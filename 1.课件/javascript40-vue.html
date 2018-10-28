@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>VUE</dt>
+    <dd>
+        <p>为什么要使用vue</p>
+        <ol>
+        	<li>在传统的开发过程中，我们通常要用js去获取元素、创建元素、修改元素和删除元素等，这些操作麻烦有兼容问题而且容易出错</li>
+            <li>解决办法就是使用框架，如jQ、Angular、React、Vue等，JQ主要针对的是烦人的DOM操作，其他则是为了关注业务、项目构建的整体完成流程，而Vue简单易用，灵活高效，大公司用的比较多</li>
+            <li>vue的学习和使用是一个渐进式的过程，首先它包括vue本身，能够完成业务基本需求。而在开发过程中则会碰到各种问题，我们需要配合其他框架与vue融合使用。</li>
+            
+        </ol>
+        <p>如何使用vue</p>
+        <ol>
+        	<li><a href="https://cn.vuejs.org/" target="_blank">vue的官网</a>可以下载最新的vue.js</li>
+            <li>将vue.js引入到html项目后，需要在script标签内使用一个构造函数创建vue对象，该对象是个封闭环境，它不能获得包括全局在内的外部的值，防止其他域中的值对其发生影响<pre>
+    new Vue()</pre>后期则通过该对象对我们vue项目进行开发，该方法接收一个对象参数，在对象上设置配置来完成开发</li>
+    		<li>el属性：给vue设置一个容器（在页面中要用vue处理的范围），值可以是页面中作为容器的元素，也可以是一个字符串类型的选择器。</li>
+            <li>template属性（可选）：内容（模板），若未设置，默认容器即为模板，如下是一个简单的例子：<pre>
+    &lt;div id="app"&gt;&lt;/div&gt;  //html
+    new Vue({           //js
+    	el : document.querySelector("#app"),  //可以直接用"#app"
+        template : "&lt;h1&gt;hello Vue&lt;/h1&gt;"
+    })</pre>注意：不要用body或html元素作为容器，原因是template中的内容是作为替换容器的模板出现，不能替换body或html</li>
+    		<li>视图和模板(理解区分)：视图既是我们在浏览器看到的页面，而模板是产生视图页面（vue处理数据之前）的原始结构</li>
+            <li>data属性 ： 用来存放vue中要用的数据，值是一个对象，数据会被vue实例监听，如果该值发生变化对应视图会同时重新渲染</li>
+            <li>模板语法 ： {{表达式}}（表达式是用运算数和运算符组成并能进行计算结果的公式，如变量、函数、算数等），如<pre>
+    &lt;div id="app"&gt;
+    	&lt;h1&gt;{{message}}&lt;/h1&gt;
+    &lt;/div&gt;  //html
+    var app = new Vue({           //js
+    	el : "#app",
+        data : {
+        	message : "hello Vue"
+        }
+    })</pre>当前构造函数的返回值app是vue对象，而data中的数据都会变成该对象的属性，因此不要写成data.message，但是可以写成app.message</li>
+    		<li>methods属性 ： 用来存放vue中要用的函数，但是所有函数的this都指向vue对象实例，那么就可以用this.message的方式访问data中的数据了；而被绑定的函数如果被事件绑定指令绑定了，则其第一个参数就是事件对象event，但是如果绑定时带括号，虽然不会立即执行，但是event就不是第一个参数了，而是需要手动传入（$enent），后者在需要传入参数的时候会用到</li>
+    		<li>指令 ： 根据不同的需求和结构进行结构渲染，写在标签属性的位置，以v-开头，格式为v-"指令"="表达式"，指令会根据指令和表达式的不同对标签产生影响
+            	<ul>
+                	<li>v-text、v-html、v-cloak、v-once、v-pre（内容输出指令）data中的数据如果通过{{}}输出，里面的标签也会作为字符串输出，这里主要是考虑到安全性的问题，但使用v-html就可以保证输出的标签变成标签了，v-once则会让{{}}中的数据只显示第一次的结果，不会跟着数据变化而变化</li>
+                    <li>v-show、v-if、v-else、v-ele-if（条件渲染指令）v-show和v-if的区别，一个是根据布尔值隐藏和显示元素，一个是根据布尔值决定是否创建该元素，if经常和else配合使用，例如我们可以做一个登陆显示欢迎，未登录显示请登录的一个效果</li>
+                    <li>v-for（列表渲染指令）通过v-for="u,index of users" {{u}}来遍历users这个数据，根据数组的数量动态生成多个元素，其中index是它的key值，数组则是下标，后面的users变量也可以写成一个数值，如10就会遍历出1-10的数字</li>
+                    <li>v-bind、v-model（属性绑定指令）属性的值不会被{{}}等方式改变，值得内容被看成一个字符串，vue不会处理，例如你想绑定属性的值和vue的数据，那么写成v-bind:属性名="表达式"去绑定；特殊的style属性可以用一个json的写法来处理每个样式及其对应的值；而class除了可以用表达式外还可以用数组，vue会自动将数组解析成用空格拆分的多个class的值，或者写一个json，key为class的值，value是布尔值，当value为true时该class被添加进去，否则不会被添加进去，v-bind:比较常用可以省略为:<br/>而v-model不能指定绑定的属性名，它会自动根据当前元素决定绑定的属性名，如input会自动绑定value，而且当绑定属性的值发生了变化会同步改变数据的值，即它支持双向数据流<br/>
+                    数据流：单项数据流--数据&rarr;视图（数据发生变化视图同步变化，视图发生变化数据无影响）；双向数据流--数据&harr;视图（两边的值任何一个发生变化时，另一个同步变化）</li>
+                    <li>v-on（事件绑定指令）把函数绑定到元素的事件上，它的参数为事件类型，如v-on:click="表达式"，v-on:也比较常用可以省略为@</li>
+                </ul>
+            </li>
+        </ol>
+    </dd>
+</dl>
+<dl>
+	<dt>练习：</dt>
+    <dd>
+    	<p>1、做一个点击按钮显示隐藏div的效果</p>
+        <p>2、模拟一个单选和多选框效果</p>
+        <p>3、做一个5星好评的效果</p>
+        <p>4、做一个选项卡功能</p>
+    </dd>
+</dl>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<input type="button" value="0"/>
+<input type="button" value="0"/>
+<input type="button" value="0"/>
+<script>
+var aBtn = document.getElementsByTagName("input");
+var arr = ["A","B","C","D"];
+for(var i=0;i<aBtn.length;i++){
+	aBtn[i].val = 0;
+	aBtn[i].onclick = function (){
+		this.value = arr[this.val%4];
+		this.val++;
+	}
+}
+</script>
+</body>
+</html>

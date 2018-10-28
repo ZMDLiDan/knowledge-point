@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>CSS3基础</dt>
+    <dd>
+    	<p>CSS3样式：</p>
+        <ol>
+        	<li>direction：定义文字排列方式(全兼容)<br/>rtl:从右向左排列<br/>ltr:从左向右排列<br/>注意要配合unicode-bidi:bidi-override; 一块使用<pre>
+    .test p{width:320px;margin:15px 0;border:1px solid #000;}
+    .ltr p{direction:ltr;unicode-bidi:bidi-override;}
+    .rtl p{direction:rtl;unicode-bidi:bidi-override;}
+    &lt;ul class="test"&gt;
+        &lt;li class="ltr"&gt;
+            &lt;strong&gt;ltr：&lt;/strong&gt;
+            &lt;p&gt;本段文字将按照从左到右的方向进行流动。&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li class="rtl"&gt;
+            &lt;strong&gt;rtl：&lt;/strong&gt;
+            &lt;p&gt;本段文字将按照从右到左的方向进行流动。&lt;/p&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;</pre>
+            </li>
+            <li>text-overflow：定义省略文本的处理方式<br/>clip:无省略号<br/>ellipsis:省略号(注意配合overflow:hidden和white-space:nowrap一块使用)</li>
+			<li>（重点）盒模型阴影，语法：box-shadow:[inset] x y blur [spread] color<br/>参数：<br/>[inset]：投影方式（默认为外投影，inset为内投影）<br/>x、y：水平和垂直方向的阴影偏移<br/>blur：模糊半径<br/>[spread]：扩展阴影半径（先扩展原有形状，再开始画阴影）<br/>Color：颜色</li>
+            <li>box-sizing：盒模型解析模式<br/>border-box：边框盒模型 width/height=border+padding+content<br/>content-box：标准盒模型 width/height=content</li>
+            <li>resize：自由缩放样式<br/>both：水平垂直都可以缩放<br/>horizontal：只有水平方向可以缩放<br/>vertical 只有垂直方向可以缩放<br/>注意：一定要配合overflow:auto; 一块使用
+</li>
+			<li>多列：将文本内容设计成像报纸一样的多列布局<br/>column-width：指定列的宽度<br/>column-count：要分的列数<br/>column-gap：列之间的距离<br/>column-rule：栏目间隔线（column-rule-style、column-rule-width和column-rule-color的集合样式）<br/>column-rule-style：间隔线类型（hidden：定义隐藏规则/dotted：定义点状规则/dashed：定义虚线规则/solid：定义实线规则/double：定义双线规则）</li>
+            <li>（重点）transition：过渡（css3的动画的一种,非常重要）<br/>transition-property：要运动的样式（all || [attr] || none）<br/>transition-duration：规定完成过渡效果需要多少秒(s)或毫秒(ms)<br/>transition-delay：定义动画延迟多久开始<br/>transition-timing-function：运动速度曲线。ease：（逐渐变慢）默认值；linear：（匀速）；ease-in：(加速)；ease-out：（减速）；ease-in-out：（先加速后减速）；cubic-bezier 贝塞尔曲线（ x1, y1, x2, y2 ），可以百度一下贝赛尔曲线的图<br/>
+集合样式 transition: property duration timing-function delay  </li>
+			<li>（重点）border-radius：圆角<br/>1-4个数字 / 1-4个数字：/前面是水平方向圆角，后面是垂直方向圆角，不加/指的两个方向圆角相同，如：
+    <pre>
+    border-radius: 10px/5px;</pre>
+    参数：各种长度单位都可以：px，%，…，%有时很方便，但宽高不一致时不太好<br/>参数个数1：四个方向都一样，border-radius: 一样<br>参数个数2：对角，border-radius: 左上&amp;右下 右上&amp;左下<br/>参数个数3：斜对角，border-radius: 左上 右上&amp;左下 右下<br/>参数个数4：全部，顺时针，border-radius: 左上 右上 右下 左</li>
+    		<li>边框图片：border-image:;（集合样式）<br/>border-image-source:;引入图片url<br/>border-image-slice:;切割图片（从外向内）（数值，无px）<br/>border-image-width:;边框宽度（展示边框图片区域）<br/>border-image-repeat:;图片的排列方式<br/>round四舍五入，repeat重复，stretch拉伸</li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、分别做一个光从左上方打过来的外阴影效果；一个光从正上方打过来的内阴影效果；光从Z轴打下去的外阴影效果</p>
+        <p>2、做一个风车，用圆角做风车的叶片</p>
+    </dd>
+</dl>
+</body>
+</html>

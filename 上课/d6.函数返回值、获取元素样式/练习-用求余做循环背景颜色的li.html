@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+body{margin:0;}
+ul{margin:0; padding:0; list-style:none;}
+li{float:left; width:100px; height:100px; margin:0 5px 5px 0;}
+</style>
+</head>
+<body>
+<ul></ul>
+<script src="myJs.js"></script>
+<script>
+var oUl=document.getElementsByTagName("ul")[0];
+var arr=["red","black","blue","yellow","green"];
+var str = "";
+for(var i=0;i<22;i++){
+	str += "<li></li>";
+}
+oUl.innerHTML = str;
+var aLi = document.getElementsByTagName("li");
+/*for(var i=0;i<aLi.length;i++){
+	aLi[i].index = i;
+	aLi[i].style.backgroundColor = arr[i%arr.length];
+	aLi[i].onmouseover = function (){
+		this.style.backgroundColor = "#ccc";
+	}
+	aLi[i].onmouseout = function (){
+		this.style.backgroundColor = arr[this.index%arr.length];
+	}
+}*/
+var thisColor = "";
+for(var i=0;i<aLi.length;i++){
+	aLi[i].style.backgroundColor = arr[i%arr.length];
+	aLi[i].onmouseover = function (){
+		thisColor=getStyle(this,"backgroundColor");
+		this.style.backgroundColor = "#ccc";
+	}
+	aLi[i].onmouseout = function (){
+		this.style.backgroundColor = thisColor;
+	}
+}
+</script>
+</body>
+</html>

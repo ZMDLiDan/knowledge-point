@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+div{width:150px; height:150px; background-color:red;}
+</style>
+</head>
+<body>
+<div></div>
+<script>
+function alertThis(){
+	alert(this);
+}
+var oDiv = document.getElementsByTagName("div")[0];
+//oDiv.onclick = alertThis;
+oDiv.onclick = function (){
+	alertThis();
+}
+</script>
+</body>
+</html>

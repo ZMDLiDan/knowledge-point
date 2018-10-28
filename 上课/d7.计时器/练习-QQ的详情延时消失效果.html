@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+#div1{width:200px; height:400px; background-color:red; position:absolute; left:0; top:0;}
+#div2{width:200px; height:200px; background-color:blue; position:absolute; left:210px; top:0; display:none;}
+</style>
+</head>
+<body>
+<div id="div1"></div>
+<div id="div2"></div>
+<script>
+var aDiv = document.getElementsByTagName("div");
+var timer = null;
+aDiv[0].onmouseover = aDiv[1].onmouseover = function (){
+	clearTimeout(timer);
+	aDiv[1].style.display = "block";
+}
+aDiv[0].onmouseout = aDiv[1].onmouseout = function (){
+	timer = setTimeout(function (){
+		aDiv[1].style.display = "none";
+	},700);
+}
+</script>
+</body>
+</html>

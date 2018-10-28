@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<input type="button" value="打开百度"/>
+<input type="button" value="关闭该页面"/>
+<script>
+var aBtn = document.getElementsByTagName("input");
+var oWin = null;
+aBtn[0].onclick = function (){
+	oWin = window.open("http://www.baidu.com","_blank");
+}
+aBtn[1].onclick = function (){
+	oWin.close();
+}
+</script>
+</body>
+</html>

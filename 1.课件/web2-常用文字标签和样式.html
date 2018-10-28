@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+body{margin:0; background-color:#deefff; color:#333;}
+dl{padding:0 25px;}
+dt{font-size:26px; color:#600000;}
+p{font-size:22px; margin:20px 0;}
+li{font-size:20px; color:#066; margin:10px 0;}
+pre{border-radius:20px; background-color: #666; color:#ccc; font-size:24px; line-height:30px; text-shadow:0px 1px #999; border:3px #FFC solid;}
+</style>
+</head>
+<body>
+<dl>
+	<dt>WEB前端标记的类型与特点</dt>
+    <dd>
+    	<p>单标记:</p>
+    	<ol>
+        	<li>某些标记称为"单标记"，因为它只需要单独使用就能完整地表达意思</li>
+            <li>记的语法如下：&lt;标记名称/&gt;；最常用的单标记是&lt;br/&gt;，它表示换行。</li>
+        </ol>
+        <p>双标记:</p>
+    	<ol>
+        	<li>双标记由"始标记"和"尾标记"两部分构成，必须成对使用。</li>
+            <li>语法如下：&lt;标记&gt;内容&lt;/标记&gt;；最常见的就是&lt;div&gt;&lt;/div&gt;，它表示一个区块。</li>
+        </ol>
+        <p>标记属性:</p>
+    	<ol>
+        	<li>许多单标记和双标记的始标记内可以包含一些属性</li>
+            <li>语法如下：&lt;标记名字 属性1 属性2  属性3……&gt;</li>
+            <li>各属性之间无先后次序，属性也可以省略。</li>
+            <li>所有标签都具有id（唯一名）、class（类名）、title（标题）、style（行内样式）属性</li>
+        </ol>
+        <p>标记须知：</p>
+        <ol>
+        	<li>双标签必须有开始也有结束</li>
+            <li>双标签可以嵌套不可以交叉。嵌套时，内部的标签称为子元素，外部的标签称为父元素；非嵌套时，两个同级的标签称为兄弟元素</li>
+            <li>浏览器会对部分错误进行纠错，但我们要养成良好的编码习惯，尽量做到不用浏览器的纠错</li>
+        </ol>
+    </dd>
+	<dt>WEB前端HTML和CSS</dt>
+    <dd>
+    	<p>标签书写规范：</p>
+        <ol>
+        	<li>新项目先保存在一个文件夹中</li>
+            <li>程序员的机器上必须显示后缀名</li>
+            <li>把实时存档当成一种习惯</li>
+            <li>所有文件名务必使用英文或者以英文开头的英文数字的组合</li>
+            <li>html全部使用小写字母来书写</li>
+            <li>在书写代码的同时做好注释的习惯</li>
+        </ol>
+        <p>标签类名常用命名：</p>
+        <ol>
+        	<li>页头：header；标志：logo；侧栏：aside；广告：banner；导航：nav；菜单：menu；搜索：search</li>
+            <li>滚动：scroll；页面主体：main；内容：content；列表：list；标题：title；服务：service；热点：hot</li>
+            <li>新闻：news；下载：download；注册：regsiter；合作伙伴：partner；按钮：btn；页脚：footer</li>
+</li>
+
+        </ol>
+        <p>文本标签：</p>
+        <ol>
+        	<li>段落标签：&lt;p&gt;</li>
+            <li>标题标签：&lt;h1&gt;~&lt;h6&gt;</li>
+            <li>粗体/加重标签：&lt;b&gt;/&lt;strong&gt;</li>
+            <li>斜体/着重标签：&lt;i&gt;/&lt;em&gt;</li>
+            <li>上标/下标标签：&lt;sup&gt;/&lt;sub&gt;</li>
+            <li>插入/删除标签：&lt;ins&gt;/&lt;del&gt;</li>
+            <li>换行标签：&lt;br/&gt;</li>
+            <li>分割线标签：&lt;hr/&gt;</li>
+        </ol>
+        <p>CSS的由来：</p>
+        <ol>
+        	<li>最早的样式是通过标签（如b、del等标签）添加的，结果不同的浏览器（网景和IE）为了抢用户设置除了很多不同的标签制作效果，并且它们并不兼容，程序员则需要大量的兼容代码来为他们不同的浏览器做页面。</li>
+            <li>接着W3C组织对HTML标签进行了统一，但HTML1.0功能不足，各个浏览器依然出了很多不同的新标签，于是从1.0直到4.0一直在进行更新，但是规范依然不够，毕竟它只是个标准，并没有去实现样式。</li>
+            <li>最后W3C又出了一个新标准XHTML1.0，这个标准要求非常严格（借鉴了XML的语法），而且废弃了很多（带有样式的）标签和属性，因为他们在不停的破坏页面的结构（内容和表现在一起而且修改困难），于是css诞生了，html页面的内容和表现终于分开了。</li>
+        </ol>
+        <p>文字样式：</p>
+        <ol>
+        	<li>文字字体：font-family:"微软雅黑" //最常用的既是“微软雅黑”；Heiti SC,Heiti SC Light,"Open Sans", Arial, "Hiragino Sans GB"  //其他字体（在第一个字体在本机没有时，使用后续的字体）</li>
+            <li>文字大小样式：font-size:12px（px作为WEB常用单位，既是彩屏设备中的像素）</li>
+            <li>文本对齐方式：text-align（left（左）, right（右）, center（居中）, justify（两端对齐））</li>
+            <li>文本缩进：text-indent:2em（em是使用当前元素父元素的字体大小（font-size）的倍数计算的单位，2em就是2倍父元素字体大小）</li>
+            <li>行高：line-height:20px/120%（百分比也是常用单位，这里指的是字体大小的120%）</li>
+            <li>字间距：letter-spacing:0.5em/2px</li>
+            <li>文本装饰：text-decoration（underline（下划线）, overline（上划线）, line-through（线穿过/中划线））</li>
+            <li>字体颜色/背景颜色：color/background-color（常用设置颜色方式：英文：red；16进制数：#ffff00；三原色：rgb(x,x,x)）</li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、新建一个文件夹并用代码编辑器生成以下页面-主页、个人简历、个人作品、联系方式4个页面，将他们的title标签设置成相应的名字</p>
+        <p>2、用html的标签做出：<br/>请删除该行文字（加上中划线）<br/>Z2=X2+Y2（2为上标）<br/>H2O（2为下标）<br/>中国.陕西.西安（文字斜体）<br/>你好！欢迎您的到来（文字加粗）</p>
+        <p>3、用css把一个p标签的文字的颜色设置为紅色，背景设置为绿色<br/>用css把一个p标签的文字右对齐并设置字体大小30px<br/>用css把三个p标签的文字分别用下划线, 上划线, 中划线展示出来</p>
+    </dd>
+</dl>
+</body>
+</html>

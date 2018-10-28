@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+.wrap{width:122px; height:172px; border:1px red solid; margin:100px auto; overflow:hidden; position:relative;}
+.box{position:absolute; left:0; top:0;}
+img{display:block;}
+</style>
+</head>
+<body>
+<div class="wrap">
+	<div class="box" id="div1">
+    	<img src="img/0.JPG" width="122" height="172"/>
+        <img src="img/1.JPG" width="122" height="172"/>
+    </div>
+</div>
+<script src="myJs.js"></script>
+<script>
+var oDiv = document.getElementById("div1");
+var aImg = document.getElementsByTagName("img");
+var i=0;
+setInterval(function (){
+	doMove(oDiv,8,-172,"top");
+	setTimeout(function (){
+		i++;
+		oDiv.style.top = "0px";
+		aImg[0].src = "img/"+i%10+".JPG";
+		aImg[1].src = "img/"+(i+1)%10+".JPG";
+	},900)
+},1000)
+	
+</script>
+</body>
+</html>

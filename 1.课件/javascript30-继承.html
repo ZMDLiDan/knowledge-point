@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>javascript</dt>
+    <dd>
+    	<p>*原型链继承：</p>
+        <ol>
+            <li>这是实现继承最简单的方式了，核心就一句话：<pre>
+    function Super(){
+        this.val = 1;
+        this.arr = [1];
+    }
+    function Sub(){
+        // ...
+    }
+    Sub.prototype = new Super();    // 核心
+
+    var sub1 = new Sub();
+    var sub2 = new Sub();
+    sub1.val = 2;
+    sub1.arr.push(2);
+    alert(sub1.val);    // 2
+    alert(sub2.val);    // 1
+     
+    alert(sub1.arr);    // 1, 2
+    alert(sub2.arr);    // 1, 2</pre></li>
+            <li>核心：拿父类实例来充当子类原型对象</li>
+    		<li>优缺点：<br/>优点：简单，易于实现；<br/>缺点：1、修改sub1.arr后sub2.arr也变了，因为来自原型对象的引用属性是所有实例共享的；2、创建子类实例时，无法向父类构造函数传参</li>
+        </ol>
+        <p>*借用构造函数：</p>
+        <ol>
+        	<li>原型链继承存在2个致命缺点，于是出现了借用构造函数方法：<pre>
+    function Super(val){
+        this.val = val;
+        this.arr = [1];
+     
+        this.fun = function(){
+            // ...
+        }
+    }
+    function Sub(val){
+        Super.call(this, val);   // 核心
+        // ...
+    }
+     
+    var sub1 = new Sub(1);
+    var sub2 = new Sub(2);
+    sub1.arr.push(2);
+    alert(sub1.val);    // 1
+    alert(sub2.val);    // 2
+     
+    alert(sub1.arr);    // 1, 2
+    alert(sub2.arr);    // 1
+     
+    alert(sub1.fun === sub2.fun);   // false</pre></li>
+    		<li>核心：借父类的构造函数来增强子类实例，等于是把父类的实例属性复制了一份给子类实例装上了（完全没有用到原型）</li>
+            <li>优缺点：<br/>优点：1、解决了子类实例共享父类引用属性的问题；2、创建子类实例时，可以向父类构造函数传参<br/>缺点：无法实现函数复用，每个子类实例都持有一个新的fun函数，太多了就会影响性能。</li>
+        </ol>
+        <p>**组合继承（最常用）：</p>
+        <ol>
+        	<li>目前我们的借用构造函数方式还是有问题（无法实现函数复用），于是又搞出了组合继承：<pre>
+    function Super(){
+        // 只在此处声明基本属性和引用属性
+        this.val = 1;
+        this.arr = [1];
+    }
+    //  在此处声明函数
+    Super.prototype.fun1 = function(){};
+    Super.prototype.fun2 = function(){};
+    //Super.prototype.fun3...
+    function Sub(){
+        Super.call(this);   // 核心
+        // ...
+    }
+    Sub.prototype = new Super();    // 核心
+     
+    var sub1 = new Sub(1);
+    var sub2 = new Sub(2);
+    alert(sub1.fun === sub2.fun);   // true</pre></li>
+    		<li>核心：把实例函数都放在原型对象上，以实现函数复用。同时还要保留借用构造函数方式的优点，通过Super.call(this);继承父类的基本属性和引用属性并保留能传参的优点；通过Sub.prototype = new Super();继承父类函数，实现函数复用</li>
+            <li>优缺点：<br/>优点：1、不存在引用属性共享问题；2、可传参；3、函数可复用<br/>缺点：子类原型上有一份多余的父类实例属性，因为父类构造函数被调用了两次，生成了两份，而子类实例上的那一份屏蔽了子类原型上的。内存浪费，虽然比刚才情况好点，不过确实是瑕疵</li>
+        </ol>
+        <p>*寄生组合继承（最佳方式）：</p>
+        <ol>
+        	<li>从名字就能看出又是对组合继承的优化，为了追求完美而创建的方法：<pre>
+    function beget(obj){   // 生孩子函数 beget：龙beget龙，凤beget凤。
+        var F = function(){};
+        F.prototype = obj;
+        return new F();
+    }
+    function Super(){
+        // 只在此处声明基本属性和引用属性
+        this.val = 1;
+        this.arr = [1];
+    }
+    //  在此处声明函数
+    Super.prototype.fun1 = function(){};
+    Super.prototype.fun2 = function(){};
+    //Super.prototype.fun3...
+    function Sub(){
+        Super.call(this);   // 核心
+        // ...
+    }
+    var proto = beget(Super.prototype); // 核心
+    proto.constructor = Sub;            // 核心
+    Sub.prototype = proto;              // 核心
+     
+    var sub = new Sub();
+    alert(sub.val);
+    alert(sub.arr);</pre></li>
+    		<li>核心：用beget(Super.prototype);切掉了原型对象上多余的那份父类实例属性</li>
+            <li>优缺点：<br/>优点：完美了<br/>缺点：理论上没有了（如果麻烦不算缺点的话），除了用起来麻烦，另一方面是因为寄生组合式继承出现的比较晚，所以组合继承是最常用的，而这个理论上完美的方案却只是课本上的最佳方式了</li>
+        </ol>
+        <p>原型式：</p>
+        <ol>
+        	<li>其实介绍完上面的完美方案就可以结束了，但从组合继承到完美方案好像有一段不小的思维跳跃，有必要把故事说清楚：<pre>
+    function beget(obj){   // 生孩子函数 beget：龙beget龙，凤beget凤。
+        var F = function(){};
+        F.prototype = obj;
+        return new F();
+    }
+    function Super(){
+        this.val = 1;
+        this.arr = [1];
+    }
+     
+    // 拿到父类对象
+    var sup = new Super();
+    // 生孩子
+    var sub = beget(sup);   // 核心
+    // 增强
+    sub.attr1 = 1;
+    sub.attr2 = 2;
+    //sub.attr3...
+     
+    alert(sub.val);     // 1
+    alert(sub.arr);     // 1
+    alert(sub.attr1);   // 1</pre></li>
+    		<li>核心：用生孩子函数得到得到一个"纯洁"的新对象（"纯洁"是因为没有实例属性），再逐步增强之（填充实例属性），ES5提供了Object.create()函数，内部就是原型式继承，IE9+支持</li>
+            <li>优缺点：<br/>优点：从已有对象衍生新对象，不需要创建自定义类型（更像是对象复制，而不是继承。。）<br/>缺点：1、原型引用属性会被所有实例共享，因为是用整个父类对象来充当了子类原型对象，所以这个缺陷无可避免；2、无法实现代码复用（新对象是现取的，属性是现添的，都没用函数封装，怎么复用）</li>
+        </ol>
+        <p>寄生式：</p>
+        <ol>
+        	<li>寄生式是一种模式（套路），并不是只能用来实现继承：<pre>
+    function beget(obj){   // 生孩子函数 beget：龙beget龙，凤beget凤。
+        var F = function(){};
+        F.prototype = obj;
+        return new F();
+    }
+    function Super(){
+        this.val = 1;
+        this.arr = [1];
+    }
+    function getSubObject(obj){
+        // 创建新对象
+        var clone = beget(obj); // 核心
+        // 增强
+        clone.attr1 = 1;
+        clone.attr2 = 2;
+        //clone.attr3...
+     
+        return clone;
+    }
+     
+    var sub = getSubObject(new Super());
+    alert(sub.val);     // 1
+    alert(sub.arr);     // 1
+    alert(sub.attr1);   // 1</pre></li>
+    		<li>核心：给原型式继承穿了个马甲而已，看起来更像继承了（上面介绍的原型式继承更像是对象复制）注意：beget函数并不是必须的，换言之，创建新对象 -> 增强 -> 返回该对象，这样的过程叫寄生式继承，新对象是如何创建的并不重要（用beget生的，new出来的，字面量现做的都可以）</li>
+            <li>优缺点：<br/>优点：还是不需要创建自定义类型<br/>缺点：无法实现函数复用（没用到原型，当然不行）</li>
+        </ol>
+    </dd>
+</dl>
+</body>
+</html>

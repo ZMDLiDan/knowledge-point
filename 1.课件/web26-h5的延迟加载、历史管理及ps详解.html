@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+    <dt>css3、HTML5和移动端</dt>
+    <dd>
+    	<p>HTML5的延迟加载</p>
+        <ol>
+        	<li>JS的加载会影响后面的内容加载，很多浏览器都采用了并行加载JS，但还是会影响其他内容</li>
+            <li>Html5的defer和async（外部script标签属性）<br/>
+defer : 延迟加载，会按顺序执行，在onload执行前被触发<br/>
+async : 异步加载，加载完就执行，有顺序问题（某个js基于前面一个js时会有错误），互相不影响时可以使用</li>
+            <li>async和defer的区别在于：async属性会在脚本下载完成后无序立即执行，defer属性会在脚本下载完成后按照document结构顺序执行。</li>
+            <li>由于defer和async的兼容性问题，我们通常使用动态创建script标签的方式来实现异步加载脚本，即：<pre>
+    document.write('&lt;script src="myJs.js" async="async"&gt;&lt;/script&gt;');</pre></li>
+            <li>(加载时间优化)用Labjs库—异步加载js库，可以解决兼容问题，看几个demo<pre>
+    /**
+    *传统的JS加载方式
+    **/
+    &lt;script src="framework.js"&gt;&lt;/script&gt;
+    &lt;script src="plugin.framework.js"&gt;&lt;/script&gt;
+    &lt;script src="myplugin.framework.js"&gt;&lt;/script&gt;
+    &lt;script src="init.js"&gt;&lt;/script&gt;
+    /**
+    *采用LABjs加载
+    **/
+    &lt;script&gt;
+    $LAB
+       .script("framework.js").wait()
+       .script("plugin.framework.js")
+       .script("myplugin.framework.js").wait()
+       .script("init.js").wait();
+    &lt;/script&gt;<hr/>
+    $LAB
+    .script("script1.js")
+    .script("script2.js")
+    .script("script3.js")
+    //.script("script1.js", "script2.js", "script3.js") 另一个写法
+    .wait(function(){ // 等待所有script加载完再执行这个代码块
+    script1Func();
+    script2Func();
+    script3Func();
+    });<hr/>
+    $LAB
+    .script("script1.js").wait() // 空的wait()只是确保script1在其他代码之前被执行
+    .script("script2.js") // script2 和 script3 依赖于 script1
+    .script("script3.js").wait() // 但是script2 和 script3 并不互相依赖,可以并行下载
+    .script("script4.js") // script4 依赖于 script1, script2 及 script3
+    .wait(function(){script4Func();});<hr/>
+    $LAB
+    .script(function(){
+    // `_is_IE`的值ie为true ,非ie为false，除此以外还可以用if(-[1,]){} 
+        if (_is_IE) {
+            return "ie.js"; // 如果是ie则这个js会被加载
+        }
+        else {
+            return null; //如果不是ie这个代码就会被略过
+        }
+    })
+    .script("script1.js")
+    .wait();</pre></li>
+        </ol>
+        <p>HTML5历史管理（通过跳转页面）(改变:Ajax局部刷新没有历史记录)</p>
+        <ol>
+            <li>Window.onhashchange：改变hash值（#x）来管理</li>
+            <li>用途：可以做成不改变网址，仅改变hash值进行历史管理（window.location.hash）</li>
+            <li>还可以通过window.location.href来做页面跳转和跨域传输</li>
+            <li>history：<br/>
+history.pushState :  三个参数 ：数据  标题(没实现，用""来代替)  地址(可选)<br/>
+window.onpopstate事件 : event.length（改变history的数量）</li>
+        </ol>
+        <p>PS使用详解</p>
+        <ol>
+        	<li>图层叠加和图层样式</li>
+            <li>选取抠图和图层蒙版</li>
+            <li>色相饱和度和滤镜</li>
+        	<li>gif制作</li>
+            <li>海报和页面制作</li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、用window.location.href把数据放在hash值里进行跨域传输，并在新页面将其取出展示</p>
+        <p>2、做一个随机彩票页面，可以通过历史管理返回</p>
+    </dd>
+</dl>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+<body>
+<dl>
+	<dt>javascript</dt>
+    <dd>
+    	<p>JavaScript的数组：</p>
+        <ol>
+        	<li>数组变量var arr = [];</li>
+            <li>数组是数据的仓库，length为数组数据的数量</li>
+			<li>["第一个数据","第二个数据","第三个数据"]</li>
+            <li>arr[下标]为数组下标位置的数据（从0开始）</li>
+            <li>arr.push("第四个数据")向数组最后一位后添加数据</li>
+        </ol>
+        <p>用标签名获取元素：document.getElementsByTagName("");</p>
+        <p>该方法与ById的区别：</p>
+        <ol>
+        	<li>ById是静态方法（它的前面必须是document）；ByTagName是动态方法（它的前面可以是另一个元素的所有后代元素中获取）</li>
+            <li>ById获取的只有一个元素（而且id本身在同一个页面中也是唯一的）；ByTagName获取的可能是多个（无论是一个和多个都会变成类数组），需要加上[]和数字或者遍历来控制</li>
+            <li>ById无法选中动态创建的元素（如通过innerHTML生成的标签），ByTagName可以选中动态创建的元素</li>
+            <li>特殊标签选取：在页面中唯一的标签如body、title：用document.body和document.title就可以获取到该元素</li>
+        </ol>
+        <p>JavaScript的循环：</p>
+        <ol>
+        	<li>当我们需要重复执行某些代码或连续执行的代码有数字在变化时，就可以使用循环：for(;;){}</li>
+            <li>循环也被用做给数组或类数组遍历（既让数组或类数组的每项都执行）</li>
+            <li>试着用for和innerHTML给body加100个按钮</li>
+            <li>我们可以用document.body.innerHTML +="&lt;input&gt;"的方法向body内添加按钮， 但循环添加太耗性能，可以先循环将要添加的字符串预先连接后保存到str里，再一次性添加给body： document.body.innerHTML =str</li>
+            <li>JavaScript的for循环如果要遍历一个嵌套的数组：var arr = [[1,2,3],[4,5,6],[7,8,9]]</li>
+            <li>用两次for循环来遍历数据，执行第一个for时变量需小于arr.length，而执行第二个for时变量则需要小于arr[i].length，最后输出arr[i][j]</li>
+			<li>注意：多个for可以都用变量i，但是循环嵌套要换变量名（如上面的换成了j）</li>
+            <li>如果我们用循环给元素加定位就可以做出各种布局的元素了</li>
+        </ol>
+        <p>JavaScript修改样式：</p>
+        <ol>
+        	<li>之前我们用oDiv.style.width = '200px';来修改样式，该方法是在style属性里添加</li>
+            <li>除此之外还可以用oDiv.style.cssText= 'width:200px';来修改样式，该方法是在style属性里修改</li>
+            <li>试着用一个div和btn来做点击切换的多个背景颜色的效果</li>
+        </ol>
+        <p>this是什么？</p>
+        <ol>
+        	<li>它是一个object，直接用alert弹出的是window</li>
+            <li>Js里当对象是window的时候一般把window省略，实际上alert是window的方法</li>
+            <li>再试一下div的点击事件里弹出this则变成了div</li>
+            <li>得到的结论是：this就是调用当前方法（函数）的（元素）对象，在全局下就是window</li>
+            <li>但是事件调用匿名函数里直接调用时，this又回变成window，这时元素调用的函数实际是匿名函数，而匿名函数内部直接调用的函数依然是window在调用</li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、把图片地址写成数组，并做一个图片无缝切换的效果</p>
+        <p>2、用for循环和定位分别做出以下效果：<br/>50个li每个li向下和右移动一格（楼梯状）<br/>11个li做一个V字形<br/>50个li每10个li就换一行</p>
+        <p>3、用for循环做一个按钮切换新闻的效果，每次显示5条，思考生成li和添加内容的顺序，以及使用变量和for循环的对应关系</p>
+        <p>4、在页面中做三个按钮，每个按钮被点击时，该按钮背景变黄色</p>
+        <p>5、上个练习中的事件函数写成有名函数，然后分别用事件调用函数名和事件调用匿名函数内部直接调用的方法分别做出来</p>
+        <p>6、布局一个导航（3个按钮项即可），给每个导航下面加一个下拉框（只有宽高背景颜色的样式即可），让每个下拉框在鼠标移入时展示，移出时隐藏</p>
+    </dd>
+</dl>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<form id="oForm">
+    <select name="sel">
+        <option value="北京">北京</option>
+        <option value="上海">上海</option>
+        <option value="西安">西安</option>
+    </select>
+    <input name="btn" type="button" value="按钮"/>
+</form>
+<script>
+var oF = document.getElementById("oForm");
+oF.btn.onclick = function (){
+	alert(oF.sel.value);
+}
+</script>
+</body>
+</html>

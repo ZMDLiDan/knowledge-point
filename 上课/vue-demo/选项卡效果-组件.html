@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+body{margin:0;}
+ul{margin:0; padding:0; list-style:none; overflow:hidden;}
+.box{ width:500px; border:1px #000 solid;}
+li{width:100px; float:left; background-color:#6FF; height:50px; line-height:50px; text-align:center; cursor:pointer;}
+li.active{background-color:#fff;}
+.box .content{height:50px; padding:50px;}
+</style>
+</head>
+<body>
+<div class="box">
+	<xzy-tab
+    :cities="cities1"
+    :contents="contents1"
+    :n="n"></xzy-tab>
+    <xzy-tab
+    :cities="cities2"
+    :contents="contents2"
+    :n="n"></xzy-tab>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+/*<div class="box">
+	<ul>
+		<li v-for="city,index of cities"
+        :class="{active:index==n}"
+        @mouseover="choose(index)">{{city}}</li>
+    </ul>
+    <div>{{contents[n]}}</div>
+</div>*/
+/*<div class="box">
+	<ul>
+		<li class="checked">北京</li>
+		<li>上海</li>
+		<li>重庆</li>
+		<li>广州</li>
+		<li>西安</li>
+	</ul>
+	<div>这是北京的内容</div>
+</div>*/
+//template : 组件的模板； porops : 组件的形参
+Vue.component('xzy-tab',{
+	props : ['cities','contents','n'],
+	data(){  //组件私有数据，但必须是个函数，必须返回一个对象，既是data数据
+		return {
+			value : this.n
+		}
+	},
+	template:`
+	<div class="box">
+		<ul>
+			<li v-for="city,index of cities"
+			:class="{active:index==value}"
+			@mouseover="choose(index)">{{city}}</li>
+		</ul>
+		<div class="content">{{contents[value]}}</div>
+	</div>
+	`,
+	methods : {
+		choose (index){
+			//在vue等框架里，子组件不要修改父组件的数据
+			this.value = index;
+		}
+	}
+})
+new Vue({
+	el : ".box",
+	data : {
+		cities1 : ["北京","上海","重庆","广州","西安"],
+		contents1 : ["这是北京的内容","这是上海的内容","这是重庆的内容","这是广州的内容","这是西安的内容"],
+		n : 0,
+		cities2 : ["前端","后端","设计"],
+		contents2 : ["html+css+js","java+php+node","ps"]
+	}
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>javascript</dt>
+    <dd>
+    	<p>拖拽的延伸：</p>
+        <ol>
+        	<li>碰撞检测：就是检查是否有重合，思路：九宫格方式判断</li>
+            <img src="img/碰撞_九宫格.jpg" style="width:200px; height:200px;"/>
+            <li>拖拽改变元素大小：先找到鼠标按下时，它在元素的什么位置（判断要改变哪个方向），每个方向--上下左右分别为：改变height和top值；改变height；改变width和left值；改变width</li>
+            <li>模拟滚动条：滚动条的样式很难处理，类似select，定义一个元素在另一个元素里拖拽，只需要一个方向移动，思路：内部元素的top和两个元素高度差的比例，等于当前要控制的滚动条scrollTop和整个页面高度的比例</li>
+        </ol>
+        <p>鼠标滚轮事件：</p>
+        <ol>
+        	<li>ie浏览器/谷歌浏览器的事件：onmousewheel事件</li>
+            <li>火狐浏览器的事件：DOMMouseScroll（必须用addEventListener事件监听才能生效），可以通过判断一下是否有addEventListener，否则ie里会出问题</li>
+    		<li>ie浏览器/谷歌浏览器的属性：event.wheelDelta（上：120 下：-120）</li>
+            <li>火狐浏览器的属性：ev.detail（上：-3  下：3）</li>
+    		<li>判断是否是ie浏览器的方法：判断（-[1,]）的真假，真为标准浏览器否则为低版本ie浏览器；判断是否为某个浏览器的方法：判断（navigator.userAgent.indexOf("Firefox")>=0）的真假（IE为MSIE），真即为火狐浏览器</li>
+            <li>由于判断方法都不同，因此需要把鼠标滚轮方向进行统一，如：<pre>
+    var b = true;
+    if(ev.wheelDelta){
+    	b = ev.wheelDelta&gt;0 ? true : false;
+    }else{
+        b = ev.detail&lt;0 ? true : false;
+    }
+    if(b){}else{}</pre></li>
+    		<li>如果有滚动条会触发滚动的默认行为，阻止默认行为，但是return false只能阻止on事件所触发的默认行为，不能阻止addEventListener绑定的事件，这种需要通过event的ev.preventDefault()来阻止（同样需要判断存在，注意：attachEvent用的却是return false）</li>
+        </ol>
+        <p>cookie</p>
+        <ol>
+        	<li>我们用变量存储数据在关闭页面时会销毁，如果我们需要一段时间内保存数据，但又不至于使用后端数据库去存储的东西就可以用cookie来存储</li>
+            <li>例如：当用户访问了某个网站时，我们就可以通过cookie来向访问者电脑上储存数据</li>
+            <li>cookie的注意事项：
+            	<ul>
+                	<li>不同的浏览器存放的cookie位置不同，不能通用</li>
+                    <li>cookie的存储是以域名的形式区分的</li>
+                    <li>cookie的数据可以设置名字</li>
+                    <li>一个域名下存放的cookie的个数是有限制的</li>
+                    <li>每个cookie存放的内容大小也有限制</li>
+                </ul>
+            </li>
+            <li>cookie的存储方式（在ie和ff可以使用，在chrome里禁止本地使用）：<pre>
+    document.cookie = 'username=wei'; //可读可写</pre></li>
+    		<li>通过document.cookie获取当前网站的cookie时，得到的是字符串形式的值，包含当前网站下所有的cookie，不同的值用分号+空格分开</li>
+            <li>如果我们想长时间存放一个cookie，需要在设置它的时候同时设置一个过期时间（expires），默认是临时存储：<pre>
+    document.cookie = 'usename=wei;expires='+时间;//这个时间必须是字符串
+    oDate.setDate(oDate.getDate()+5);</pre></li>
+    		<li>该方法在ie里会有问题，用oDate.toGMTString()（转化成日期字符串）就可以了</li>
+            <li>内容最好编码存放，encodeURI（编码方法）和decodeURI（解码方法），如：<pre>
+    alert(encodeURI('你好\n你好'));//得到的值再用下面的弹出：      
+    alert(decodeURI('得到的值'));</pre></li>
+    		<li>如果我们只需要获取某些值而不是所有值，可以先封装一个存储cookie的方法：<pre>
+    function setCookie(key,value,t){
+    	var oDate = new Date();
+    	oDate.setDate(oDate.getDate()+t); 
+        document.cookie = key+'='+encodeURI(value)+';expires='+oDate.toGMTString();
+    }</pre></li>
+    		<li>再封装一个获取cookie值的方法：<pre>
+    function getCookie(key){
+    	var arr1 = document.cookie.split('; ');
+    	for(var i=0;i&lt;arr1.length;i++){
+    	var arr2 = arr1[i].split('=');
+    	if(arr2[0]==key){
+        	return decodeURI(arr2[1]);}
+        }
+    }
+    alert(getCookie('username'));</pre></li>
+    		<li>最后封装一个删除cookie的方法：<pre>
+    function removeCookie(key){
+        setCookie(key,'',-1);
+    }</pre></li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、做一个方块和图片碰撞时，图片切换成另一张图片，离开时变回</p>
+        <p>2、做一个滚动条下啦一个元素高度跟着改变，直到元素高度等滚动条高度</p>
+        <p>3、鼠标滚轮控制并改变div高度变化</p>
+    </dd>
+</dl>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+    <dt>css3、HTML5和移动端</dt>
+    <dd>
+        <p>弹性盒模型（flexbox）理论</p>
+        <ol>
+        	<li>弹性盒模型就 W3C 官方给到的解释是，这是设计来实现更复杂的版面布局。其本质上就是Box-model的延伸， Box-model定义了一个元素的盒模型，而 Flexbox 更进一步的去规范了这些盒模型之间彼此的相对关系</li>
+            <li>Flexible boxes盒子按照宽高分出了以下 8 点：<br/>
+水平的主轴：main axis；  垂直的纵轴：cross axis；<br/>纵轴的开始位置和边框的交点：cross start；纵轴的结束位置和边框的交点：cross end；<br/>主轴的开始位置和边框的交点：main strat；主轴的结束位置和边框的交点：main end；<br/>单个项目占据主轴的空间距离：main axis；单个项目占据纵轴的空间距离：cross axis<br/><img src="img/弹性盒模型8个点.png" width="704" height="416"/></li>
+            <li>弹性盒模型语法基础概念——任何一个容器都可以指定为Flex布局：块（display）；行内（inline-flex：依然要加上浏览器前缀）
+注意，设为Flex布局以后，子元素的float、clear和vertical-align属性将失效。</li>
+			<li>容器属性设置：flex-direction：主轴的方向（即项目的排列方向）<br/>
+flex-wrap：如果一条轴线排不下，如何换行<br/>
+flex-flow：flex-direction属性和flex-wrap属性的简写,集合样式<br/>
+justify-content：定义了项目在主轴上的对齐方式<br/>
+align-items：定义项目在交叉轴上如何对齐<br/>
+align-content：多根轴线的对齐方式，一根轴该属性无效</li>
+        </ol>
+        <p>弹性盒模型用法(不会脱离父元素)</p>
+        <ol>
+        	<li>flex-direction：主轴的方向（即项目的排列方向）
+row | row-reverse | column | column-reverse;<br/>
+row（默认值） 	主轴为水平方向，起点在左端。<br/>
+row-reverse 	主轴为水平方向，起点在右端。<br/>
+column 	主轴为垂直方向，起点在上沿。<br/>
+column-reverse 	主轴为垂直方向，起点在下沿。<br/><img src="img/弹性盒模型主轴方向.png" width="776" height="179"/></li>
+            <li>flex-wrap：如果一条轴线排不下，如何换行nowrap | wrap | wrap-reverse; <br/>
+nowrap（默认）：不换行。 <br/>
+wrap：换行，第一行在上方。<br/> 
+wrap-reverse：换行，第一行在下方。<br/><img src="img/弹性盒模型如何换行.jpg" width="700" height="370"/></li>
+            <li>flex-flow：flex-direction属性和flex-wrap属性的简写
+默认值为row nowrap</li>
+			<li>justify-content ：定义了项目在主轴上的对齐方式
+flex-start | flex-end | center | space-between | space-around;它可能取5个值，具体对齐方式与轴的方向有关。下面假设主轴为从左到右。<br/>
+flex-start（默认值） 	左对齐<br/>
+flex-end 	右对齐<br/>
+center 	居中<br/>
+space-between 	两端对齐，项目之间的间隔都相等。<br/>
+space-around 	每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。<br/><img src="img/弹性盒模型对齐方式.jpg" width="736" height="494"/></li>
+			<li>align-items：定义项目在交叉轴上如何对齐
+flex-start | flex-end | center | baseline | stretch;
+它可能取5个值。具体的对齐方式与交叉轴的方向有关，下面假设交叉轴从上到下。<br/>
+flex-start 	交叉轴的起点对齐。<br/>
+flex-end 	交叉轴的终点对齐。<br/>
+center 	交叉轴的中点对齐。<br/>
+baseline 	项目的第一行文字的基线对齐。<br/>
+stretch（默认值） 	如果项目未设置高度或设为auto，将占满整个容器的高度。<br/><img src="img/弹性盒模型垂直对齐方式.jpg" width="736" height="494"/></li>
+			<li>align-content：多根轴线的对齐方式，一根轴该属性无效
+flex-start | flex-end | center | space-between | space-around | stretch;<br/>
+flex-start 	与交叉轴的起点对齐。<br/>
+flex-end 	与交叉轴的终点对齐。<br/>
+center 	与交叉轴的中点对齐。<br/>
+space-between 	与交叉轴两端对齐，轴线之间的间隔平均分布。<br/>
+space-around 	每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。<br/>
+stretch（默认值） 	轴线占满整个交叉轴。<br/><img src="img/弹性盒模型多行对齐方式.jpg" width="736" height="494"/></li>
+        </ol>
+    </dd>
+</dl>
+</body>
+</html>

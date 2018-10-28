@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+body{margin:0; background-color:#deefff; color:#333;}
+dl{padding:0 25px;}
+dt{font-size:26px; color:#600000;}
+p{font-size:22px; margin:20px 0;}
+li{font-size:20px; color:#066; margin:10px 0;}
+pre{border-radius:20px; background-color: #666; color:#ccc; font-size:24px; line-height:30px; text-shadow:0px 1px #999; border:3px #FFC solid;}
+</style>
+</head>
+<body>
+<dl>
+	<dt>锚点和源代码标签</dt>
+    <dd>
+		<p>a标签除了用做页面跳转外还可以做锚点</p>
+        <ol>
+        	<li>本页面的锚点是通过改变滚动条的位置实现</li>
+            <li>页面跳转后的锚点会通过先跳转页面再改变滚动条的位置来实现</li>
+        </ol>
+        <p>pre：源代码标签</p>
+        <ol>
+        	<li>会让代码按照原本呈现的方式呈现</li>
+            <li>如下是一段js的代码</li>
+        </ol>
+        <pre>
+    var a = 10;
+    var b = 20;
+    document.write(a+b);</pre>
+    </dd>
+    <dt>学习做一个页面</dt>
+    <dd>
+        <p>如何做一个页面</p>
+        <ol>
+        	<li>第一步：画布局图（在前期学习阶段必须画）</li>
+            <li>第二部：开始布局（务必保证按照布局图写标签）</li>
+            <li>第三部：写出头部代码/主体代码/页脚代码（使用注释把html代码和css样式标注分别属于哪里的代码）</li>
+            <li>第四部：保证css和js（后面学习到的）与html分离（可以一开始就将css写在css文件中，也可以在做完页面后单独去做）</li>
+        </ol>
+        <p>html和css的注释</p>
+        <ol>
+        	<li>html的注释：&lt;!--这里是注释内容--&gt;</li>
+            <li>css的注释：/*这里是注释内容*/</li>
+            <li>注释就是代码的注解，初学者一定要养成随时在代码中标注注释的习惯</li>
+        </ol>
+    </dd>
+    <dt>表单</dt>
+    <dd>
+    	<p>form：表单</p>
+    	<ol>
+            <li>form常用属性：<br/>method：表单的提交方式（post和get）<br/>action：表单处理服务器<br/></li>
+            <li>注意：<br/>凡是用户与服务器交互的表单标签应全部放在form标签内<br/>form内的提交按钮提交的是整个form表单</li>
+            <li>post方法：<br/>如果采用 POST 方法，浏览器将会按照下面两步来发送数据。首先，浏览器将与 action 属性中指定的表单处理服务器建立联系，一旦建立连接之后，浏览器就会按分段传输的方法将数据发送给服务器<br/>在服务器端，一旦 POST 样式的应用程序开始执行时，就应该从一个标志位置读取参数，而一旦读到参数，在应用程序能够使用这些表单值以前，必须对这些参数进行解码。用户特定的服务器会明确指定应用程序应该如何接受这些参数</li>
+            <li>get方法：<br/>如果采用 GET 方法，浏览器会与表单处理服务器建立连接，然后直接在一个传输步骤中发送所有的表单数据：浏览器会将数据直接附在表单的 action URL 之后。这两者之间用问号进行分隔</li>
+            <li>一般浏览器通过上述任何一种方法都可以传输表单信息，而有些服务器只接受其中一种方法提供的数据。可以在 &lt;form&gt; 标签的 method （方法）属性中指明表单处理服务器要用方法来处理数据，使 POST 还是 GET</li>
+        </ol>
+        <p>input：表单元素</p>
+        <ol>
+        	<li>input常用属性：<br/>name：类似前端的id，同时前端可以用来js取值和分类<br/>type：input的种类<br/>value：input的值<br/>placeholder（输入类）：文本输入提示（css3新增属性，用来提示文本输入）<br/>checked（选择类）：页面加载时默认选定的 input 元素<br/>disabled/readonly：规定禁用/只读的 input 元素</li>
+            <li>input的专用伪类选择器：:focus---获得焦点</li>
+            <li>例子：做一个类似淘宝搜索商品的表单</li>
+            <li>type的类型：
+            	<ul>
+                	<li>输入类：text——文本框；password——密码</li>
+                    <li>选择类：radio——单选；checkbox——复选</li>
+                    <li>按钮类：submit——提交；reset——重置；button——按钮</li>
+                    <li>特殊类：file——上传</li>
+                </ul>
+            </li>
+        </ol>
+        <p>label标签：绑定input元素定义标注，并帮助input元素获取焦点</p>
+        <ol>
+        	<li>写法1：两个标签分开写，label的for属性的值等于input的id值</li>
+            <li>写法2：label嵌套成input的父元素</li>
+        </ol>
+        <p>其他表单元素</p>
+        <ol>
+        	<li>select/option：下拉选框/下拉选框的选项<br/>对高度的支持不兼容<br/>size属性：用来设置同时显示选项的数量</li>
+            <li>textarea：文本域<br/>各个浏览器下的默认滚动条显示不兼容<br/>css3新增 resize 调整尺寸属性 resize: none; 
+</li>
+        </ol>
+    </dd>
+    
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、用锚点做一个楼层导航的布局</p>
+        <p>2、做4个背景颜色不同的DIV元素，父元素300X300固定定位在页面正中心，在分别设置大小150X150， 200X200， 250X250的子元素，中心点与其父元素重合，最后用z-index让他们从人的方向向屏幕从小到大的顺序排列</p>
+    </dd>
+</dl>
+</body>
+</html>

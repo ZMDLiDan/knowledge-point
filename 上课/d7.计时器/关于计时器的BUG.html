@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+#div1{width:150px; height:150px; background-color:red; position:absolute; top:50px; left:0;}
+</style>
+</head>
+<body>
+<input type="button" value="走"/>
+<input type="button" value="停"/>
+<div id="div1"></div>
+<script src="myJs.js"></script>
+<script>
+var aBtn = document.getElementsByTagName("input");
+var oDiv = document.getElementById("div1");
+function goTR(){
+	oDiv.style.left = parseInt(getStyle(oDiv,"left"))+1+"px";
+}
+var timer = null;
+aBtn[0].onclick = function (){
+	clearInterval(timer);
+	timer = setInterval(goTR,30);
+}
+aBtn[1].onclick = function (){
+	clearInterval(timer);
+}
+</script>
+</body>
+</html>

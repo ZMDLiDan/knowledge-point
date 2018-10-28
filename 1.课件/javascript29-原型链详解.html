@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>javascript</dt>
+    <dd>
+    	<p>原型链详解：</p>
+        <ol>
+            <li>原型链的顶层就是Object.prototype，而这个对象的是没有原型对象的。</li>
+            <li>prototype和_proto_的区别：<br/><img src="img/prototype和_proto_的区别.jpg" width="800" height="729"/></li>
+    		<li>_proto_指向谁：<br/><img src="img/_proto_指向.jpg" width="800" height="1562"/><pre>
+    /*1、字面量方式*/
+    var a = {};
+    console.log(a.__proto__);  //Object {}
+    console.log(a.__proto__ === a.constructor.prototype); //true
+    
+    /*2、构造器方式*/
+    var A = function(){};
+    var a = new A();
+    console.log(a.__proto__); //A {}
+    console.log(a.__proto__ === a.constructor.prototype); //true
+    
+    /*3、Object.create()方式*/
+    var a1 = {a:1}
+    var a2 = Object.create(a1);
+    console.log(a2.__proto__); //Object {a: 1}
+    console.log(a.__proto__ === a.constructor.prototype); //false（此处即为图1中的例外情况）</pre></li>
+    		<li>原型链详解：<br/><img src="img/原型链详解.jpg" width="800" height="632"/><pre>
+    var A = function(){};
+    var a = new A();
+    console.log(a.__proto__); //A {}（即构造器function A 的原型对象）
+    console.log(a.__proto__.__proto__); //Object {}（即构造器function Object 的原型对象）
+    console.log(a.__proto__.__proto__.__proto__); //null</pre></li>
+    		<li>instanceof：要求其左边的运算数是一个对象，右边的运算数是对象类的名字或构造函数。如果 object 是 class 或构造函数的实例，则 instanceof 运算符返回 true。如果 object 不是指定类或函数的实例，或者 object 为 null，则返回 false。</li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+		<p>1、Array.prototype.slice.call()的方法可以将一个伪数组（类数组）转换成真正的数组，如：<pre>
+    var arr = {"0":111,"1":22,"2":3,"length":3};</pre>先将它转换成数组，并在它的构造器的原型上添加一个numSort方法，该方法按照数组的数字大小进行正序排列（提示：不用sort方法，用冒泡排序），并且指出在转换之前它的构造器是谁，转换之后构造器又是谁？</p>
+    </dd>
+</dl>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+	<style type="text/css">
+		div{width:150px; height:150px; font-size:50px; color:#fff;}
+		div:nth-child(1){background-color:red;}
+		div:nth-child(2){background-color:yellow;}
+		div:nth-child(3){background-color:blue;}
+	</style>
+</head>
+<body>
+	<div>1</div>
+	<div>2</div>
+	<div>3</div>
+	<script src="jquery.min.js"></script>
+	<script>
+		$("div").eq(0).hover(function (){
+			$("div").eq(2).insertBefore($("div").eq(1));
+		},function (){
+			$("div").eq(2).insertBefore($("div").eq(1));
+		})
+		//$("div").eq(0).mouseover(function (){})
+		//$("div").eq(0).mouseout(function (){})
+	</script>
+</body>
+</html>

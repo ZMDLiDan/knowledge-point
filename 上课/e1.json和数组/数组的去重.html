@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<script>
+var arr =[1,2,2,2,2,3,3,4,4,4,2,3];
+for(var i=0;i<arr.length;i++){
+	for(var j=i+1;j<arr.length;j++){
+		if(arr[i]===arr[j]){
+			arr.splice(j,1);
+			j--;
+		}
+	}
+}
+console.log(arr);
+</script>
+</body>
+</html>

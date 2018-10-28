@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<button type="button">生成彩票</button>
+<p></p>
+<script>
+var oBtn = document.querySelector("button");
+var oP = document.querySelector("p");
+var json = {};
+oBtn.onclick = function (){
+	var newCP = caipiao();
+	oP.innerHTML = newCP;
+	var time = new Date().getTime();
+	json[time] = newCP;
+	window.location.hash = time;
+	console.log(json);
+}
+window.onhashchange = function (){
+	oP.innerHTML = json[window.location.hash.substring(1)];
+}
+window.onpopstate = function (ev){
+	window.history.pushState(json,"");
+}
+function caipiao(){
+	var arr = [];
+	for(var i=0;i<28;i++){
+		arr.push(i+1);
+	}
+	arr.sort(function (a,b){return Math.random()-0.5})
+	arr.length = 7;
+	return arr;
+}
+</script>
+</body>
+</html>

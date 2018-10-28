@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<input type="button" value="切换新闻"/>
+<ul>
+
+</ul>
+<script>
+var arr = ["新闻1","新闻2","新闻3","新闻4","新闻5","新闻6","新闻7","新闻8","新闻9","新闻10","新闻11","新闻12","新闻13","新闻14","新闻15"];
+var oUl = document.getElementsByTagName("ul")[0];
+var oBtn = document.getElementsByTagName("input")[0];
+var i = 0;
+makeNews();
+function makeNews(){
+	var str = "";
+	for(var j=5*i;j<5*i+5;j++){
+		str += "<li>"+arr[j]+"</li>";
+	}
+	oUl.innerHTML = str;
+}
+oBtn.onclick = function (){
+	if(i<arr.length/5-1){
+		i++;
+	}else{
+		i=0;
+	}
+	makeNews();
+}
+
+元素.style.backgroundPosition = a*50+"px "+b*50+"px"
+background-positon:50px 50px
+</script>
+</body>
+</html>

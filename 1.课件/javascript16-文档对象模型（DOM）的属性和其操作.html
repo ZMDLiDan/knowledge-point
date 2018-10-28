@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>javascript</dt>
+    <dd>
+    	<p>JavaScript的DOM：</p>
+        <ol>
+        	<li>Document Object Model （简称DOM）既文档对象模型
+            	<ul>
+                	<li>文档：就是我们的html页面</li>
+                    <li>文档对象：是页面中的元素</li>
+                    <li>文档对象模型：为了能够让程序--js去操作页面中的元素而定义的标准，通过 DOM，可访问 HTML 文档的所有元素</li>
+                </ul>
+            </li>
+            <li>把整个文档看成一棵树，树分支就是节点，同时定义了很多方法来操作这些节点，如下图是一个将html代码分解成的DOM树：<img src="img/DOM树.png" width="700" height="348"/><br/>DOM树中三种常见的DOM节点:
+            	<ul>
+                	<li>元素节点：上图中&lt;html&gt;、&lt;body&gt;、&lt;a&gt;等都是元素节点，即标签</li>
+                    <li>文本节点：向用户展示的内容，如&lt;title&gt;...&lt;/title&gt;中的"文档标题"文本</li>
+                    <li>属性节点：元素的属性，如&lt;a&gt;标签的链接地址属性 href</li>
+                    <li>通过getElementById和document.body等方法获取元素就是获取元素节点的</li>
+                </ul>
+            </li>
+            <li>浏览器工作的过程：
+                <ul>
+                    <li>从网络或本地拿到html源代码</li>
+                    <li>浏览器将html源码中的每个标签都实例化对应的对象</li>
+                    <li>在内存中形成一个DOM树</li>
+                    <li>将内存DOM树解析为可视页面</li>
+                    <li>JS直接修改DOM树，改变页面视图</li>
+                </ul>
+            </li>
+        </ol>
+        <p>元素的属性：元素.XXX，注意与方法的区别（没有括号）：</p>
+        <ol>
+        	<li>元素.childNodes   //只读属性--子节点列表集合：该属性不只包含元素节点，该列表的节点种类一共有12种，因此获取一个父元素的chlidNodes时要比实际元素的数量多，经常接触到的除了元素节点外还有文本节点等</li>
+            <li>元素.nodeType  //只读属性--获取元素的节点类型，常用的节点有：1元素节点，2属性节点，3文本节点。若我们希望控制元素节点，则可以先判断子节点的nodeType为1时，再控制它</li>
+            <li>属性节点：就是元素的属性--元素.attributes  //只读属性，如：属性的名称.name，属性的值.value等</li>
+            <li>元素.children  //只读属性--元素节点的列表集合
+由于children只会包含元素节点，因此不会有上面属性的兼容性问题</li>
+			<li>元素.firstChild //只读属性--第一个子节点：该属性是元素的所有子节点（childNodes）中的第一个子节点，因此包含文本类型的节点，不兼容；标准浏览器有效的写法为元素.firstElementChild。因此兼容所有浏览器的写法：<pre>
+    var oFirst = 元素.firstElementChild || 元素.firstChild;
+    if(oFirst){oFirst.style.....} //为防止在没有子节点时出问题的写法
+    (最佳的方法:)父元素.children[0].style.... //因此最好的做法是用这个方法，避免上面那些写法兼容性的问题</pre></li>
+            <li>元素.lastChild   //只读属性--最后一个子节点，与firstChild一样，需要处理兼容性问题<pre>
+    var oLast = 元素.lastElementChild || 元素.lastChild</pre></li>
+    		<li>元素.nextSibling  //只读属性--下个兄弟节点<pre>
+    var oNext = 元素.nextElementSibling || 元素.nextSibling</pre></li>
+            <li>元素.previousSibling //只读属性--上个兄弟节点<pre>
+    var oPrev = 元素.previousElementSibling || 元素.previousSibling</pre></li>
+    		<li>元素.parentNode  //只读属性--父节点：由于父元素是唯一的，因此没有兼容问题</li>
+            <li>元素.offsetParent  //只读属性--距当前元素最近一个有定位属性的父元素节点：若无定位父级则默认会找到body（若在ie7及以下的浏览器中，该元素在没有定位的时候找的是body，有定位的时候则变成html）</li>
+            <li>元素.offsetLeft/offsetTop  //只读属性--当前元素到其定位父级的距离（偏移值）：若有定位的父级，但自己没有定位，在ie7及以下浏览器里该属性指的是到body的距离，其他浏览器中则是到定位父级的距离；若无定位父级，ie8及以下浏览器是到html的距离</li>
+            <li>上面两个属性由于他们的默认的位置不同，浏览器body默认的margin值也不同，因此一定要清除浏览器的默认样式，否则用这些方法获得值在不同浏览器里也不同。</li>
+            <li>元素.offsetWidth/offsetHeight  //只读属性--当前元素的占位宽高
+            	<ul>
+                	<li>元素.style.width的取值可以得到元素属性style里的宽度（行间样式）</li>
+                    <li>元素.clientWidth的值为style.width+padding（盒子宽度去掉边框border的部分）</li>
+                    <li>元素.offsetWidth（占位宽）既盒子宽度（margin不属于盒子内部）</li>
+                </ul>
+            </li>
+            <li>元素.offsetLeft和元素.offsetTop会获取该元素到其定位父级的距离，如果想要获取一个元素到整个页面document的距离，就要考虑当该元素有多个定位的父元素的时候该如何处理：<pre>
+    var iTop = 0;
+    var obj = $('div3');
+    while(obj){
+        iTop +=obj.offsetTop;
+        obj=obj.offsetParent;
+    } //注意：body的offsetParent为空</pre></li>
+        </ol>
+        <p>DOM元素的操作：</p>
+        <ol>
+        	<li>向父元素中动态创建元素(重点)：
+            	<ul>
+                	<li>之前我们用innerHTML的累加的方式创建元素，但是添加若次数过多会使性能降低</li>
+                    <li>我们可以创建一个li元素，语法：<pre>
+    var oLi = document.createElement('li'); </pre></li>
+                    <li>该元素被创建出来的时候并不属于页面，我们可以先给该元素上添加内容，事件等，如：<pre>
+    oLi.innerHTML = oText.value; </pre></li>
+    				<li>把它放在其父元素中：<pre>
+    oUl.appendChild(oLi)  //在父级最后节点后添加该元素</pre></li>
+    				<li>或者用：<pre>
+    oUl.insertBefore(oLi,b) //在父级b节点前添加该元素</pre></li>
+    				<li>上面的方法在ie浏览器中若该元素如果没有子元素会报错，解决方法是判断一下该元素是否有第一个子元素，若没有改用append方法添加：<pre>
+    oUl.children[0] ? oUl.insertBefore(oLi,oUl.children[0]) : oUl.appendChild(oLi)</pre></li>
+                </ul>
+            </li>
+            <li>父级.removeChild(li) //从父级中删除某子节点</li>
+            <li>父级.replaceChild(新节点,被替换节点) //在父元素中用新节点替换某子节点</li>
+            <li>appendChild,insertBefore,replaceChild等方法都可以操作动态创建的元素，也可以操作已有的节点，它们都是剪切操作（既被操作的元素在原位置已经不存在了）</li>
+        </ol>
+        <p>操作元素属性的新方法：Attribute</p>
+        <ol>
+        	<li>控制页面元素的时候，我们学习属性控制的方法：<pre>
+    元素.value;
+    元素['value'] //变量必须用[]</pre></li>
+            <li>新方法：
+            	<ul>
+                	<li>获取属性值 元素.getAttribute() //一个参数，为属性名</li>
+                    <li>设置属性值 元素.setAttribute() //两个参数，为属性名和值</li>
+                    <li>删除属性值 元素.removeAttribute() //一个参数，为属性名</li>
+                </ul>
+            </li>
+            <li>Attribute的特性：
+            	<ul>
+                	<li>标签的自定义属性，在ie8及以下可以用.和[]的方法取到，但是在标准浏览器下无法取到，用getAttribute()可以在所有浏览器中取到自定义属性</li>
+                    <li>用.src和['src']的方法取到的是绝对路径，用getAttribute()可以获取到相对路径（既实际值，ie7及以下不兼容，仍然是绝对路径）</li>
+                </ul>
+            </li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、做一个列表ul，其每个li里面有个按钮，点击该按钮时隐藏其父元素li</p>
+        <p>2、封装js方法getPosition()，获取一个元素相对于document的left和top偏移值（包含left和top两个方向的结果）</p>
+        <p>3、布局一个输入框，一个按钮和一个ul列表，要求用动态创建的方法做一个点击按钮时将输入框中的内容在ul中生成一个对话li，li里面需要包含一个a标签-删除，点击该删除时，将按钮对应的对话删除</p>
+    </dd>
+</dl>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+    <dt>css3、HTML5和移动端</dt>
+    <dd>
+        <p>弹性盒模型项目的属性设置</p>
+        <ol>
+        	<li>以下6个属性设置在项目上：<br/>
+order：项目的排列顺序。数值越小，排列越靠前，默认为0<br/>
+flex-grow：放大比例，默认为0-如果存在剩余空间也不放大<br/>
+flex-shrink：缩小比例，默认为1-如果空间不足项目将缩小<br/>
+flex-basis：在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小<br/>
+flex：flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选<br/>
+align-self：允许单个项目有与其他项目不一样的对齐方式，可覆盖<br/>align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。</li>
+            <li>order ：项目的排列顺序(数字)<br/><img src="img/弹性盒模型项目排列顺序.png" width="751" height="480"/></li>
+            <li>flex-grow：放大比例(数字)<br/>
+如果所有项目的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。<br/>
+如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。<br/><img src="img/弹性盒模型项目放大比例.png" width="802" height="256"/></li>
+			<li>flex-shrink：缩小比例(数字)<br/>
+如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。<br/>
+如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。<br/>
+负值对该属性无效。<br/><img src="img/弹性盒模型项目缩小比例.jpg" width="744" height="176"/></li>
+			<li>flex-basis：项目占据的主轴空间(px)<br/>
+如果设为跟width或height属性一样的值（比如350px），则项目将占据固定空间。 <br/>
+flex-basis:flex-basis可以理解为我们给子元素设置的宽度。<br/>
+默认值是auto,宽度设置为auto时，盒子的宽度取决你们元素的宽度。<br/><img src="img/弹性盒模型项目主轴空间.png" width="632" height="283"/></li>
+			<li>flex：flex-grow,flex-shrink和flex-basis的简写
+该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)。<br/>
+建议优先使用这个属性而不分开写，浏览器会推算相关值。<br/>
+grow表示伸张因子，shrink表示是收缩因子。<br/>
+grow在flex容器下的子元素的宽度和比容器和小的时候起作用。<br/>
+grow定义了子元素的宽度增长因子，除去子元素之和剩下的宽度会按照各个子元素的gorw值进行平分加大各个子元素上。<br/>
+计算容器还剩空间：available_space(容器还剩的空间）=container_size(容器宽度)-flex_item_total(子元素宽度之和)<br/>
+计算增长单位：grow_unit(增长单位)=available_space/flex_grow_total(子元素增长因子之和)<br/>
+得到子元素的宽度：flex-item-width(子元素计算得到的宽度)=flex-basis+grow-unit*flex-grow<br/></li>
+			<li>align-self：允许单个项目有与其他项目不一样的对齐方式(之前的位置依然会被保留)
+auto | flex-start | flex-end | center | baseline | stretch;<br/>
+该属性可能取6个值，除了auto，其他都与align-items属性完全一致。<br/><img src="img/弹性盒模型项目单独对齐方式.png" width="688" height="331"/></li>
+        </ol>
+        <p>移动端所使用的元数据meta标签</p>
+        <ol>
+        	<li>&lt;meta name="viewport" content="" /&gt;<br/>
+width [pixel_value | device-height]<br/>
+height [pixel_value | device-height]<br/>
+user-scalable 是否允许缩放 （no||yes）<br/>
+initial-scale 初始比例<br/>
+minimum-scale 允许缩放的最小比例 <br/>
+maximum-scale 允许缩放的最大比例 <br/>
+target-densitydpi [dpi_value | device-dpi | high-dpi | medium-dpi | low-dpi] </li>
+			<li>常用选项为：<br/>
+&lt;meta name="keywords" content="" /&gt;
+&lt;meta name="description" content="" /&gt; <br/>
+&lt;!--描述和关键词--&gt;<br/>
+&lt;meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" /&gt;<br/>
+&lt;!--width  ----  viewport的宽度（width=device-width意思是：宽度等于设备宽度）<br/>
+initial-scale ----- 初始的缩放比例<br/>
+minimum-scale ----- 允许用户缩放到的最小比例<br/>
+maximum-scale ----- 允许用户缩放到的最大比例<br/>
+user-scalable ----- 用户是否可以手动缩放--&gt;<br/>
+&lt;meta name="format-detection" content="telephone=no" /&gt;<br/>
+&lt;!--一般情况下，IOS和Android系统都会默认某长度内的数字为电话号码，即使不加也是会默认显示为电话的，因此，取消这个很有必要！--&gt;<br/>
+&lt;meta name="apple-mobile-web-app-capable" content="yes" /&gt;<br/>
+&lt;!--它表示：允许全屏模式浏览，隐藏浏览器导航栏--&gt;<br/>
+&lt;meta name="apple-mobile-web-app-status-bar-style" content="black"&gt;<br/>
+&lt;!--它指定的iphone中safari顶端的状态条的样式
+默认值为default（白色），可以定为black（黑色）和black-translucent（灰色半透明）--&gt;</li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、将下图布局(一个父框架和九个子元素)
+要求将子元素分别定位在九宫格的每个位置，如图中所示为中上的位置，除此还有左上、右上、左中、中中、右中、左下、中下和右下。<br/><img src="img/练习1.png" width="132" height="130"/></p>
+		<p>2、把下面几个和练习1中相同布局，但是多个子元素的布局做出来<br/><img src="img/练习2-1.png"/><img src="img/练习2-2.png"/><img src="img/练习2-3.png"/></p>
+    </dd>
+</dl>
+</body>
+</html>

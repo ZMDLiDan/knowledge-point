@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>javascript</dt>
+    <dd>
+    	<p>浏览器对象模型Browser Object Model：</p>
+        <ol>
+        	<li>BOM方法一般都是在浏览器（window）的方法</li>
+            <li>我们需要跳转到新的页面时，就用到了open方法，
+open(URL,打开方式)  //用来打开一个新窗口</li>
+            <li>网址为空时打开的是空白页面，打开方式默认为_blank（在新窗口显示目标网页），也可以设置_self（在当前窗口显示目标网页），此方法的返回值是新窗口的window对象</li>
+            <li>如下封装一个打开页面的函数，在新窗口打开百度页面：<pre>
+    function open_win() {
+    	window.open("http://www.baidu.com","_blank");
+    }
+    open_win();</pre>
+    		</li>
+    		<li>close()  //关闭窗口的方法，但有兼容性问题（如火狐是禁止代码关闭浏览器的，chrome是直接关闭，ie下是询问关闭），因此很少会使用，但是可以关闭由于代码打开（open）的新窗口</li>
+        	<li>window.navigator.userAgent  //浏览器信息（内核，版本等），如可以判断当前浏览器是否是ie浏览器（.indexOf('MSIE')=-1）</li>
+            <li>window.location  //对象 当前网址地址url（.location.href）也可以用以打开页面</li>
+            <li>window.location.search  //url ?后面的内容</li>
+            <li>window.location.hash  //url#后面的内容</li>
+            <li>window.onload/window.onscroll/window.onresize分别对应window加载完成时/滚动条滚动时/窗口大小变化时事件，需要注意.onscroll/.onresize不是按照1像素来触发事件，而是单位时间触发</li>
+            <li>alert() //发出警报，参数为字符串或变量</li>
+            <li>confirm() //确认选择，参数为需要用户确认的信息，返回布尔值</li>
+            <li>prompt()  //提示输入，参数一为提示信息不可修改，参数二为用户输入内容，可修改，返回用户输入字符串</li>
+        </ol>
+        <p>浏览器里的各种尺寸：</p>
+        <ol>
+        	<li>可视区尺寸（浏览器窗口）：<pre>
+    document.documentElement.clientWidth  //可视区宽度
+    document.documentElement.clientHeight //可视区高度</pre>document没有尺寸要从文档元素documentElement上取
+			</li>
+            <li>滚动距离（可视区到页面顶部/左侧）：<pre>
+    document.body.scrollTop/scrollLeft //仅chrome下有效
+    document.documentElement.scrollTop/scrollLeft //其他浏览器
+    //垂直滚动条和水平滚动条的兼容写法：
+    var scrollTop =  document.body.scrollTop || document.documentElement.scrollTop
+    var scrollLeft = document.body.scrollLeft || document.documentElement.scrollLeft</pre></li>
+    		<li>页面内容宽高（盒子内部包括溢出部分的宽度/高度）：<pre>
+    var oBWidth = document.body.scrollWidth
+    var oBHeight = document.body.scrollHeight</pre></li>
+    		<li>文档高度：<pre>
+    var oDomHeight = document.documentElement.offsetHeight 
+    //不推荐，在ie7及以下会表现为可视区的高度
+    var oDomHeight = document.body.offsetHeight  //推荐</pre></li>
+        </ol>
+        <p>获取和取消鼠标选中的文字：</p>
+        <ol>
+        	<li>document.selection.createRange().text; IE9以下使用</li>
+            <li>window.getSelection().toString(); 其他浏览器使用</li>
+            <li>获取鼠标选中的文字的兼容写法：<pre>
+    window.getSelection ? window.getSelection() : document.selection.createRange().text;</pre></li>
+    		<li>document.selection.empty(); IE9以下使用</li>
+            <li>window.getSelection().removeAllRanges(); 其他浏览器使用</li>
+            <li>取消鼠标选中文字的兼容写法：<pre>
+    window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();</pre></li>
+        </ol>
+        <p>try...catch...语句：</p>
+        <ol>
+        	<li>错误发生时JavaScript引擎会停止并生成一个错误消息，try允许执行时进行错误测试的代码块，catch允许当 try代码块发生错误时执行的代码块，finally无论有没有错都执行的代码块，throw new Error("自定义错误")自定义错误信息</li>
+            <li>可以在用户自己操作失误或者函数少条件时不会影响下面的函数执行</li>
+            <li>语法：try {//运行代码} catch (err) {//处理错误} finally {//无论有没有错都执行的代码块}，如：<pre>
+    try {
+    	allert("Welcome guest!");
+        //throw new Error("自定义错误");
+    }catch(err) {
+    	txt="本页有一个错误。\n"; 
+        txt+="错误描述：" + err.message + "\n"; 
+        txt+="点击确定继续。\n"; 
+        alert(txt);
+    }</pre></li>
+            <li>适用情况：
+            	<ul>
+                	<li>兼容性问题，浏览器兼容性不是程序员能改正的，所以可以用try catch：不同浏览器的报错提示是不一样的，根据浏览器的报错提示判断用户的浏览器，做出对应的措施，这时候用try catch，if通常只能反馈真或假，不能直接反馈浏览器的报错内容。</li>
+                    <li>如window.a.b是非法的，再跟2对比就没有意义，这样非法的条件，在try catch中仍可以继续运行下去。但在if中window.a.b已经报错，整个页面都会坏掉。用try catch，程序不但知道window.a.b !== 2是假的，而且直接可以知道究竟哪一步就已经是假的。</li>
+                    <li>try catch不能做真假判断，只能做非法判断。也就是说：try {1 === 2}，虽然1===2是假，但是是合法的，catch不会捕捉到错误，也不会告诉你1 === 2到底是真是假。</li>
+                </ul>
+            </li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、点击一个按钮，以新的窗口打开"http://www.yahoo.com"首页，然后再用另一个按钮关闭它。</p>
+        <p>2、五个按钮都可以用.location.href打开新页面，并将按钮的需要通过.location.hash传递到新页面</p>
+        <p>3、提示用户输入用户名，用户输入XX内容并确认后弹出"欢迎XX朋友"，若未输入内容或输入为空则并确认后弹出"欢迎您，我的朋友"</p>
+        <p>4、询问用户"你喜欢学习JavaScript吗？"，当为true时返回"让我们一起共同进步" 当为false时返回"你可能需要进一步了解JavaScript"
+</p>
+    </dd>
+</dl>
+</body>
+</html>

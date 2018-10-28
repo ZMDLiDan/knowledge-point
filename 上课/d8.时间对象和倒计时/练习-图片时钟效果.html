@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+
+</head>
+<body>
+<img src="img/0.JPG"/>
+<img src="img/0.JPG"/>
+<img src="img/colon.JPG"/>
+<img src="img/0.JPG"/>
+<img src="img/0.JPG"/>
+<img src="img/colon.JPG"/>
+<img src="img/0.JPG"/>
+<img src="img/0.JPG"/>
+<script>
+var aImg = document.getElementsByTagName("img");
+function nowTime(){
+	var myTime = new Date();
+	var nowH = myTime.getHours();
+	var nowM = myTime.getMinutes();
+	var nowS = myTime.getSeconds();
+	var str = addZ(nowH)+addZ(nowM)+addZ(nowS);
+	aImg[0].src = "img/"+str.charAt(0)+".JPG";
+	aImg[1].src = "img/"+str.charAt(1)+".JPG";
+	aImg[3].src = "img/"+str.charAt(2)+".JPG";
+	aImg[4].src = "img/"+str.charAt(3)+".JPG";
+	aImg[6].src = "img/"+str.charAt(4)+".JPG";
+	aImg[7].src = "img/"+str.charAt(5)+".JPG";
+}
+nowTime();
+setInterval(nowTime,1000)
+function addZ(num){
+	return num<10 ? "0"+num : ""+num;
+}
+</script>
+</body>
+</html>

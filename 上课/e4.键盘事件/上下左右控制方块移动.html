@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+div{width:150px; height:150px; background-color:red; position:absolute; left:0; top:0;}
+</style>
+</head>
+<body>
+<div></div>
+<script src="myJs.js"></script>
+<script>
+var oDiv = document.getElementsByTagName("div")[0];
+var bL = false, bT = false, bR = false, bB = false;
+var timer = setInterval(function (){
+	if(bL){
+		oDiv.style.left = parseInt(getStyle(oDiv,"left")) - 3 + "px";
+	}
+	if(bT){
+		oDiv.style.top = parseInt(getStyle(oDiv,"top")) - 3 + "px"; 
+	}
+	if(bR){
+		oDiv.style.left = parseInt(getStyle(oDiv,"left")) + 3 + "px"; 
+	}
+	if(bB){
+		oDiv.style.top = parseInt(getStyle(oDiv,"top")) + 3 + "px"; 
+	}
+},30)
+
+document.onkeydown = function (ev){
+	ev = ev || event;
+	//alert(ev.keyCode); //左上右下37、38、39、40
+	switch(ev.keyCode){
+		case 37 : bL = true; break; 
+		case 38 : bT = true; break; 
+		case 39 : bR = true; break; 
+		case 40 : bB = true; break;  
+	}
+}
+document.onkeyup = function (ev){
+	ev = ev || event;
+	//alert(ev.keyCode); //左上右下37、38、39、40
+	switch(ev.keyCode){
+		case 37 : bL = false; 
+		case 38 : bT = false; 
+		case 39 : bR = false; 
+		case 40 : bB = false; 
+	}
+}
+</script>
+</body>
+</html>

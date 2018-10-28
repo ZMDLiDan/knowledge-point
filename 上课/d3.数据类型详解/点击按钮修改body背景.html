@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body style="background:url(img/1.png)">
+<input type="button" value="切换背景"/>
+<script>
+var oBody = document.body;
+var oBtn = document.getElementsByTagName("input")[0];
+var i = 1;
+oBtn.onclick = function (){
+	if(i==4){
+		i=1;
+	}else{
+		i++;
+	}
+	oBody.style.cssText = "background-image:url(img/"+i+".png)";
+	//oBody.style.backgroundImage = "url(img/"+i+".png)";
+}
+</script>
+</body>
+</html>

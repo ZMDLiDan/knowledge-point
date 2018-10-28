@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+    <dt>css3、HTML5和移动端</dt>
+    <dd>
+    	<p>*HTML5获取地理位置定位信息</p>
+        <ol>
+        	<li>HTML5提供了地理位置定位功能（Geolocation API），能确定用户位置，我们可以借助HTML5的该特性开发基于地理位置信息的应用。</li>
+            <li>使用HTML5，借助百度、谷歌地图接口来获取用户准确的地理位置信息。</li>
+            <li>定位功能（Geolocation）是HTML5的新特性，因此只有在支持HTML5的现代浏览器上运行，特别是手持设备如iphone，地理定位更加精确。首先我们要检测用户设备浏览器是否支持地理定位，如果支持则获取地理信息。</li>
+            <li>注意这个特性可能侵犯用户的隐私，除非用户同意，否则用户位置信息是不可用的，所以我们在访问该应用时会提示是否允许地理定位，我们当然选择允许即可。</li>
+            <li>如果用户设备支持地理定位，则运行 getCurrentPosition() 方法。如果getCurrentPosition()运行成功，则向参数showPosition中规定的函数返回一个coordinates对象，getCurrentPosition() 方法的第二个参数showError用于处理错误，它规定当获取用户位置失败时运行的函数。<pre>
+    function getLocation(){
+        if (navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(showPosition,showError);
+        }else{ 
+            alert("浏览器不支持地理定位。");
+        }
+    } </pre></li>
+    		<li>我们看一下函数showError()，它规定获取用户地理位置失败时的一些错误代码处理方式：<pre>
+    function showError(error){ 
+        switch(error.code) { 
+            case error.PERMISSION_DENIED: 
+            alert("定位失败,用户拒绝请求地理定位"); 
+            break;
+            case error.POSITION_UNAVAILABLE: 
+            alert("定位失败,位置信息是不可用"); 
+            break;
+            case error.TIMEOUT: 
+            alert("定位失败,请求获取用户位置超时");
+            break;
+            case error.UNKNOWN_ERROR:
+            alert("定位失败,定位系统失效");
+            break;
+        }
+    }</pre></li>
+    		<li>我们再来看函数showPosition(),调用coords的latitude和longitude即可获取到用户的纬度和经度。<pre>
+    function showPosition(position){
+        var lat = position.coords.latitude; //纬度 
+        var lag = position.coords.longitude; //经度 
+        alert('纬度:'+lat+',经度:'+lag);
+    } </pre></li>
+    		<li>我们要做的是把抽象的经纬度转成可读的有意义的真正的用户地理位置信息。百度地图和谷歌地图等提供了这方面的接口，我们只需要将获取到的经纬度信息传给地图接口，则会返回用户所在的地理位置，包括省市区信息，甚至有街道、门牌号等详细的地理位置信息。详情请看地理位置demo</li>
+        </ol>
+        <p>HTML5拖放</p>
+        <ol>
+            <li>draggable属性 ：设置为true，元素就可以拖拽了(谷歌)</li>
+            <li>拖拽元素事件 :  事件对象为被拖拽元素。<br/>
+dragstart (元素.ondragstart),  拖拽前触发<br/>
+drag (元素.ondrag) 拖拽前和拖拽结束之间连续触发，与move有区别<br/>
+dragend  (元素.ondragend), 拖拽结束触发</li>
+            <li>目标元素事件 :  事件对象为目标元素。<br/>
+dragenter ,  进入目标元素触发，相当于mouseover<br/>
+dragover  ,进入目标、离开目标之间，连续触发<br/>
+dragleave ,  离开目标元素触发，相当于mouseout<br/>
+drop  ,  在目标元素上释放鼠标触发（必须在dragover上阻止默认事件ev.preventDefault()）</li>
+            <li>事件的执行顺序 ：drop不触发的时候<br/>
+dragstart  >  drag >  dragenter >  dragover >  dragleave > dragend </li>
+            <li>事件的执行顺序 ：drop触发的时候(dragover的时候阻止默认事件ev.preventDefault();)<br/>
+dragstart  >  drag >  dragenter >  dragover >  drop > dragend</li>
+            <li>解决火狐下的问题：必须设置dataTransfer对象的setData方法才可以拖拽除图片外的其他标签
+                ev.dataTransfer.setData('','')</li>
+            <li>dataTransfer对象(event对象)<br/>
+setData() : 设置数据 key和value(必须是字符串)，如：<br/>
+ev.dataTransfer.setData('name','a');（在dragstart里 ）<br/>
+getData() : 获取数据，根据key值，获取对应的value<br/>
+ev.dataTransfer.getData('name');（在drop里）</li>
+			<li>dataTransfer对象(event对象)，不能释放的光标和能释放的光标不一样</li>
+            <li>effectAllowed （dragstart）<br/>
+effectAllowed : 设置光标样式(none, copy, copyLink, copyMove, link, linkMove, move, all 和 uninitialized)</li>
+			<li>setDragImage（改变拖拽clone的元素，dragstart ）<br/>
+三个参数：指定的元素，坐标X，坐标Y</li>
+			<li>files 获取外部拖拽的文件，返回一个filesList列表<br/>
+filesList下有个type属性，返回文件的类型，如：<pre>
+    var oDiv = document.querySelector('div');
+    oDiv.ondragenter = function(){
+        this.innerHTML = '可以释放啦';
+    };
+    oDiv.ondragover = function(ev){
+        ev.preventDefault();
+    };
+    oDiv.ondragleave = function(){
+        this.innerHTML = '将文件拖拽到此区域';
+    };
+    oDiv.ondrop = function(ev){
+        ev.preventDefault();
+        var fs = ev.dataTransfer.files;
+        alert(fs.length);
+        alert( fs[0].type );
+        var fd = new FileReader();
+        fd.readAsDataURL( fs[0] ); //参数为要读取的文件对象，将文件读取为DataUrl
+        fd.onload = function(){   //当读取文件成功完成的时候触发此事件
+            alert( this.result ); //读取的文件数据，图片将返回base64格式的图片数据
+        };
+    };</pre></li>
+    		<li>一个使用的例子（禁止页面的所有图片拖放）：<pre>
+    var allImages = document.getElementsByTagName("img");
+    for(var i in allImages){
+        allImages[i].ondragstart=function(){return false};
+    }</pre></li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、用removeChild和dataTransfer对象来做垃圾箱效果</p>
+        <p>2、拖拽时，拖出的元素变成一个设置好的隐藏图片</p>
+    </dd>
+</dl>
+</body>
+</html>

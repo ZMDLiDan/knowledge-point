@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>ECMAScript 6标准</dt>
+    <dd>
+        <p>ECMAScript 6标准（简称ES6）</p>
+        <ol>
+    		<li>ES6语法：
+            	<ul>
+    				<li>map方法：map()定义在JavaScript的Array中，我们调用Array的map()方法，传入我们自己的函数，就得到了一个新的Array作为结果：<pre>
+    function pow(x) {return x * x;}
+    var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    var newArr=arr.map(pow); // [1, 4, 9, 16, 25, 36, 49, 64, 81]
+    //相当于arr的每个数据执行了一次pow方法</pre>map()作为高阶函数，事实上它把运算规则抽象了，因此，我们不但可以计算简单的f(x)=x2，还可以计算任意复杂的函数，比如，把Array的所有数字转为字符串：<pre>
+    var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    var newArr=arr.map(String); // ['1', '2', '3', '4', '5', '6', '7', '8', '9']//只需要一行代码。</pre></li>
+    				<li>reduce方法：Array的reduce()把一个函数作用在这个Array的[x1, x2, x3...]上，它必须接收两个参数，reduce()把结果继续和序列的下一个元素做累积计算，其效果就是：<pre>
+    [x1, x2, x3, x4].reduce(f) = f(f(f(x1, x2), x3), x4)</pre>比方说对一个Array求和，就可以用reduce实现：<pre>
+    var arr = [1, 3, 5, 7, 9];
+    arr.reduce(function (x, y) {return x + y;}); // 25</pre>要把[1, 3, 5, 7, 9]变换成整数13579，reduce()也能派上用场：<pre>
+    var arr = [1, 3, 5, 7, 9];
+    arr.reduce(function (x, y) {return x * 10 + y;}); // 13579</pre></li>
+    				<li>filter方法(数组的过滤)：filter也是一个常用操作，用于把Array的某些元素过滤掉，然后返回剩下的元素，和map()类似，Array的filter()也接收一个函数。和map()不同的是，filter()把传入的函数依次作用于每个元素，然后根据返回值是true还是false决定保留还是丢弃该元素：<pre>
+    var arr = [1, 2, 4, 5, 6, 9, 10, 15];
+    var r = arr.filter(function (x) {
+    return x % 2 !== 0;});
+    console.log(r); // [1, 5, 9, 15] 只保留奇数，删除数组中数据为偶数的项
+    var arr = ['A', '', 'B', null, undefined, 'C', '  '];</pre>
+    <pre>@去除无效字符@
+    var r = arr.filter(function (s) {
+        return s && s.trim();});// trim:去除一串字符的左右空格。注意：IE9以下的版本没有trim()方法
+    arr; // ['A', 'B', 'C'] 把数组中的无效字符串删掉</pre>filter()接收的回调函数可以有多个参数。第一个参数表示Array的某个元素。另外两个参数，表示元素的位置和数组本身：<pre>
+    var arr = ['A', 'B', 'C'];
+    var r = arr.filter(function (element, index, self) {
+    console.log(element); 
+    // 依次打印'A', 'B', 'C'
+    console.log(index); 
+    // 依次打印0, 1, 2
+    console.log(self); 
+    // self就是变量arr
+    return true;});</pre>利用filter，可以去除Array的重复元素：<pre>
+    'use strict';
+    var arr = ['apple', 'strawberry', 'banana', 'pear', 'apple', 'orange', 'orange', 'strawberry'];
+    var r = arr.filter(function (element, index, self) {
+    	return self.indexOf(element) === index;
+    });//判断第一次出现的位置===现在的位置，false删除。总是返回第一个</pre></li>
+    				<li>includes方法：在ES5，Array提供了indexOf用来查找某个元素的位置，不存在返回-1，这个函数在判断数组是否包含某个元素时有两个不足，一个是它会返回-1和元素的位置来表示是否包含，在定位方面是没问题，就是不够语义化。另一个问题是不能判断是否有NaN的元素。<pre>
+    const arr1 = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', NaN];
+    console.log(arr1.indexOf(NaN))
+    //结果：-1</pre>includes方法判断是否包含某一元素，除了不能定位外，解决了indexOf上面的问题。它返回true或false表示是否包含元素，对NaN一样有效。如：<pre>
+    const arr1 = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', NaN];
+    console.log('%s', arr1.includes('c'))
+    console.log('%s', arr1.includes('z'))
+    console.log('%s', arr1.includes(NaN))
+    //结果：true false true</pre>includes()函数的第二个参数表示判断的起始位置。如：<pre>
+    const arr1 = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', NaN];
+    console.log('%s', arr1.includes('d', 1))
+    console.log('%s', arr1.includes('d', 3))
+    console.log('%s', arr1.includes('d', 4))
+    //结果：true true false</pre>第二个参数也可以是负数，表示从右数过来第几个，但是不改变判断搜索的方向，搜索方向还是从左到右。</li>
+    				<li>箭头函数：ES6标准新增了一种新的函数：Arrow Function（箭头函数）
+为什么叫Arrow Function？因为它的定义用的就是一个箭头：
+x => x * x  (传参 => return)这个箭头函数相当于：<pre>
+    function (x) {return x * x;}</pre>箭头函数相当于匿名函数，并且简化了函数定义。箭头函数有两种格式，一种像上面的，只包含一个表达式，连{ ... }和return都省略掉了。还有一种可以包含多条语句，这时候就不能省略{ ... }和return：<pre>
+    x => {if (x > 0) { return x * x;}else {return - x * x;}}</pre>如果参数不是一个，就需要用括号()括起来：<pre>
+    (x, y) => x * x + y * y  // 两个参数
+    () => 3.14  // 无参数</pre>如果要返回一个对象，就要注意，如果是单表达式，这么写的话会报错：<pre>
+    x => { foo: x }  // SyntaxError，因为和函数体的{ ... }有语法冲突，所以要改为：
+    x => ({ foo: x })</pre>箭头函数看上去是匿名函数的一种简写，但实际上，箭头函数和匿名函数有个明显的区别：箭头函数内部的this是词法作用域，由上下文确定。箭头函数完全修复了this的指向，this总是指向词法作用域，也就是外层调用者obj。由于this在箭头函数中已经按照词法作用域绑定了，所以，用call()或者apply()调用箭头函数时，无法对this进行绑定。</li>
+    				<li>generator（生成器）(了解)：ES6的新的数据类型。一个generator看上去像一个函数，但可以返回多次。函数执行过程中，如果没有遇到return语句（函数末尾如果没有return，就是隐含的return undefined;），控制权无法交回被调用的代码。generator跟函数很像，定义如下：<pre>
+    function* foo(x) { yield x + 1;yield x + 2;return x + 3;}</pre>和函数不同的generator由function*定义（注意多出的*号），并且，除了return语句，还可以用yield返回多次。要编写一个产生斐波那契数列的函数，可以这么写：<pre>
+    function fib(max) { 
+    	var t=0; 
+        var a=0; 
+        var b=1;
+        var arr=[0, 1];
+   		while (arr.length < max) { 
+        	t = a + b;
+            a = b;
+            b = t;
+            arr.push(t);
+        }
+    	return arr;
+    }
+    fib(5); // 测试结果[0, 1, 1, 2, 3]</pre>函数只能返回一次，必须返回一个Array。generator就可以一次返回一个数，不断返回多次。用generator改写如下：<pre>
+    function* fib(max) { 
+    	var t=0; 
+        var a=0; 
+        var b=1;
+        var n=1;
+    	while (n &lt; max) {
+        	yield a; 
+            t = a + b;
+            a = b;
+            b = t; 
+            n++;
+        }
+    	return a;
+    }
+    fib(5); // fib {[[GeneratorStatus]]: "suspended", [[GeneratorReceiver]]: Window}</pre>fib(5)仅仅是创建了一个generator对象，还没有去执行它
+调用generator对象有两个方法，一是不断地调用next()方法：<pre>
+    var f = fib(5);
+    f.next(); // {value: 0, done: false}
+    f.next(); // {value: 1, done: false}
+    f.next(); // {value: 1, done: false}
+    f.next(); // {value: 2, done: false}
+    f.next(); // {value: 3, done: true}
+    f.next(); // {value: undefined, done: true}</pre>value就是yield的返回值，done表示这个generator是否已经执行结束了。为true时value就是return的返回值，并且generator对象就已经全部执行完毕，不要再继续调用next()了。第二个方法是直接用 for ... of 循环迭代generator对象，这种方式不需要我们自己判断done：<pre>
+    for (var x of fib(5)) {
+    	console.log(x);
+    } // 依次输出0, 1, 1, 2</pre>这里需要注意，一旦next方法的返回对象的done属性为true，for...of循环就会中止，且不包含该返回对象，所以上面代码的return语句返回的3，不包括在for...of循环之中。我们可以让函数内部无限循环，但是调用时限制范围：<pre>
+    function* fibonacci() {
+        let [a, b] = [0,1];
+        for(;1;){
+            [a, b] = [b, a + b];
+            yield b;
+        }
+    }
+    var i = 0;
+    for (let n of fibonacci()) {
+    	if (i==5) {break;}
+    	i++;
+    	console.log(n);
+    }</pre></li>
+    				<li>class继承：继承的章节中我们看到了JavaScript的对象模型是基于原型实现的，特点是简单，缺点是理解起来比传统的类－实例模型要困难，最大的缺点是继承的实现需要编写大量代码，并且需要正确实现原型链。新的关键字class从ES6开始正式被引入到JavaScript中。class的目的就是让定义类更简单。我们先看一下用函数实现Student的方法：<pre>
+    function Student(name) { this.name = name; } 
+    Student.prototype.hello = function () { 
+    	alert('Hello, ' + this.name + '!'); 
+    }</pre>如果用新的class关键字来编写Student，(更贴近面向对象语言)可以这样写：<pre>
+    class Student { 
+    	constructor(name) { this.name = name; } 
+    	hello() { alert('Hello, ' + this.name + '!'); } 
+    }</pre>比较一下就可以发现，class的定义包含了构造函数constructor（构造器）和定义在原型对象上的函数hello()（注意没有function关键字），这样就避免了Student.prototype.hello = function () {...}这样分散的代码。最后，创建一个Student对象：<pre>
+    var xiaoming = new Student('小明'); 
+    xiaoming.hello();</pre><pre>
+    class Student { 
+        constructor(name) { this.name = name; } 
+        hello() { alert('Hello, ' + this.name + '!'); } 
+    }
+    var xiaoming = new Student('小明'); 
+    xiaoming.hello();   //弹出: Hello, 小明!
+    </pre>用class定义对象的另一个巨大的好处是继承更方便了。想一想我们从Student派生一个PrimaryStudent需要编写的代码量。现在，原型继承的中间对象，原型对象的构造函数等等都不需要考虑了，直接通过extends来实现：<pre>
+    class PrimaryStudent extends Student { 
+    	constructor(name, grade) { 
+            super(name); 
+    	   // 记得用super调用父类的构造方法! 
+    	   this.grade = grade; 
+        } 
+        myGrade() { alert('I am at grade ' + this.grade); } 
+    }</pre>注意PrimaryStudent的定义也是class关键字实现的，而extends则表示原型链对象来自Student。子类的构造函数可能会与父类不太相同，例如，PrimaryStudent需要name和grade两个参数，并且需要通过super(name)来调用父类的构造函数，否则父类的name属性无法正常初始化。PrimaryStudent已经自动获得了父类Student的hello方法，我们又在子类中定义了新的myGrade方法。ES6引入的class和原有的JavaScript原型继承有什么区别呢？实际上它们没有任何区别，class的作用就是让JavaScript引擎去实现原来需要我们自己编写的原型链代码。简而言之，用class的好处就是极大地简化了原型链代码。<pre>
+    class PrimaryStudent extends Student { 
+        constructor(name, grade) { 
+            super(name); 
+            this.grade = grade; 
+        } 
+        myGrade() { alert('I am at grade ' + this.grade); } 
+    }
+    var xiaoming = new PrimaryStudent("小刚",5);
+    
+    </pre></li>
+    		</ul>
+        </ol>
+    </dd>
+</dl>
+</body>
+</html>

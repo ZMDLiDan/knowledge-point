@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css" id="style1">
+.wrap{width:600px; height:600px; background-color:#999; display:flex;}
+.wrap div{ width:210px; height:150px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+	<div style=""></div>
+    <div style=""></div>
+    <div style=""></div>
+    <div style="align-self:flex-end"></div>
+    <div style=""></div>
+</div>
+<script>
+var arr = ["red","blue","yellow","green","pink"];
+var oStyle = document.getElementById("style1");
+var str = "";
+for(var i=0;i<arr.length;i++){
+	str += ".wrap div:nth-child("+(i+1)+"){ background-color:"+arr[i]+";}";
+}
+oStyle.innerHTML += str;
+console.log(oStyle.innerHTML);
+</script>
+</body>
+</html>

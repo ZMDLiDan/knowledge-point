@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>Jquery</dt>
+    <dd>
+    	<p>$()下的常用方法：</p>
+        <ol>
+        	<li>元素的宽：<pre>
+    alert( $('div').width() );   //width
+    alert( $('div').innerWidth() ); //width + padding
+    alert( $('div').outerWidth() ); //width + padding + border
+    alert( $('div').outerWidth(true) ); //width + padding + border + margin</pre>注意：原生js的offsetWidth等属性是获取不到隐藏元素的值，而outerWidth可以</li>
+    		<li>元素的移动：<pre>
+    A.insertBefore(B); //把A放在B的前面(兄弟元素)(A在前)
+    A.insertAfter(B); //把A放在B的后面(兄弟元素)
+    A.appendTo(B); //把A插入到B的内容后
+    A.prependTo(B); //把A插入到B的内容前
+    A.before(B); //A把B放在前面(B在前)
+    A.after(B);	//A把B放在后面
+    A.append(B); //A把B插入到A的内容后
+    A.prepend(B); //A把B插入A的内容前</pre></li>
+    		<li>元素的删除：<pre>
+    $('div').remove();   //删除该节点
+    $('div').detach();   //跟remove方法一样，只不过会保留删除这个元素的操作：
+    var oDiv = $('div');
+    oDiv.click(function(){alert(123);});
+    oDiv.detach();  //可以弹出123
+    //oDiv.remove();   
+    $('body').append( oDiv );</pre></li>
+    		<li>数值和内容：<pre>
+    $('input').val();  //获取元素value值
+    $('li').size();  //获取元素个数和length一样，length是JQ和js通用的属性
+    $('div').text();  //获取标签文本内容(不会获取标签)
+    $('div').html();  //获取标签文本内容(会获取标签)</pre></li>
+    		<li>位置偏移值：<pre>
+    alert( $('#div2').offset().left );//获取元素到屏幕的左距离
+    alert( $('#div2').position().left ); //获取元素到有定位的父级的left值,把当前元素转化成类似定位
+    元素.parent(); //获取元素的父级
+    元素.offsetParent(); //获取元素最近的被定位的父级</pre></li>
+    		<li>类似css的hover方法：<pre>
+    $('#div1').hover(function(){
+        $(this).css('background','blue');
+        $('#div2'). hide(3000);    //隐藏
+        $('#div2').fadeOut(1000);  //透明   默认400
+        $('#div2').slideUp();     //收缩
+        $('#div2').fadeTo(1000,0.5);  //透明度到
+    },function(){
+        $(this).css('background','red');
+        $('#div2'). show(3000);	 //展示
+        $('#div2').fadeIn(1000);  //不透明 
+        $('#div2').slideDown();   //展开
+        $('#div2').fadeTo(1000,1);});</pre></li>
+        </ol>
+        <p>JQ的事件操作：</p>
+        <ol>
+        	<li>事件的写法：<pre>
+    $('div').click(function(){alert(123);});         //事件函数
+    $('div').on('click',function(){alert(123);});  //事件绑定
+    $('div').on('click mouseover',function(){alert(123);});  //绑定多个事件写法（做同一件事）
+    $('div').on({'click' : function(){alert(123);},'mouseover' : function(){alert(456);}});  //绑定多个事件json写法（做不同事）
+    $('div').one('click',function(){ alert(123);});  //只执行事件一次</pre></li>
+    		<li>解除事件绑定：<pre>
+    $('div').on('click mouseover',function(){
+    	alert(123);
+        $('div').off('mouseover');
+    }); //解除绑定事件写法</pre></li>
+    		<li>滚动条事件：<pre>
+    $(document).click(function(){
+    	alert( $(window).scrollTop() );
+    });  //滚动距离
+    $(window).scroll(function(){})   //滚动条事件</pre></li>
+    		<li>JQ的event：<pre>
+    $('div').click(function(ev){
+        //ev : event对象
+        //ev.pageX/Y(相对于文档的) : clientX(相对于可视区) 鼠标坐标
+        //ev.which : keyCode  //键盘按键
+        ev.preventDefault();  //阻止默认事件
+        ev.stopPropagation(); //阻止冒泡的操作
+        return false;   //阻止默认事件 + 阻止冒泡的操作
+    });</pre></li>
+    		<li>JQ的键盘事件：<pre>
+    $(document).keydown(function(ev) { 
+        if(ev.which == 37){ 
+            alert("left"); 
+        }else if (ev.which == 38) { 
+            alert("top");  
+        }else if (ev.which == 39) { 
+            alert("right");  
+        }else if (ev.which == 40) { 
+            alert("bottom");  
+        }else if (ev.which == 13) { 
+            alert("回车");
+        } 
+    }); </pre></li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、做3个不同颜色的方块,鼠标移入第一个方块时,调换后两个方块的位置,点击时调换回来</p>
+        <p>2、做一个固定到页面右下角的按钮,点击时返回页面的顶部,要求该按钮只有在滚动距离超过200px时才能看见</p>
+        <p>3、用JQ编写同一个元素既可以被鼠标拖拽，又可以上下左右控制元素移动</p>
+    </dd>
+</dl>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<script>
+function fibonacci(n){
+	if(n<=2){
+		return 1;
+	}else{
+		return arguments.callee(n-1)+arguments.callee(n-2);
+	}
+}
+alert(fibonacci(8)); //21
+</script>
+</body>
+</html>

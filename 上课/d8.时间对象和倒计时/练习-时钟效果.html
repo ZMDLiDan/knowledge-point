@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+p{font-size:60px;}
+</style>
+</head>
+<body>
+<p></p>
+<script>
+var oP = document.getElementsByTagName("p")[0];
+function nowTime(){
+	var myTime = new Date();
+	var nowH = myTime.getHours();
+	var nowM = myTime.getMinutes();
+	var nowS = myTime.getSeconds();
+	var str = addZ(nowH) +":"+addZ(nowM)+":"+addZ(nowS);
+	oP.innerHTML = str;
+	alert(str.charAt(0));
+}
+nowTime();
+setInterval(nowTime,1000)
+function addZ(num){
+	return num<10 ? "0"+num : ""+num;
+}
+</script>
+</body>
+</html>

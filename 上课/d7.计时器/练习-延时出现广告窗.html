@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+#div1{width:300px; height:250px; background-color:red; position:absolute; top:50%; left:50%; margin-left:-150px; margin-top:-125px; display:none;}
+span{display:block; width:30px; height:30px; border:1px #000 solid; text-align:center; line-height:30px; font-size:24px; color:blue; border-radius:50%; position:absolute; right:3px; top:3px; cursor:pointer;}
+</style>
+</head>
+<body>
+<div id="div1"><span>X</span></div>
+<script>
+var oDiv = document.getElementById("div1");
+var oS = document.getElementsByTagName("span")[0];
+setTimeout(function (){
+	oDiv.style.display = "block";
+	setTimeout(function (){
+		oDiv.style.display = "none";
+	},3000)
+},2000)
+oS.onclick = function (){
+	oDiv.style.display = "none";
+}
+
+</script>
+</body>
+</html>

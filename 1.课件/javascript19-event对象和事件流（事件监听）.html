@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>javascript</dt>
+    <dd>
+    	<p>JavaScript焦点的事件和方法：</p>
+        <ol>
+        	<li>焦点事件（焦点就是光标所在的位置）：使浏览器能够区分用户输入的对象，当一个元素有焦点的时候，那么它就可以等待用户的输入</li>
+            <li>可以切换焦点的方法：1、点击；2、tab；3、javascript</li>
+            <li>注意：不是所有元素都有焦点，能响应用户操作的元素才有焦点（如div就没有焦点，a就有焦点）</li>
+            <li>onfocus  //当元素获取到焦点时触发<br/>
+onblur  //当元素失去焦点时触发</li>
+    		<li>focus()  //方法 元素获得焦点，例如百度刷新出来后会立即在搜索框里获得焦点<br/>
+blur()  //方法  元素取消焦点<br/>
+select() //方法 选择指定元素里的文本内容，但是只能选择能获取焦点元素的内容</li>
+        </ol>
+        <p>JavaScript的事件对象：</p>
+        <ol>
+        	<li>event：事件对象，当一个事件发生时，和当前这个对象发生的事件有关的一些信息都会被临时保存到一个指定地方--event对象，供我们需要的时候调用</li>
+            <li>类似飞机的黑匣子--记录飞机飞行的状况信息以供需要的时候找到这些信息</li>
+    		<li>注意：事件对象必须在一个事件调用的函数里面使用才有内容。函数是不是事件函数，不是定义时决定，而是调用时决定</li>
+    		<li>如：<pre>
+    function fn1(){alert(event);} 
+    //如果通过fn1()方式调用就不会有内容，用事件调用就有内容
+    document.onclick = fn1;</pre></li>
+    		<li>event对象在ie和chrome里面是内置的全局变量，像window一样定义好的，弹出为空和未定义。但是在火狐里会报错：事件对象是通过事件函数的第一个参数--function fn1(ev){alert(ev)};（标准下的用法，在标准的ie和chrome也是有效）</li>
+            <li>兼容方法在事件调用函数里使用：<pre>
+    var ev = ev || event;//在非标准下ev是未定义，就会取到后面的event</pre></li>
+    		<li>例如我们可以使用兼容写法查看一下不同浏览器中event里的属性和方法：<pre>
+   for(var attr in ev){console.log(attr+'='+ev[attr])} //查看event里的内容</pre></li>
+   			<li>在event上获得鼠标位置：<pre>
+    ev.clientX/ev.clientY  //鼠标在可视区的X/Y的坐标</pre></li>
+        </ol>
+        <p>事件流（事件监听）：冒泡和捕获</p>
+        <ol>
+        	<li>事件冒泡——先做练习3，然后思考出现的问题</li>
+            <li>产生问题的原因和页面的html结构有关——原理是事件冒泡机制：当一个元素接受到事件的时候，会把他接收到的所有传播给他的父级，父级继续传播直到顶层，事件冒泡是默认存在的</li>
+            <li>给一个元素绑定事件实际上是绑定事件所处理的函数--事件函数绑定，即使没写事件函数在你点击时onclick点击事件也会触发，但是他没有绑定任何函数那么就不会执行任何动作</li>
+            <li>很多效果是会被事件冒泡影响的，那为什么会默认冒泡那，因为页面有很多元素，如果他们有共同的父元素，你只需要给他们的父元素绑定事件，而不是分别给每个元素绑定事件就可以解决问题，这样大大减少了操作</li>
+            <li>如果不需要冒泡则阻止事件冒泡就可以了
+在事件函数中调用event.cancelBubble = true; //阻止当前对象的当前事件的冒泡，而其他对象的事件冒泡则不会阻止</li>
+            <li>例如在document上绑定两个点击事件函数会让后面的覆盖前面的（尤其多人一起做的项目），在一个大型项目中很可能出现一个元素需要绑定多个不同的函数</li>
+            <li>为了能够给一个对象的同一个事件绑定多个不同的函数，加了一个元素绑定事件函数的第二种形式：
+            	<ul>
+                	<li>ie下：obj.attachEvent(事件名称,事件函数);</li>
+                    <li>它的四个特点：1、没有捕获；2、事件名称有on；3、事件执行顺序倒序；4、this指向window
+</li>
+					<li>标准：obj.addEventListener(事件名称,事件函数,是否捕获)</li>
+                    <li>它的四个特点：1、有捕获；2、事件名称没有on；3、事件执行是顺序；4、this指向该事件的对象</li>
+                    <li>默认是false，false：冒泡； true：捕获</li>
+                    <li>当定义了函数时，函数会有个call()方法：fn1()=fn1.call()，区别是用call()方法的第一个参数可以改变内部this的指向（null时为原本该指向的），后面的参数是正常的参数</li>
+                    <li>事件捕获（只有标准浏览器下才有）obj.addEventListener(事件名称,事件函数,是否捕获)，最后一个参数为true时会发现弹出顺序和之前相反了</li>
+                    <li>原理是从外向内执行所有有事件的元素，因此会先执行最外面（父元素），然后依次向内执行直到执行的那个元素，这就是捕获过程，而冒泡机制刚好相反，也就是说捕获只监视进入的事件触发时执行，而冒泡只监视出去的事件触发时执行</li>
+                </ul>
+            </li>
+            <li>因此我们可以兼容成这种写法:<pre>
+    function bind(obj,evname,fn){
+    	if(obj.addEventListener){
+    	    obj.addEventListener(evname,fn,false)
+    	}else{
+    	    obj.attachEvent('on'+evname,function(){
+    			fn.call(obj);
+            })
+    	}
+    }
+    bind(document,'click',fn1);  //调用</pre></li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、写一个placeholder的兼容函数，value为'请输入内容'，当获取焦点时清空，失去焦点时且为空时恢复</p>
+        <p>2、做div跟着一个鼠标（宽高100px，背景为红色的方块）移动的效果，然后给浏览器的body加上高度并思考有滚动条的时候会出现什么问题，如何解决</p>
+        <p>3、做3个div嵌套，并都绑定一个事件，点击某个div时，弹出这个div的id</p>
+        <p>4、做一个下拉菜单，在点击时，让该菜单展示出来，点击页面的其他位置时，菜单隐藏</p>
+    </dd>
+</dl>
+</body>
+</html>

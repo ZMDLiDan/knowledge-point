@@ -1,0 +1,8 @@
+@charset "utf-8";
+/* CSS Document */
+body{margin:0; background-color:#c7cbbd; color:#333;}
+dl{padding:0 20px;}
+dt{font-size:30px; color:#600000;}
+p{font-size:24px; margin:15px 0; font-weight:bold;}
+li{font-size:18px; color:#494949; margin:10px 0; font-weight:400;text-shadow:1px 1px #eee;}
+pre{border-radius:10px; background-color: #666; color:#eee; font-size:18px; line-height:25px; text-shadow:none; border:3px #efefef solid;}

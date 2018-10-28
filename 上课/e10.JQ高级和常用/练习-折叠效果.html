@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+ul{margin:0; padding:0; list-style:none; width:500px;}
+p{margin:0; overflow:hidden;}
+button{width:300px;}
+</style>
+</head>
+<body>
+<ul>
+	<li>
+    	<button type="button">标题1</button>
+        <p>文字1文字1文字1文字1文字1文字1文字1文字1文字1文字1文字1文字1文字1文字1文字1文字1文字1文字1文字1文字1文字1文字1文字1文字1文字1文字1文字1文字1文字1文字1文字1文字1文字1</p>
+    </li>
+    <li>
+    	<button type="button">标题2</button>
+        <p>文字2文字2文字2文字2文字2文字2文字2文字2文字2文字2文字2文字2文字2文字2文字2文字2文字2文字2文字2文字2文字2文字2文字2文字2文字2文字2文字2文字2文字2文字2文字2文字2文字2</p>
+    </li>
+    <li>
+    	<button type="button">标题3</button>
+        <p>文字3文字3文字3文字3文字3文字3文字3文字3文字3文字3文字3文字3文字3文字3文字3文字3文字3文字3文字3文字3文字3文字3文字3文字3文字3文字3文字3文字3文字3文字3文字3文字3文字3</p>
+    </li>
+</ul>
+<script src="jquery.min.js"></script>
+<script>
+for(var i=0;i<$("p").length;i++){
+	$("p")[i].height = $("p")[i].offsetHeight;
+	$("p")[i].style.height = "0";
+}
+$("p")[0].style.height = $("p")[0].height+"px";
+$("button").on("click",function (){
+	$("p").eq($(this).parent().index()).animate({"height" : ($("p")[$(this).parent().index()].offsetHeight==0 ? $("p")[$(this).parent().index()].height+"px" : 0)},400,"linear").parent().siblings().find("p").animate({"height":"0"},400,"linear");
+})
+</script>
+</body>
+</html>

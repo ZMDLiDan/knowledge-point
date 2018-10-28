@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>javascript</dt>
+    <dd>
+    	<p>浏览器的发展史</p>
+        <ol>
+        	<li>众所周知，在Netscape设计出JavaScript后的短短几个月，JavaScript事实上已经是前端开发的唯一标准。后来，微软通过IE击败了Netscape后一统桌面，结果几年时间，浏览器毫无进步。（2001年推出的古老的IE 6到今天仍然有人在使用！）</li>
+            <li>没有竞争就没有发展。微软认为IE6浏览器已经非常完善，几乎没有可改进之处，然后解散了IE6开发团队！而Google却认为支持现代Web应用的新一代浏览器才刚刚起步，尤其是浏览器负责运行JavaScript的引擎性能还可提升10倍。先是Mozilla借助已壮烈牺牲的Netscape遗产在2002年推出了Firefox浏览器，紧接着Apple于2003年在开源的KHTML浏览器的基础上推出了WebKit内核的Safari浏览器，不过仅限于Mac平台。</li>
+            <li>随后，Google也开始创建自家的浏览器。他们也看中了WebKit内核，于是基于WebKit内核推出了Chrome浏览器。Chrome浏览器是跨Windows和Mac平台的，并且，Google认为要运行现代Web应用，浏览器必须有一个性能非常强劲的JavaScript引擎，于是Google自己开发了一个高性能JavaScript引擎，名字叫V8，以BSD许可证开源。</li>
+            <li>现代浏览器大战让微软的IE浏览器远远地落后了，因为他们解散了最有经验、战斗力最强的浏览器团队！回过头再追赶却发现，支持HTML5的WebKit已经成为手机端的标准了，IE浏览器从此与主流移动端设备绝缘。</li>
+        </ol>
+    	<p>主流的浏览器</p>
+        <ol>
+        	<li>IE 6~11：国内用得最多的IE浏览器，历来对W3C标准支持差。从IE10开始支持ES6标准；</li>
+            <li>Chrome：Google出品的基于Webkit内核浏览器，内置了非常强悍的JavaScript引擎——V8。由于Chrome一经安装就时刻保持自升级，所以不用管它的版本，最新版早就支持ES6了；</li>
+            <li>Safari：Apple的Mac系统自带的基于Webkit内核的浏览器，从OS X 10.7 Lion自带的6.1版本开始支持ES6，目前最新的OS X 10.11 El Capitan自带的Safari版本是9.x，早已支持ES6；</li>
+    		<li>Firefox：Mozilla自己研制的Gecko内核和JavaScript引擎OdinMonkey。早期的Firefox按版本发布，后来终于聪明地学习Chrome的做法进行自升级，时刻保持最新；</li>
+        </ol>
+        <p>浏览器的内核</p>
+        <ol>
+        	<li>Trident内核：IE,MaxThon,TT,The World,360,搜狗浏览器等。（早起国内浏览器用的）[又称MSHTML]</li>
+            <li>Gecko内核：Netscape6及以上版本，FF,MozillaSuite/SeaMonkey等</li>
+            <li>Presto内核：Opera7及以上。      [Opera内核原为：Presto，现为：Blink;]</li>
+            <li>Webkit内核：Safari,Chrome等。   [ Chrome的：Blink（WebKit的分支）]（现在国内浏览器使用Webkit或者在Webkit的基础上开发的）</li>
+        </ol>
+        <p>国内外pc浏览器及移动端浏览器对新标准的兼容：</p>
+        <ol>
+        	<li>移动设备上目前iOS和Android两大阵营分别主要使用Apple的Safari和Google的Chrome，由于两者都是Webkit核心，结果HTML5首先在手机上全面普及（桌面绝对是Microsoft拖了后腿），对JavaScript的标准支持也很好，最新版本均支持ES6。</li>
+            <li>其他浏览器如Opera等由于市场份额太小就被自动忽略了。</li>
+            <li>另外还要注意识别各种国产浏览器，如某某安全浏览器，某某旋风浏览器，它们只是做了一个壳，其核心调用的是IE或Webkit，也有号称同时支持IE和Webkit的"双核"浏览器。</li>
+            <li>不同的浏览器对JavaScript支持的差异主要是，有些API的接口不一样，比如AJAX，File接口。对于ES6标准，不同的浏览器对各个特性支持也不一样。</li>
+        </ol>
+        <p>Ajax基础</p>
+        <ol>
+        	<li>什么是Ajax：其实就是无刷新数据读取的技术</li>
+            <li>AJAX全称为"Asynchronous JavaScript and XML"（异步JavaScript和XML），是一种创建交互式网页应用的网页开发技术。</li>
+            <li>Ajax很早就存在了，但是一开始大家不知道有什么用，第一个开始应用Ajax的是谷歌在谷歌map上，之后ajax就开始被各个地方滥用......常用的地方：用户注册和在线聊天室等</li>
+			<li>将js文件引入页面后<pre>
+    var oBtn = document.getElementById('btn1');
+    oBtn.onclick = function(){
+    //ajax能且仅能从服务器上读取文件信息，这个页面不能在本地打开
+    	ajax('abc.txt',function(str){alert(str);});
+    }</pre>第一个参数是地址，第二个参数是拿到地址上的内容str后要做的函数，注意：保存的txt文件也必须是utf-8编码，否则不是乱码就是出错</li>
+    		<li>这里请求并显示静态TXT文件，字符集编码是utf-8编码</li>
+            <li>如果需要阻止缓存，可以利用url里的<pre>
+    'abc.txt?t='+new Date().getTime() </pre>利用url里的不同的时间戳阻止其使用缓存</li>
+    		<li>动态数据：请求JS（或json）文件，在服务器上读到的东西全部是以文本（string）的方式，因此无法拿到数组或者json，用eval('('+str+')')将字符串转换成js代码（函数，计算等），服务器的数据更多的是放的json或由json组成的数组</li>
+            <li>HTTP请求方法：
+            	<ul>
+                	<li>GET：用于获取数据（如：浏览贴子），把数据放在url（网址）里来提交</li>
+                    <li>POST：用于上传数据（如：用户注册），把数据放在不是url的地方提交</li>
+                    <li>GET、POST的区别：get在url里传送数据：安全性低、容量小，便于分享（商品地址和url有关），适合获取，且会缓存；post安全性一般、容量几乎无限，更适合上传（图片等）</li>
+                </ul>
+            </li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、3个按钮和一个div，点击第一个按钮把文件1.txt内容放在div里，点击第二个按钮时把文件2.txt内容放在div里，点击第三个按钮时把文件3.txt内容放在div里</p>
+        <p>2、利用ajax做一个分页效果，数据如下：<br/>
+[{"id":"1","name":"苹果1","price":"6.00"},{"id":"2","name":"苹果2","price":"5.00"},{"id":"3","name":"苹果3","price":"7.00"},{"id":"4","name":"苹果4","price":"6.00"},{"id":"5","name":"苹果5","price":"6.00"},{"id":"6","name":"苹果6","price":"6.00"},{"id":"7","name":"苹果7","price":"6.00"},{"id":"8","name":"苹果8","price":"6.00"},{"id":"9","name":"苹果9","price":"6.00"},{"id":"10","name":"苹果10","price":"6.00"},{"id":"11","name":"苹果11","price":"6.00"},{"id":"12","name":"苹果12","price":"6.00"},{"id":"13","name":"苹果13","price":"6.00"}]</p>
+    </dd>
+</dl>
+</body>
+</html>

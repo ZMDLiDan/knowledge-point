@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<script>
+function fn1(a){ //var a = function (){alert("我不是数字和字符串")}
+	if(typeof(a) === 'number' && a===a){
+		alert(a+20);
+	}else if(typeof(a)==='string'){
+		alert(a.charAt(2));
+	}else if(typeof(a)==='function'){
+		a();
+	}
+}
+fn1(function (){alert("我不是数字和字符串")});
+</script>
+</body>
+</html>

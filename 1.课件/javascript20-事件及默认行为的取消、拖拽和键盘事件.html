@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>javascript</dt>
+    <dd>
+    	<p>事件函数的取消：</p>
+        <ol>
+        	<li>第一种元素.事件=函数的事件函数绑定形式取消方法：<pre>
+    function fn1(){alert(1);}
+    document.onclick = fn1;
+    document.onclick = null; //取消</pre></li>
+            <li>第二种事件监听的事件函数绑定形式取消方法：
+            	<ul>
+                	<li>ie：obj.detachEvent(事件名称，事件函数);</li>
+                    <li>标准：obj.removeEventListener(事件名称，事件函数，是否捕获);</li>
+                    <li>注意：如果分别有捕获和冒泡，也需要分别取消，不会全部取消</li>
+                </ul>
+            </li>
+        </ol>
+        <p>键盘事件：</p>
+        <ol>
+        	<li>onkeydown：当键盘按键按下时触发<br/>
+onkeyup：当键盘按键抬起时触发</li>
+            <li>我们不能让所有按键按下时都执行同一件事，这时需要用到：event.keyCode——键盘按键值（数字类型）,如：<pre>
+    document.onkeydown = function(ev){
+    var ev = ev || event;
+    alert(ev.keyCode);
+    }  //判断一下当前按键的键值</pre>因此在使用该事件时应该判断一下当前按键的键值，来分别执行不同的函数</li>
+    		<li>event下还有ctrlKey，shiftKey，altKey等属性（布尔值），当一个事件发生时，如果ctrl或shift或alt是按下状态，返回true，否则返回false</li>
+    		<li>注意：只有能接受焦点的元素才能接收键盘事件，特殊的document可以接收，如不能直接给div加</li>
+    		<li>按键事件在按下不抬起时会连续触发，但是连续触发前会有一个停顿，如果要做按住连续触发并且不想要停顿效果时，需要自己写个方法（可以用计时器的方法）</li>
+        </ol>
+        <p>事件默认行为：当一个事件发生时，浏览器默认会做的事情</p>
+        <ol>
+        	<li>如：点击右键会有个菜单等（oncontextmenu，右键--环境菜单显示出来时触发）</li>
+            <li>有些时候我们不想让其执行默认行为
+，首先需要知道当前这个行为是什么事件触发，然后在这个事件处理函数中使用return false</li>
+        </ol>
+        <p>实现元素的拖拽：</p>
+        <ol>
+        	<li>实现原理，选择元素时（鼠标按下）保存鼠标的位置和元素位置的差值；移动元素时（鼠标移动），不停的给元素赋值（当前鼠标位置减去保存的差值）；释放元素（鼠标抬起）时，取消移动事件</li>
+            <li>鼠标按下时保存差值：<pre>
+    var disX = ev.clientX - 元素.offsetLeft
+    var disY = ev.clientY - 元素.offsetTop</pre></li>
+    		<li>鼠标移动时：<pre>
+    元素.style.left = ev.clientX - disX + 'px';
+    元素.style.top= ev.clientY - disY + 'px';</pre></li>
+    		<li>鼠标抬起释放元素时：<pre>
+    元素.onmousemove = 元素.onmouseup =  null;</pre></li>
+    		<li>问题：
+            	<ul>
+                	<li>移动太快脱离元素时事件就不会执行了，解决方法：onmousemove事件放在document上就可以了</li>
+                    <li>抬起鼠标时在其他元素上抬起的，元素也不会停止。同样把onmouseup事件也放在document上</li>
+                    <li>鼠标按下时，如果有文字被选中（包括图片），拖拽会变成复制（浏览器的默认行为），会出现冲突，在onmousedown阻止默认行为（非标准浏览器无效），可以防止。ie浏览器里有个全局捕获（和前面的捕获不同），if(元素.setCapture){元素.setCapture()};全局捕获的意思是当有其他元素执行一个事件时，劫持该事件，在释放元素时需要把全局捕获也释放，if(元素.releaseCapture){元素.releaseCapture()};，最终得到与阻止默认行为相同的效果。</li>
+                    <li>封装拖拽，限制范围的拖拽：让其不能离开另一个元素的范围。方法：在赋值前进行判断，将一个正确的值赋给它</li>
+                </ul>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、做一个输入框，每次输入内容时立即弹出value值<br/>再做一个输入框和ul，每次输入完内容后，点击回车变成留言<br/>最后将上面的练习改成按ctrl+回车时，变成留言</p>
+        <p>2、做一个自定义的默认菜单（把原本右键的默认事件取消），这个菜单要求和原本右键菜单一样（内容是个框）</p>
+        <p>3、限制范围的拖拽（让目标元素不能离开页面可视区）</p>
+    </dd>
+</dl>
+</body>
+</html>

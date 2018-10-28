@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+body{margin:0;}
+ul{margin:0; padding:0; overflow:hidden;}
+nav{background-color:#333;}
+li{list-style:none; height:50px;color:#79ced3; text-align:center; line-height:50px;}
+li:hover{background-color:#ff651e;}
+.on-off{height:50px; font-size:30px; color:#ff651e; font-weight:bold; text-align:center; line-height:50px; background-color:#333333; position:relative;}
+.on-off img{position:absolute; right:10px; top:7px;}
+@media (min-width:640px) and (max-width:999px){
+	li{float:left; width:20%;}
+	.on-off{display:none;}
+}
+@media (min-width:1000px){
+	ul{width:500px; margin:0 auto;}
+	li{float:left; width:100px;}
+	.on-off{display:none;}
+}
+</style>
+</head>
+<body>
+<nav>
+	<ul>
+    	<li>导航首页</li>
+        <li>导航首页</li>
+        <li>导航首页</li>
+        <li>导航首页</li>
+        <li>导航首页</li>
+    </ul>
+    <div class="on-off"><span>腾讯视频</span><img src="button.jpg"/></div>
+</nav>
+<script>
+var oImg = document.getElementsByTagName("img")[0];
+var oUl = document.getElementsByTagName("ul")[0];
+oImg.bOn = true;
+oImg.onclick = function (){
+	this.bOn ? oUl.style.height = "0" : oUl.style.height = "auto";
+	this.bOn = !this.bOn;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<textarea></textarea>
+<input type="button" value="生成彩虹字"/>
+<p></p>
+<script>
+var arr = ["red","yellow","green","blue","purple"];
+var oText = document.getElementsByTagName("textarea")[0];
+var oBtn = document.getElementsByTagName("input")[0];
+var oP = document.getElementsByTagName("p")[0];
+oBtn.onclick = function (){
+	var str = oText.value;
+	var arr1 = str.split("");
+	var str1 = arr1.join("</span><span>");
+	oP.innerHTML = "<span>" + str1 + "</span>";
+	var aSpan = oP.getElementsByTagName("span");
+	for(var i =0;i<aSpan.length;i++){
+		aSpan[i].style.color = arr[i%5];
+	}
+}
+
+</script>
+</body>
+</html>

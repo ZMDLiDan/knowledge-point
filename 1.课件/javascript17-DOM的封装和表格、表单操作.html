@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>javascript</dt>
+    <dd>
+    	<p>通过calssName操作元素：</p>
+        <ol>
+        	<li>getElementsByClassName是标准浏览器下的一个方法，但是在低版本ie浏览器下不兼容</li>
+            <li>我们试着写一个函数function getElsByClass()，实现返回值为所传参数class类名的元素集合：<pre>
+    function getElsByClass(className){
+        var aEls = document.getElementsByTagName('*');
+        var arr = [];
+        for(var i=0 ; i &lt; aEls.length ; i++){
+            if(aEls[i].className == className){
+                arr.push(aEls[i]);
+            }
+        }
+        return arr;
+    }</pre>在所有浏览器里正确的选取className为我们需要的元素，但问题是当一个class包含多个class时不会正确选中</li>
+            <li>上面的问题出现在aEls[i].className == className，当一个元素含有多个class时便不相等，做修改：在循环里添加一个数组将className用空格拆分：<pre>
+    var aClassName = aEls[i].className.split(' ');
+    for(var j=0 ; j &lt; aClassName.length ; j++){
+    	if(aClassName[j] == className){
+        	arr.push(aEls[i]);
+        }
+    }</pre>依然有问题：如果出现手误，在一个class里面写了两个相同的class时，在该方法里会把此元素选取两次，因此需要在第一次找到class的时候就加一个break来跳出循环，不再查找其余的class了</li>
+            <li>扩展该方法：在该函数里加一个parent的参数，代表了是谁下面的class元素：<pre>
+    var aEls = parent.getElementsByTagName('*');
+    parent = document  //当需要获取页面中所有的class时</pre>
+    		</li>
+    		<li>如果需要获取的class为li的元素，还是通过传参来解决：<pre>
+    function getElsByClass( parent,tagName,className )
+    var aEls = parent.getElementsByTagName(tagName);
+    //最终整理得到：
+    function getElsByClass( parent,tagName,className ){
+    	var aEls = parent.getElementsByTagName(tagName);
+        var arr = [];
+        var aClassName = aEls[i].className.split(' ');
+        for(var i=0 ; i &lt; aEls.length ; i++){
+            for(var j=0 ; j &lt; aClassName.length ; j++){
+                if(aClassName[j] == className){
+                    arr.push(aEls[i]);
+                }
+            }
+        }
+        return arr;
+    }</pre>
+    		</li>
+        	<li>给元素添加class：<pre>
+    function addClass( obj, className){//封装一个添加class的方法
+        if( obj.className ==''){
+            obj.className = className;
+        }else{ 
+            obj.className += ' '+className;
+        } //else里应该加一个判断，如果加的class原本存在
+    }
+    //写一个方法：如果存在就返回i，不存在就返回-1
+    function arrIndexOf(arr,v){
+    	for(var i=0;i&lt;arr.length;i++){
+    		if(arr[i]==v){return i;}
+        }
+    	return -1;
+    }
+    //整理出完整写法：
+    function addClass( obj, className){
+        if( obj.className ==''){
+        	obj.className = className;
+        }else{
+        	var arrClassName = obj.className.split(' ');
+        	if(arrIndexOf( arrClassName, className) ==-1){
+        		obj.className += ' '+className;
+            }
+        }
+    }</pre>
+    		</li>
+            <li>删除元素的class：<pre>
+    function removeClass( obj, className)  //删除class
+    //直接用className =''，会删除所有的class，判断两种情况，有class和没有class
+    function removeClass( obj, className){
+    	if(obj.className !=''){
+            var arrClassName = obj.className.split(' ');
+            if(arrIndexOf( arrClassName,className )!=-1 ){
+                arrClassName.splice(arrIndexOf( arrClassName,className ),1);
+                obj.className = arrClassName.join(' ');
+            }
+        }
+    }</pre>
+            </li>
+        </ol>
+        <p>表格的DOM操作：</p>
+        <ol>
+        	<li>浏览器在解析table的时候，如果你没有写tbody（表格正文），则它会自动加一个tbody，这样直接通过children[1]去获取第二个tr的时候会出错，因此html里table最好直接加上thead和tbody</li>
+            <li>但是我们用上面的children一级一级获取元素比较麻烦，js里原生提供了一些获取表格元素的方法：tHead/tBodies/tFoot/rows/cells对应表格头/表格正文/表格尾/行/单元格（注意：一个表格里只能有一个表格头和尾，其他可以多个），如：oTab.tBodise[0].rows[1].cells[1]就可以获取到表格第一个正文中第二行第二格的元素</li>
+        </ol>
+        <p>表单的DOM操作：</p>
+        <ol>
+        	<li>form里的元素中有个比id更重要的属性--name，js可以通过oForm.name值，就可以获取到这个元素，并且兼容所有浏览器</li>
+            <li>如果是单选和多选（name值相同为一组）时，用oForm.name值的方法获取的是一组元素，就不能直接控制了，可以循环来加事件</li>
+            <li>onchange  //事件 当值发生改变时触发（表现为失去焦点时触发），如果值不变，事件则不会触发（注意：radio在标准浏览器点击时只要值变了就会触发，非标准浏览器下离开时才会触发）</li>
+            <li>onsubmit  //事件 当表单提交的时候（点击submit时）</li>
+            <li>onreset  //事件 当表单重置的时候（点击reset时）</li>
+            <li>submit() //方法  提交表单oForm.submit()</li>
+            <li>单选框、多选框和下拉列表选中状态：<pre>
+    oForm.sex[0].checked //radio和checkbox是否选中
+    oForm.sex[0].checked = true/false  //操作被选中状态</pre>
+    		</li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、写一个包含北京、上海、西安的下拉列表，利用表单的DOM操作，写一个按钮点击弹出相应的城市（获取它的值就是选择项的value）</p>
+        <p>2、如果文本框的内容为空时，禁止提交（return false）并弹出一个请填写内容的弹窗</p>
+        <p>3、点击重置时让其确定，是否重置，提示：使用confirm()返回值判断</p>
+    </dd>
+</dl>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<script>
+mouseScroll(document,function (){alert("上")},function (){alert("下")})
+
+function mouseScroll(obj,topFn,bottomFn){
+	if(window.navigator.userAgent.indexOf("Firefox")>=0){
+		obj.addEventListener("DOMMouseScroll",function (ev){
+			ev = ev || event;
+			where(ev) ? topFn() : bottomFn();
+			ev.preventDefault();
+		},false);
+	}else{
+		obj.onmousewheel = function (ev){
+			ev = ev || event
+			where(ev) ? topFn() : bottomFn();
+			return false;
+		}
+	}
+}
+function where(ev){
+	var b = true;
+	if(ev.wheelDelta){
+		b = ev.wheelDelta>0 ? true : false;
+	}else{
+		b = ev.detail<0 ? true : false;
+	}
+	return b;
+}
+
+//if(b){}else{}
+</script>
+</body>
+</html>

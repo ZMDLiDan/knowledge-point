@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<ul>
+	<li></li>
+    <li></li>
+    <li></li>
+</ul>
+<script src="jquery.min.js"></script>
+<script>
+/*$('li').each(function(i,elem){   
+//一参：下标 二参 : 每个元素
+	$(elem).html(i);
+});*/
+//可以简写成下面的写法：
+/*$('li').each(function(){ 
+	$(this).html($(this).index());
+});*/
+for(var i=0;i<$('li').length;i++){
+	$('li')[i].onclick = function (){
+		this.innerHTML = $(this).index();
+	}
+}
+
+</script>
+</body>
+</html>

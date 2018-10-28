@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<script>
+function fn1(){}
+document.onclick = function (ev){
+	ev = ev || event;
+	console.log("鼠标在X轴的位置："+ev.clientX+"鼠标在Y轴的位置："+ev.clientY);
+}
+</script>
+</body>
+</html>

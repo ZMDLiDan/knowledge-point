@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+div{width:150px; height:150px; background-color:red; position:absolute; left:0; top:0; color:#fff;}
+</style>
+</head>
+<body>
+<div>divdivdivdivdivdiv</div>
+<script src="myJs.js"></script>
+<script>
+var oDiv = document.getElementsByTagName("div")[0];
+oDiv.onmousedown = function (ev){
+	ev = ev || event;
+	var disX = ev.clientX - oDiv.offsetLeft;
+	var disY = ev.clientY - oDiv.offsetTop;
+	document.onmousemove = function (ev){
+		ev = ev || event;
+		var iW = document.documentElement.clientWidth;
+		var iH = document.documentElement.clientHeight;
+		var iL = ev.clientX - disX,iT = ev.clientY - disY;
+		(ev.clientX - disX<=20)&&(iL = 0);
+		(ev.clientX - disX >= iW - oDiv.offsetWidth-20)&&(iL = iW - oDiv.offsetWidth);
+		(ev.clientY - disY<=20)&&(iT = 0);
+		(ev.clientY - disY >= iH - oDiv.offsetHeight-20)&&(iT = iH - oDiv.offsetHeight);
+		oDiv.style.left =  iL + "px";
+		oDiv.style.top = iT + "px";
+	}
+	document.onmouseup = function (){
+		document.onmousemove = document.onmouseup = null;
+	}
+	return false;
+}
+</script>
+</body>
+</html>

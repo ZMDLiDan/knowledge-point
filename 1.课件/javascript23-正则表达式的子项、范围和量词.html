@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>javascript</dt>
+    <dd>
+    	<p>正则表达式的分组/匹配子项：小括号()</p>
+        <ol>
+        	<li>把正则的整体叫母体，然后把左边第一个小括号里的正则，叫做母体的第一个子项，以此类推</li>
+            <li>直接操作母体有时会比较麻烦，我们可以把母体分割成多个子项去操作，replace函数的第二个参数就是匹配成功的母体的第一个子项，第三个参数就是匹配成功的母体的第二个子项，以此类推</li>
+            <li>下面的例子看看分别会弹出什么：<pre>
+    var str = '2017-6-7';
+    var re = /\d+-/g;   //匹配:数字 + —;
+    //var re = /\d-+/g;   //匹配：
+    //var re = /(\d-)+/g; //匹配:7-6-7
+    str.replace(re,function($0,$1,$2){
+        alert($0);  ($0:母体;$1:第一个子项;$2:第二个子项)
+    })</pre></li>
+    		<li>匹配重复项\n(n是个大于等于1的数字)，与第n个子项重复的项（复制第n个子项），如：<pre>
+    var re = /\w\w/;    //匹配两个字符
+    var re = /(\w)\1/;  //匹配前面匹配过的
+    var re = /(\w)(\d)\2/;</pre>第一个是两个字符（可以不同），第二个则是相同的两个字符</li>
+            <li>match用小括号()得到结果：<pre>
+    var str = 'abc';
+    var re = /abc/;
+    //var re = /(a)(b)(c)/;  //abc,a,b,c(非全局匹配下使用)
+    alert(str.match(re));</pre>注意：以上结果是在re不加全局匹配g的时候才能得到</li>
+        </ol>
+        <p>正则表达式匹配相似项：中括号[]</p>
+        <ol>
+        	<li>一组相似的元素，用[]表示，整体代表一个字符，如：<pre>
+    var str = 'abc';  
+    var re = /a[bde]c/;//[]里面是或的关系 abc或adc或aec
+    alert(re.test(str)); </pre></li>
+        	<li>连字符(-)：可以是任意从大到小的范围，如[a-z0-9A-Z]，其中任意一个都匹配成功，如：<pre>
+    var str = 'abc';  
+    var re = /a[a-z]c/;
+    alert(re.test(str));</pre></li>
+    		<li>排除(^)：若写在[]里面，则代表排除的意思，如：<pre>
+    var str = 'abc';  
+    var re = /a[^bde]c/;    //除了bde以外
+    alert(re.test(str)); </pre></li>
+            <li>限定开始位置(^)和限定结束位置($)，他们本身不占位置</li>
+        </ol>
+        <p>正则表达式量词：大括号{}，匹配的字符最少和最多出现的数量</p>
+        <ol>
+        	<li>{4,7}--最少出现4次，最多出现7次</li>
+            <li>{4,}--最少出现4次，最多不限</li>
+            <li>{4}--恰好出现4次</li>
+            <li>特殊情况：
+            	<ul>
+                	<li>+：出现至少1次，完整写法{1,}</li>
+                    <li>?：出现0-1次，完整写法{0,1}</li>
+                    <li>*：至少出现0次，完整写法{0,}</li>
+                </ul>
+            </li>
+        </ol>
+        <p>正则表达式常用匹配：工作中可以把这些放在一个json里，var jRe = {}，通过jRe.email等方式调用它们</p>
+        <ol>
+        	<li>匹配中文：[\u4e00-\u9fa5]</li>
+            <li>行首行尾空格：^\s*|\s*$</li>
+            <li>Email：^\w+@[a-z0-9]+(\.[a-z]+){1,3}$</li>
+            <li>网址：[a-zA-z]+://[^\s]*</li>
+            <li>QQ号：[1-9][0-9]{4,9}</li>
+            <li>邮政编码：[1-9]\d{5}</li>
+            <li>身份证：[1-9]\d{14}|[1-9]\d{17}|[1-9]\d{16}x
+</li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、把"在2017-6-7修改background-color的样式"通过正则的replace方法和改变子项的方式变成"在2017.6.7修改background-color的样式"</p>
+        <p>2、输入框里输入&lt;h3 class="title"&gt;标题&lt;/h3&gt;aaaaa，通过匹配替换得到'标题aaaaa'（去掉标签效果）<br/>注意：\w是不包含/</p>
+        <p>3、写一个去掉字符串中的前后空格的方法（用^和$做）</p>
+    </dd>
+</dl>
+</body>
+</html>

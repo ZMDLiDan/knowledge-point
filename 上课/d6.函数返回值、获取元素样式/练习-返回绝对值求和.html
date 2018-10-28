@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<script>
+function sum(a,b,f){
+	return f ? f(a)+f(b) : a+b;
+}
+console.log(sum(5,-6));
+console.log(sum(5,-6,Math.abs));
+</script>
+</body>
+</html>

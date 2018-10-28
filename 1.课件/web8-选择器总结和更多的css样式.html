@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+<body>
+<dl>
+	<dt>选择器总结</dt>
+    <dd>
+		<p>基本选择器</p>
+        <ol>
+        	<li>通配选择器：*（选择所有元素）</li>
+            <li>标签选择器：div（选择所有标签名为div的元素）</li>
+            <li>class选择器：.class（选择所有类名为class的元素）</li>
+            <li>id选择器：#id（选择id为id的元素）</li>
+        </ol>
+        <p>选择器扩展</p>
+        <ol>
+        	<li>包含选择器：div */#id .class（选择div的所有后代元素/id值为#id的所有后代中有类名.class的元素）</li>
+            <li>分组选择器：.class,#id/div .class,#id（选择类名为class的所有选择和#id的元素/选择div的所有后代中类名.class的元素和id值为#id的元素）</li>
+            <li>多条件选择器：.box1.box2（既有box1类名同时也有box2类名的元素）</li>
+            <li>子元素选择器：div>.class（选择div元素的所有子元素中有类名.class的元素，只找到下一级元素）</li>
+            <li>next选择器：div+p（选择div元素的下个同级元素且为p元素的元素）</li>
+            <li>伪类选择器：
+            	<ul>
+                	<li>a:link---选择所有未被访问的链接。</li>
+                    <li>a:visited---选择所有已被访问的链接。</li>
+                    <li>a:active---选择活动链接。（正在击中）</li>
+                    <li>a:hover---选择鼠标指针位于其上的链接。</li>
+					<li>input:focus---选择获得焦点的 input 元素。</li>
+                    <li>p:before---在每个 p 元素的内容之前插入内容。</li>
+                    <li>p:after---在每个 p 元素的内容之后插入内容。</li>
+                </ul>
+            </li>
+        </ol>
+    </dd>
+	<dt>更多的css样式</dt>
+    <dd>
+        <ol>
+        	<li>去掉a及input等标签的虚线框：<br/>input,button{outline:none;}<br/>::-moz-focus-inner{border:none;}<br/>a{blr:expression(this.onFocus=this.blur());}<br/>:focus{outline:0;-moz-outline-style:none;}</li>
+            <li>改变元素透明度：<br/>opacity:0.9;filter:alpha(opacity=90);</li>
+            <li>隐藏元素：<br/>visibility:hidden/visible;<br/>display:none/block;</li>
+            <li>百分比宽高和最大最小宽高（ctrl+shift+m）：<br/>max-width<br/>min-width<br/>max-height<br/>min-width</li>
+            <li>背景固定：<br/>background-attachment：fixed;</li>
+            <li>文字溢出样式：<br/>text-overflow:clip（溢出时裁切）<br/>text-overflow:ellipsis（溢出时显示省略号）<br/>上面两个样式需要配合overflow:hidden;和white-space:nowrap;（禁止文字自动换行使用）<br/>word-wrap:break-word;（强制文字换行样式。尽量不用）</li>
+            <li>outline（轮廓）：<br/>它是绘制于元素周围的一条线，位于边框边缘的外围，可起到突出元素的作用，它不会占据空间，也不一定是矩形。<br/>可以按顺序设置如下属性：
+            	<ul>
+                	<li>outline-color:;（轮廓线颜色）</li>
+                    <li>outline-style:;（轮廓线样式）</li>
+                    <li>outline-width:;（轮廓线宽度）</li>
+                    <li>outline-offset:;（轮廓线扩张,不能写在集合样式里面）</li>
+                </ul>
+                集合样式outline:; ，如果不设置其中的某个值，也不会出问题，比如 outline:solid #ff0000; 也是允许的
+</li>
+        </ol>
+    </dd>
+    <dt>特殊的布局——三栏式布局：两边盒子固定宽度，中间盒子自适应</dt>
+    <dd>
+        <p>其他三栏式布局</p>
+        <ol>
+            <li>利用定位左右两栏</li>
+            <li>利用左右浮动做左右两栏</li>
+        </ol>
+    	<p>圣杯布局</p>
+        <ol>
+        	<li>父元素包含左中右三个盒子，分别左浮动</li>
+            <li>中间元素宽度100%（必须为第一个渲染）</li>
+            <li>用margin-left的负值将两边盒子拉上去和中间盒子同行（左边-100%，右边-右盒子宽度）</li>
+            <li>父元素用左右padding为左右盒子留位置</li>
+            <li>用相对定位将左右元素移动到正确的位置上</li>
+            <li>给父元素上清除浮动</li>
+        </ol>
+        <p>双飞翼布局</p>
+        <ol>
+        	<li>父元素包含左中右三个盒子，分别左浮动</li>
+            <li>中间元素宽度100%（必须为第一个渲染）</li>
+            <li>用margin-left的负值将两边盒子拉上去和中间盒子同行（左边-100%，右边-右盒子宽度）</li>
+            <li>给中间元素设置子元素，并给其左右margin为左右盒子留位置</li>
+            <li>给父元素上清除浮动</li>
+        </ol>
+    </dd>
+</dl>
+</body>
+</html>

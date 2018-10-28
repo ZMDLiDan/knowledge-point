@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+#div1{width:150px; height:150px; background-color:red; position:absolute; left:300px; top:200px;}
+</style>
+</head>
+<body>
+<div id="div1"></div>
+<script src="myJs.js"></script>
+<script>
+var oDiv = document.getElementById("div1");
+var arr = [];
+for(var i=16;i>0;i-=2){
+	arr.push(-i,i);
+}
+arr.push(0);
+var oDivL = parseInt(getStyle(oDiv,"left"));
+var timer = null;
+oDiv.onclick = function (){
+	clearInterval(timer);
+	var i = 0;
+	timer = setInterval(function (){
+		oDiv.style.left = oDivL+arr[i++] +"px";
+		if(i==arr.length){clearInterval(timer);}
+	},30)
+}
+
+</script>
+</body>
+</html>

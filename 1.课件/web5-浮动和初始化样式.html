@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+body{margin:0; background-color:#deefff; color:#333;}
+dl{padding:0 25px;}
+dt{font-size:26px; color:#600000;}
+p{font-size:22px; margin:20px 0;}
+li{font-size:20px; color:#066; margin:10px 0;}
+pre{border-radius:20px; background-color: #666; color:#ccc; font-size:24px; line-height:30px; text-shadow:0px 1px #999; border:3px #FFC solid;}
+</style>
+</head>
+<body>
+<dl>
+	<dt>内联块和浮动</dt>
+    <dd>
+		<p>让区块元素在同一行显示</p>
+        <ol>
+        	<li>inline-block（内联块）：元素支持宽高，并且可以在同一行显示，但是会解析换行符，使元素中间出现空格</li>
+            <li>浮动（元素脱离文档流，按照浮动方向移动，遇到父级边界或者相邻浮动元素停住：float：left/right/none），由于子元素脱离文档流，结果会使父元素高度崩塌</li>
+            <li>无论哪种方式都需要做一些处理：去除inline-block的间隔或者去除浮动（或者说封闭浮动）</li>
+        </ol>
+        <p>去除inline-block的间隔</p>
+        <ol>
+        	<li>用margin-left设置为负值（不推荐，需要根据字体大小进行计算，并且各浏览器解析结果不同）</li>
+            <li>用注释、连续标签、拆分标签等方式去掉换行符（不推荐，无论哪种方法都会使页面结构混乱和不利于阅读）</li>
+            <li>设置字间距-npx（不推荐，同样有字体大小问题，且在欧朋和ie7浏览器中会有问题）</li>
+            <li>#设置父元素字体大小为0，并在子元素中重新设置字体大小（勉强推荐，仅仅是低版本谷歌浏览器有问题）</li>
+            <li>结论：方法很多，但是没有能够完美解决的方法，但在间距不是很重要的时候可以使用</li>
+        </ol>
+        <p>去除浮动（封闭浮动）</p>
+        <ol>
+        	<li>为父元素设置高度（不推荐，高度有时是未知的）</li>
+            <li>(溢出元素的显示方式)overflow:hidden/scroll/auto（哪个方向溢出，哪个方向出现滚动条；不溢出不出现）（不推荐，hidden可以清除浮动但有可能隐藏有用的东西）</li>
+            <li>在浮动元素的最后设置空标签的样式style="clear:both;"就是用来清除浮动的方法（不推荐，会给父元素中增加无意义的空标签）</li>
+            <li>选择器的伪类 .clearfix:before,.clearfix:after{display:table;content:"";}<br/>
+    			.clearfix:after{clear:both;}<br/>
+   				.clearfix{*zoom:1}（兼容ie 触发haslayout）（推荐）</li>
+    <li>结论：利用最后一个方法（用伪类虚拟一个空标签的方式可以完美实现清除浮动</li>
+        </ol>
+    </dd>
+
+	<dt>默认样式初始化</dt>
+	<dd>
+    	<p>由于在不同的浏览器中有不同的默认样式，为了让样式在所有浏览器中统一，并希望页面更加符合美观简介和将一些常用样式加入到自定义样式中去使用，我们应该做浏览器默认样式的初始化</p>
+        <ol>
+        	<li>默认样式的检查方式：用border+浏览器工具来查看是否有默认样式</li>
+            <li>清除斜体和加粗等字体样式：font-weight:normal; font-style:normal;</li>
+            <li>清除块状元素边距：margin:0; padding:0;</li>
+            <li>清除li的默认样式：list-style:none;</li>
+            <li>清除img在ie下的边框：border:none;</li>
+            <li>清除a的默认样式（必须按照lvha的顺序书写,状态性的伪类，a的伪类优先级比a高）:
+            	<ul>
+                	<li>a{text-decoration:none;  color:#000;  border:0;}</li>
+                    <li>a:link{text-decoration:none;  color:#000;}( 有链接属性的时候切未激活 -- href 属性 )</li>
+                    <li>a:visited{text-decoration:none;  color:#000;}( 链接地址被访问过 )</li>
+                    <li>a:hover{text-decoration:none;  color:#000;}( 鼠标移动到DOM节点上面 )（重要）</li>
+                    <li>a:active{text-decoration:none;  color:#000;}( 鼠标点击瞬间 )</li>
+                </ul>
+            </li>
+        </ol>
+        <p>其他自定义样式（详见common.css）</p>
+        <ol>
+        	<li>*通配符上定义所有标签盒子模型的格式和字体颜色</li>
+        	<li>body上定义字体的大小、样式和行高，以及背景颜色，去掉默认margin和横向滚动条</li>
+            <li>各种块状元素去掉他们默认的margin和padding（如果有的话）</li>
+            <li>a和img去掉不同浏览器里不同的部分（ie下会有边框），并用vertical-align来垂直对齐内联块</li>
+            <li>去掉li、i和em等标签上的默认样式</li>
+            <li>初始化并统一a标签的各种伪类的样式</li>
+            <li>将其他常用样式写成默认样式去直接使用，如将清除浮动的样式写成默认样式</li>
+            <li>后续可以自己写一些默认样式加入到自己的常用默认样式中去</li>
+        </ol>
+    </dd>
+	<dt>转义字符（网页实体）</dt>
+    <dd>
+        <ol>
+        	<li>通过&amp;XXXX的格式生成一个转义字符(shift+f7)</li>
+            <li>原因是有部分字符无法直接在html里直接生成，如：空格 、&amp;符号、大于号&gt;、小于号&lt;、&copy;符号等</li>
+            <li>在网上可以找到转义字符的表</li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+        <p>1、也在页面中做出psd文件——练习中的元素，要求在ps中测量其中所有数值（包括宽、高、内填充、文字大小和所有的精确颜色值）</p>
+        <p>2、将练习1做的元素标签复制六个，要求第一排3个，第二排2个，第三排1个</p>
+        <p>3、在页面中生成下面的句子：<br/>在页面里输入一个&lt;br/&gt;就可以实现换行了<br/>在页面里输入&amp;nbsp;就可以实现空格&nbsp;&nbsp;效果<br/>在页面里输入&amp;copy;就可以实现&copy;符号了</p>
+    </dd>
+</dl>
+</body>
+</html>

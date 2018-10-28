@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<script>
+/*var obj1 = {};
+obj1.a = 10;
+console.log(obj1);
+console.log(Object.__proto__);
+var obj2 = new Object();
+obj2.b = 10;
+console.log(obj2);
+console.log(obj2.__proto__);*/
+
+
+var sum = {name: "百度", type: "加法"}
+Object.prototype.add = function(){
+//创建原型对象的一个方法
+	alert("原型对象的方法");
+}
+sum.add(); // =>在sum上调用原型对象的方法
+</script>
+</body>
+</html>

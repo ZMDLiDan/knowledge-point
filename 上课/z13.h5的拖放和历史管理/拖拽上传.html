@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+div{width:300px; height:300px; background-color:red; margin:100px auto; font-size:30px; color:#fff;}
+</style>
+</head>
+<div>将文件拖拽到此区域</div>
+<body>
+<script>
+var oDiv = document.querySelector('div');
+oDiv.ondragenter = function(){
+	this.innerHTML = '可以释放啦';
+};
+oDiv.ondragover = function(ev){
+	ev.preventDefault();
+};
+oDiv.ondragleave = function(){
+	this.innerHTML = '将文件拖拽到此区域';
+};
+oDiv.ondrop = function(ev){
+	ev.preventDefault();
+	var fs = ev.dataTransfer.files;
+	console.log(fs.length);
+	console.log( fs[0].type );
+	var fd = new FileReader();
+	fd.readAsDataURL( fs[0] ); //参数为要读取的文件对象，将文件读取为DataUrl
+	fd.onload = function(){   //当读取文件成功完成的时候触发此事件
+		console.log( this.result ); //读取的文件数据，图片将返回base64格式的图片数据
+	};
+};
+</script>
+</body>
+</html>

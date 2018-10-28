@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<script>
+var arr = ['1','20','32','5','4'];
+//arr.sort();
+arr.sort(function(a,b){  //传入一个匿名函数
+	return b-a;      //正序/反序
+})
+console.log(arr);
+</script>
+</body>
+</html>

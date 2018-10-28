@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>VUE</dt>
+    <dd>
+        <p>数据处理</p>
+        <ol>
+            <li>watch：数据监听，watch是Vue对象的一个属性，它所监听的值（如isChecked:true）相当于一个函数，每当它监听的值发生变化时函数里面的代码既会执行，如我们在多选的练习中可以加一个全选按钮，每当全选的值发生变化时，让多选里的选项同步发生变化，如：<pre>
+    watch : {
+        isChecked (){
+            this.cities.forEach( city => {
+                city.checked = this.isChecked;
+            })
+        }
+    }</pre>当一个值发生变化同时影响一个或多个数据的时候，用watch</li>
+            <li>computed：计算属性，它也是Vue对象的一个属性，如多选里你想展示被选择的项数，常规方法会比较麻烦，我们可以首先设置一个值（如checkedTotal:0），然后在computed里把checkedTotal作为一个属性，它也是个对象，里面有get和set方法（get方法是它的值如何获取的，这样就不用每个按钮点击时都要去计算，不用关心什么时候变，只要值变了vue会根据你写的获取方式自动计算），如：<pre>
+    computed : {
+        checkedTotal : {
+            get () {
+                return this.cities.filter(city => city.checked).length;
+            }
+        }
+    }</pre>当一个值变化是由于多个值得变化得来的时候，用computed</li>       
+        </ol>
+        <p>组件（封装复用，在js中用函数实现）</p>
+        <ol>
+        	<li>即是将页面中居中相似样式，行为，结构等的代码进行封装成小模块，叫做组件</li>
+            <li>创建组件：Vue.component(组件名称,组件配置)，组件名称将会写成标签，因此不要用大写，也不要与原有标签名字相同，配置里有个属性叫做template，组件模板（html结构），如我们用选项卡来做模板<pre>
+    Vue.component('xzy-tab',{
+        template:`
+        //此处放选项卡的html结构
+        `
+    })</pre></li>
+    		<li>组件的使用：通过标签去调用组件，标签名称既是上面组件名称，如：<pre>
+    &lt;div class="box"&gt;
+        &lt;xzy-tab&gt;&lt;/xzy-tab&gt;
+    &lt;/div&gt;</pre></li>
+            <li>props：组件的形参，如果组件里使用固定的代码，注定它的复用性很低，因此它要想函数一个可以将能够改变的值变成参数</li>
+    		<li>子组件的自定义事件：$emit()，两个参数，第一个是事件名称，第二个是值，如：<pre>
+    methods:{
+        choose (index){
+            this.value = index;
+            this.$emit("change",this.value);
+        }
+    }</pre>然后在组件标签上绑定change事件，并监听对应方法，在父组件中加入方法changeOne，如：<pre>
+    methods:{
+        changeOne(n){
+            //console.log(n);
+            this.tabIndex = n;
+        },
+        getTabOne(){
+            //console.log(this.tabIndex);
+        }
+    }</pre>将getTabOne绑定在按钮的点击事件上，再加个初始值tabIndex : 0就可以实现子组件和按钮的数据交互了</li>
+        </ol>
+    </dd>
+</dl>
+<dl>
+	<dt>练习：</dt>
+    <dd>
+    	<p>1、做一个分页组件</p>
+        <p>2、做一个滑块组件</p>
+    </dd>
+</dl>
+</body>
+</html>

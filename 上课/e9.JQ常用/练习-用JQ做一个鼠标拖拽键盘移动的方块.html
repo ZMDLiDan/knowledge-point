@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+	<style type="text/css">
+		body{margin:0;}
+		#div1{width:150px;  height:150px; background-color:red; position:absolute; left:0; top:0;}
+	</style>
+</head>
+<body>
+	<div id="div1"></div>
+	<script src="jquery.min.js"></script>
+	<script>
+		$("#div1").on("mousedown",function (ev){
+			var disX = ev.pageX - $(this).offset().left;
+			var disY = ev.pageY - $(this).offset().top;
+			$(document).on("mousemove",function (ev){
+				$("#div1").css({
+					"left":ev.pageX-disX+"px",
+					"top" :ev.pageY-disY+"px"
+				});
+			})
+			$(document).on("mouseup",function (){
+				$(document).off("mousemove mouseup");
+			})
+			return false;
+		})
+		$("#div1")[0].bL = $("#div1")[0].bT = $("#div1")[0].bR = $("#div1")[0].bB = false;
+		setInterval(function (){
+			if($("#div1")[0].bL){
+				$("#div1").css("left",$("#div1").offset().left-3+"px");
+			}
+			if($("#div1")[0].bT){
+				$("#div1").css("top",$("#div1").offset().top-3+"px");
+			}
+			if($("#div1")[0].bR){
+				$("#div1").css("left",$("#div1").offset().left+3+"px");
+			}
+			if($("#div1")[0].bB){
+				$("#div1").css("top",$("#div1").offset().top+3+"px");
+			}
+		},30)
+		$(document).on("keydown",function (ev){
+			switch(ev.which){
+				case 37 : $("#div1")[0].bL = true; break;
+				case 38 : $("#div1")[0].bT = true; break;
+				case 39 : $("#div1")[0].bR = true; break;
+				case 40 : $("#div1")[0].bB = true; break;
+			}
+		})
+		$(document).on("keyup",function (ev){
+			switch(ev.which){
+				case 37 : $("#div1")[0].bL = false; break;
+				case 38 : $("#div1")[0].bT = false; break;
+				case 39 : $("#div1")[0].bR = false; break;
+				case 40 : $("#div1")[0].bB = false; break;
+			}
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+body{margin:0;}
+.box{ margin:150px 150px;}
+ul{padding:0; list-style:none;}
+.item,li{
+	width:50px; height:30px; display:inline-block;
+	text-align:center; line-height:30px;
+	cursor:pointer;margin-left:5px;
+}
+.item:before,li:before{ 
+	display:inline-block; width:10px; height:10px; 
+	line-height:10px; content:""; border:1px #000 solid; 
+	margin-right:2px; transition:all 0.3s linear;
+}	
+.item.checked:before,li.checked:before{ background-color:#0CF; border:1px #fff solid;}
+.item.checked,li.checked{color:#0CF;}
+</style>
+</head>
+<body>
+<div class="box">
+	<div class="item" 
+    :class="{checked : isChecked}"
+    @click="checkAll"
+    >全选</div>
+    <ul>
+    	<li v-for="city,index of cities"
+        :class="{checked : city.checked}"
+        @click="choose(city)"
+        >{{city.name}}</li>
+    </ul>
+    <div>当前选中了<strong>{{checkedTotal}}</strong></div>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+new Vue({
+	el : ".box",
+	data : {
+		cities : [{name:"北京",checked:false},
+				  {name:"上海",checked:false},
+				  {name:"重庆",checked:false},
+				  {name:"广州",checked:false},
+				  {name:"西安",checked:false}],
+		isChecked : false,
+		//checkedTotal : 0,
+	},
+	methods : {
+		choose (city){
+			city.checked = !city.checked;
+		},
+		checkAll(){
+			this.isChecked = !this.isChecked;
+		}
+	},
+	watch : {
+        isChecked (){  //监听isChecked，只要它的值发生变化既会执行下面的代码
+            this.cities.forEach( city => {
+                city.checked = this.isChecked;
+            })
+        }
+    },
+	computed : {
+        checkedTotal : {
+            get () {  //告诉它当前属性的值是以什么逻辑得到的，这样就不用在每个会变化的时候都去调用方法了
+                return this.cities.filter(city => city.checked).length;
+            }
+        }
+    }
+})
+</script>
+</body>
+</html>

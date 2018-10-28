@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<input type="button" value="按钮1"/>
+<input type="button" value="按钮2"/>
+<input type="button" value="按钮3"/>
+<p>我是p1</p>
+<p>我是p2</p>
+<p>我是p3</p>
+<script>
+var aBtn = document.getElementsByTagName("input");
+var aP = document.getElementsByTagName("p");
+for(var i=0;i<aBtn.length;i++){
+	aBtn[i].index = i;
+	aBtn[i].onclick= function (){
+		alert(aP[this.index].innerHTML);
+	}
+}
+
+</script>
+</body>
+</html>

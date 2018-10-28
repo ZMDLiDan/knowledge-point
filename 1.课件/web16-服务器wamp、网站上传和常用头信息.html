@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+    <dt>如何配置自己的服务器程序和上传网站</dt>
+    <dd>
+        <p>配置服务器程序</p>
+        <ol>
+        	<li>AMP--集成了Apache, PHP5, 和MySQL</li>
+            <li>浏览器服务器文件localhost/文件.txt，这种方式和用路径在浏览器上打开的方式是不同的，前者是在服务器上</li>
+            <li>很多东西必须在服务器上运行，如ajax等</li>
+        </ol>
+        <p>上传一个网站</p>
+        <ol>
+        	<li>首先我们需要一个网上的服务器（需要花钱租用，比如西部数码、阿里云、腾讯云等等）</li>
+            <li>其次我们自己做好一个网站的所有项目，并上传到该服务器上</li>
+            <li>我们需要一个叫做FTP的软件，并在快速连接里输入你服务器的地址，你的用户民和密码就可以连接到服务器上了，把你的项目上传上去</li>
+            <li>然后我们需要一个自己的域名，并将其绑定在我们的服务器上，这样在互联网上打开该域名就会自动打开我们项目中的index.html了</li>
+            <li>即使是个人网站也是需要备案的，这里是个人网站详细的<a href="https://jingyan.baidu.com/article/5bbb5a1b3bbd1213eaa1797e.html">备案过程</a>，可以去看一下</li>
+        </ol>
+    </dd>
+    <dt>头信息head标签里的特殊标签</dt>
+    <dd>
+    	<p>base标签：描述了基本的链接地址/链接目标，该标签作为HTML文档中所有的链接标签的默认链接：</p>
+        <ol>
+        	<li>如：<pre>
+    &lt;base href="www.xxx.com/images/" target="blank"/&gt;</pre>相当于相对路径不再相对该文件了，而是相对"www.xxx.com/images"这个文件，这样我们不用去找images下的文件，直接./图片名称就可以了，后面的target规定了我们页面中的所有超链接都在新窗口打开</li> 
+        </ol>
+        <p>meta标签：为页面描述了一些基本的元数据</p>
+        <ol>
+        	<li>用name="keywords" content="关键词"为搜索引擎定义关键词</li>
+            <li>用name="descrption"为网页定义描述内容，该描述与上面的描述常在SEO时使用（搜索引擎优化）</li>
+            <li>用charset=""设置请求后页面的编码格式</li>
+            <li>用name="author" content="名字"定义网页的作者</li>
+            <li>用http-qeuiv="refresh" content="30;url=http://www.xxx.com"每30秒刷新一次url内的页面</li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、做一个打开页面后在页面正中心出现一个5秒后页面跳转，等待5秒后跳到另一个页面的效果</p>
+    	<p>2、大家把你认为做的最好的网站上传到网络上</p>
+    </dd>
+</dl>
+</body>
+</html>

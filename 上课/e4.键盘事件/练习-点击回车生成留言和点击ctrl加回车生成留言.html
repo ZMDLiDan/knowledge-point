@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<input type="text" />
+<ul></ul>
+<script>
+var oTe = document.getElementsByTagName("input")[0];
+var oUl = document.getElementsByTagName("ul")[0];
+oTe.onkeydown = function (ev){
+	ev = ev || event;
+	if(ev.keyCode==13&&ev.ctrlKey){
+		var oLi = document.createElement("li");
+		oLi.innerHTML = this.value;
+		oUl.appendChild(oLi);
+		this.value = '';
+	}
+}
+</script>
+</body>
+</html>

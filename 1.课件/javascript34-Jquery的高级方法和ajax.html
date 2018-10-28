@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>Jquery</dt>
+    <dd>
+        <p>$()下的高级方法：</p>
+        <ol>
+        	<li>delegate() 事件委托<br/>undelegate() 终止事件委托<br/>优点：1、不用循环（同时会提高性能）；2、js添加的元素也会获得事件<pre>
+    $('li').on('click',function(){
+    	this.style.background = 'red';
+    });
+    $('ul').delegate('li','click',function(){
+    	this.style.background = 'red';
+    	$('ul').undelegate();
+    });</pre></li>
+			<li>trigger()  主动触发，适合自定义事件：<pre>
+    $('#div1').on('show',function(){alert(123);});
+    $('#div1').on('show',function(){alert(456);});
+    $('#div1').trigger('show');</pre></li>
+			<li>ev.data（获取数据）/ev.target（获取事件源）/ev.type（获取事件类型）<pre>
+    $('#div1').on('click',{name:'hello'},function(ev){
+    	alert( ev.data.name );
+    	alert( ev.target );
+    	alert( ev.type );
+    });</pre></li>
+    		<li>$.extend：扩展工具方法下的插件形式，语法：$.xxx() $.yyy()<br/>$.fn.extend：扩展到JQ对象下的插件形式，语法：$().xxx()  $().yyy()<pre>
+    $.extend({   //工具方法的封装
+        leftTrim : function(str){return str.replace(/^\s+/,'');},
+        aaa : function(){alert(1);}
+    }); 
+    
+    $.fn.highlight1 = function () {     //jQuery对象的封装
+        // this已绑定为当前jQuery对象:
+        this.css('backgroundColor','#fffceb').css('color', '#d85030'); 
+        return this; 
+    }
+    //为什么要return this;？因为jQuery对象支持链式操作，我们自己写的扩展方法也要能继续链式下去
+    //但是这个版本并不完美。有的用户希望高亮的颜色能自己来指定，怎么办？
+    $.fn.highlight2 = function (options) { 
+        //要考虑到各种情况: 1、options为undefined；2、options只有部分key 
+        var bgcolor = options && options.backgroundColor || '#fffceb'; 
+        var color = options && options.color || '#d85030'; 
+        this.css('backgroundColor', bgcolor).css('color', color); 
+        return this; 
+    }
+    
+    &lt;div id="test-highlight2"&gt; 
+    &lt;p&gt;什么是&lt;span&gt;jQuery&lt;/span&gt;
+    &lt;span&gt;Plugin&lt;/span&gt;&lt;/p&gt; 
+    &lt;p&gt;编写&lt;span&gt;jQuery&lt;/span&gt;
+    &lt;span&gt;Plugin&lt;/span&gt;可以用来扩
+    &lt;span&gt;jQuery&lt;/span&gt;的功能&lt;/p&gt;&lt;/div&gt;
+    $('#test-highlight2 span').highlight2({
+    	backgroundColor: '#00a8e6',
+    	color: '#ffffff'
+    });  //查看最后的效果</pre></li>
+    		<li>Jquery的ajax方法：ajax() 方法用于执行 AJAX（异步 HTTP）请求。所有的 jQuery AJAX 方法都使用 ajax() 方法。该方法通常用于其他方法不能完成的请求。<pre>
+    $("button").click(function(){
+        $.ajax({url:"a1.txt",success:function(result){
+            $("#div1").html(result);
+        }});
+    });
+    $.get('xxx.php',function(){//get请求的简写，函数为成功后的回调});
+    $.post('xxx.php',function(){//post请求的简写，函数为成功后的回调});</pre>下面列出了可能的名称/值：<br/>
+async 	布尔值，表示请求是否异步处理。默认是 true。<br/>
+beforeSend(xhr) 	发送请求前运行的函数。<br/>
+cache 	布尔值，表示浏览器是否缓存被请求页面。默认是 true。<br/>
+complete(xhr,status) 	请求完成时运行的函数（在请求成功或失败之后均调用，即在 success 和 error 函数之后）。<br/>
+contentType 	发送数据到服务器时所使用的内容类型。默认是："application/x-www-form-urlencoded"。<br/>
+context 	为所有 AJAX 相关的回调函数规定 "this" 值。<br/>
+data 	规定要发送到服务器的数据。<br/>
+dataFilter(data,type) 	用于处理 XMLHttpRequest 原始响应数据的函数。<br/>
+dataType 	预期的服务器响应的数据类型。<br/>
+error(xhr,status,error) 	如果请求失败要运行的函数。<br/>
+global 	布尔值，规定是否为请求触发全局 AJAX 事件处理程序。默认是 true。<br/>
+ifModified 	布尔值，规定是否仅在最后一次请求以来响应发生改变时才请求成功。默认是 false。<br/>
+jsonp 	在一个 jsonp 中重写回调函数的字符串。<br/>
+jsonpCallback 	在一个 jsonp 中规定回调函数的名称。<br/>
+password 	规定在 HTTP 访问认证请求中使用的密码。<br/>
+processData 	布尔值，规定通过请求发送的数据是否转换为查询字符串。默认是 true。<br/>
+scriptCharset 	规定请求的字符集。<br/>
+success(result,status,xhr) 	当请求成功时运行的函数。<br/>
+timeout 	设置本地的请求超时时间（以毫秒计）。<br/>
+traditional 	布尔值，规定是否使用参数序列化的传统样式。<br/>
+type 	规定请求的类型（GET 或 POST）。<br/>
+url 	规定发送请求的 URL。默认是当前页面。<br/>
+username 	规定在 HTTP 访问认证请求中使用的用户名。<br/>
+xhr 	用于创建 XMLHttpRequest 对象的函数。</li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、用jquery的ajax做一个商品分页效果</p>
+    </dd>
+</dl>
+</body>
+</html>

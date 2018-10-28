@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+div{width:200px; height:200px; background-color:red; font-size:50px; color:#fff;}
+</style>
+</head>
+<body>
+<div>div</div>
+<script>
+function bind(obj,evname,fn){
+	if(obj.addEventListener){
+		obj.addEventListener(evname,fn,false)
+	}else{
+		obj.attachEvent('on'+evname,function(){
+			fn.call(obj);
+		})
+	}
+}
+var oDiv = document.getElementsByTagName("div")[0];
+bind(oDiv,"click",function (){alert(123)})
+bind(oDiv,"click",function (){alert(456)})
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<img src="img/1.png" width="391" height="479"/>
+<script>
+var oImg = document.getElementsByTagName("img")[0];
+var i = 0;
+var timer = setInterval(changPic,1000);
+function changPic(){
+	i++;
+	oImg.src = "img/"+(i%4+1)+".png";
+}
+oImg.onmouseover = function (){
+	clearInterval(timer);
+}
+oImg.onmouseout = function (){
+	timer = setInterval(changPic,1000);
+}
+</script>
+</body>
+</html>

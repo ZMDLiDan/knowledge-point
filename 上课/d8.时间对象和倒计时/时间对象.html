@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<script>
+var myTime  = new Date();
+//alert(myTime);
+var nY = myTime.getFullYear(); //获取年
+var nM = myTime.getMonth(); //获取月(从0开始要+1)
+var nD = myTime.getDate(); //获取日
+var nW = myTime.getDay(); //获取星期
+var nH = myTime.getHours(); //获取时
+var nMi = myTime.getMinutes(); //获取分
+var nS = myTime.getSeconds(); //获取秒
+switch(nW){
+	case 0: nW = "星期日"; break;
+	case 1: nW = "星期一"; break;
+	case 2: nW = "星期二"; break;
+	case 3: nW = "星期三"; break;
+	case 4: nW = "星期四"; break;
+	case 5: nW = "星期五"; break;
+	case 6: nW = "星期六"; break;
+};
+console.log(nY+"年/"+(nM+1)+"月/"+nD+"日 "+nW+" "+nH+":"+nMi+":"+nS);
+</script>
+</body>
+</html>

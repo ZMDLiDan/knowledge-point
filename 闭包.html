@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function outer(){
+			var a = 1;
+			return function (){
+				console.log(a++);
+			}
+		}
+		var getNum = outer();
+		getNum();
+		getNum();
+		a = 1;
+		getNum();
+
+		console.log(1==='1');
+		console.log(1===1);
+		console.log({}==={});
+	</script>
+</body>
+</html>

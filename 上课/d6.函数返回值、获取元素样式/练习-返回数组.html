@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<script>
+/*function mArr(n){
+	var arr = [];
+	for(var i=0;i<n;i++){
+		arr.push(i+1);
+	}
+	return arr;
+}
+console.log(mArr(5));  //[1,2,3,4,5]*/
+
+/*function mArr(a,b){
+	var arr = [];
+	if(a<b){
+		arr.push(a,b);
+	}else{
+		arr.push(b,a);
+	}
+	return arr;
+}
+console.log(mArr(6,3));  //[3,6]*/
+
+/*function sum(){
+	var s = arguments[0];
+	for(var i=1;i<arguments.length;i++){
+		s += arguments[i];
+	}
+	return s;
+}
+console.log(sum(9,3,4))  //16*/
+
+function sum(){
+	var s = arguments[0];
+	for(var i=1;i<arguments.length-1;i++){
+		if(arguments[arguments.length-1]=="+"){
+			s += arguments[i];
+		}else if(arguments[arguments.length-1]=="-"){
+			s -= arguments[i];
+		}
+	}
+	return s;
+}
+console.log(sum(9,3,4,"+"))  //16
+console.log(sum(9,3,4,"-"))  //2
+</script>
+</body>
+</html>

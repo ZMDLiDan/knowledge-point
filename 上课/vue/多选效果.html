@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+	<style type="text/css">
+		body{margin:0;}
+		.box{ margin:150px 150px;}
+		ul{padding:0; list-style:none;}
+		li{
+			width:50px; height:30px; display:inline-block;
+			text-align:center; line-height:30px;
+			cursor:pointer;margin-left:5px;
+		}
+		li:before{ 
+			display:inline-block; width:10px; height:10px; 
+			line-height:10px; content:""; border:1px #000 solid; 
+			margin-right:2px; transition:all 0.3s linear;
+		}	
+		li.checked:before{ background-color:#0CF; border:1px #fff solid;}
+		li.checked{color:#0CF;}
+	</style>
+</head>
+<body>
+	<ul class="box">
+    	<!--<li class="checked">北京</li>
+    	<li>上海</li>
+    	<li>重庆</li>
+    	<li>广州</li>
+    	<li>西安</li>-->
+    	<li v-for="c,index of cities"
+    	:class="{checked:c.show}"
+    	@click="change(c)">{{c.name}}</li>
+	</ul>
+<script src="vue.js"></script>
+<script>
+	var app = new Vue({
+		el : ".box",
+		data : {
+		cities : [{name:"北京",show:false},
+			{name:"上海",show:false},
+			{name:"重庆",show:false},
+			{name:"广州",show:false},
+			{name:"西安",show:false}]
+		},
+		methods : {
+			change(c){
+				c.show = !c.show;
+			}
+		}
+	})
+</script>
+</body>
+</html>

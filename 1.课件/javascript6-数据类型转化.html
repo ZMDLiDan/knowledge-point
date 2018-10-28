@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>javascript</dt>
+    <dd>
+    	<p>JavaScript的数据类型转换：</p>
+        <ol>
+        	<li>如同block、inline这种类型，当我们需要相应的类型时就要进行数据类型转换</li>
+            <li>在JavaScript中，boolean值，数字和字符串的原始值都是伪对象，这意味着它们实际上具有属性和方法，如：<pre>
+    alert( "blue".length);</pre></li>
+    	</ol>
+        <p>转换字符串类型方法：</p>
+        <ol>
+    		<li>3种主要原始值都具有toString方法，可以将自身转换为字符串，如Number的toString方法:<pre>
+    var iNum=10;
+    alert(iNum.toString()); </pre></li>
+    		<li>String()强制类型转换与toString()方法的唯一不同之处在于，对null或undefined值强制类型转换可以生成字符串而不引发错误，如:<pre>
+    var s1=null.toString();   //错误
+    var s2=String(null);      //"null"</pre></li>
+    		<li>与上面强制类型转换（即显形转换）对应的字符串的隐形转换+（字符串连字符）<pre>
+    var s="100"; 
+    alert(a+100) ; </pre>输出结果100100,并转化成了字符串，当数字与字符串相加时，会被转换成字符串</li>
+        </ol>
+        <p>转化数字类型方法：</p>
+        <ol>
+            <li>Number()方法，如
+            <pre>
+    var s = "100";
+    alert（Number（s）+100）;  //200</pre>Number()会尽可能的将传入的值整体转换成数字。转换规则为：
+    			<ul>
+                	<li>字符串的""（空）和" "（空格）都会转换成数字0</li>
+                    <li>布尔值的true和false会变成1和0</li>
+                    <li>空对象null会变成0</li>
+                    <li>函数、json、undefined（未定义）和其他对象会变成NaN（not a number）</li>
+                    <li>特殊的数组如果为空或只有一个数据（字符串、null或undefined）时字符串会根据之前字符串的规则一样去转，空、null和undefined会转换成0，多个数据时变成NaN</li>
+                </ul>
+                Number不合适的地方：当一个字符串是var b = "100px"，会变成NaN，因此在转换字符串时Number用的比较少，而一般使用parseInt()和parseFloat()</li>
+            <li>parseInt()会从左到右依次判断每个字符，碰到非数字后会将前面的数字输出(会认识一些特殊符号，如+-空格)，若数据不是字符串会返回NaN，只会保留整数，小数点和其后面的部分会被舍去，最好写成parseInt(b,10)，后面代表10进制</li>
+            <li>parseFloat与上面的方法一样，但是会保留第1个小数点后面的数字</li>
+			<li>Number()/parseInt()/parseFloat()都是数字的强制类型转换的方法，而-、*、/、%、++、--也会让数字字符串和数字字符串或数字的运算结果变成数字类型，他们是数字类型的隐形转换</li>
+            <li>无论是哪种转换方法，转换数字失败就会返回NaN，NaN（not a number）它是转换数字类型转换失败的产物，但依然变成了number类型，它一旦出现代表你的代码进行了非法的操作</li>
+            <li>NaN转换布尔类型为false，它与它本身不相等（而其他所有类型与自己都相等）<br/>alert(NaN==NaN)结果是false</li>
+    		<li>isNaN():is not a number，用来判断一个number类型是不是非数字，不是数字返回true，是数字则返回false。若判断的值不是number类型，会找Number判断，如果转换后的结果是NaN则返回true</li>
+        </ol>
+        <p>转化布尔值类型方法：</p>
+        <ol>
+        	<li>Boolean(value)—把给定的值转换成Boolean型</li>
+            <li>Boolean和之前的Number和String这三个函数转换值时，都将创建一个新值，存放由原始值直接转换成的值。</li>
+            <li>当要转换的值是至少有一个字符的字符串，非0数字或对象时，Boolean()函数将反回true，如果该值是空字符串，数字0或null，它将返回false</li>
+            <li>&gt;、&lt;会让字符串和数字的比较结果正确显示，但两个字符串不行，如：10&gt;9和'10'&gt;'9'，前者为true后者为false，因为字符串之间的比较是从左向右一位一位地比较unicode编码大小</li>
+            <li>!取反，一个字符串或数字放在if判断里为真，所以取反会变成false，取反后的结果一定是布尔值</li>
+            <li>==如果两边数值相同（即使不同类型，如：'2'和2），就相等，在判断前将两边转换成了数字</li>
+            <li>===会判断类型，类型不同即使数值相同也返回false<br/>alert(1==ture)结果ture<br/>alert(2==ture)结果false<br/>alert([]==![])结果ture</li>
+        </ol>
+        <p>数据类型转换的注意事项：</p>
+        <ol>
+        	<li>不要用new Number()/Boolean()/String()创建包装对象，因为这样创建出来的是object类型</li>
+            <li>用parseInt()或parseFloat()来转换字符串类型到number</li>
+            <li>用String()转换任意类型到string，或调用某对象的toString()方法</li>
+            <li>不用把任意类型转换boolean再判断，因为if (myVar) {...}的()里会自动转换</li>
+            <li>typeof操作符可以判断出number、boolean、string、function和undefined，判断后的结果是一个字符串</li>
+            <li>判断Array要使用Array.isArray(arr)</li>
+            <li>判断null请使用myVar === null</li>
+            <li>null和undefined没有toString()方法！这两个特殊值要除外，虽然null还伪装成了object类型</li>
+            <li>number对象（非变量）调用toString()报SyntaxError：<pre>
+    123.toString(); // SyntaxError</pre>遇到这种情况，要特殊处理一下：<pre>
+    123..toString(); // '123', 注意是两个点！
+    (123).toString(); // '123'</pre></li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、做一个input输入框和按钮，判断输入值是不是数字，是不是整数（注意：从HTML的内容和value值里拿到的都是字符串）</p>
+        <p>2、如何让'10'&gt;'9'正确的比较出大小，试着用多种方法来实现</p>
+    </dd>
+</dl>
+</body>
+</html>

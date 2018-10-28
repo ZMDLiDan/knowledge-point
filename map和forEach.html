@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//map
+		var arr = [0,2,4,6,8];
+		var newArr = arr.map(function(item,index,arr){
+			console.log(this);
+			console.log(arr);
+			return item/2;
+		},this);
+		console.log(newArr);
+
+		//forEach
+		var arr1 = [0,2,4,6,8];
+		var newArr1 = arr1.forEach(function(item,index,arr1){
+			console.log(this);
+			console.log(arr1);
+			arr1[index] = item/2;
+		},this);
+		console.log(arr1);
+		console.log(newArr1);
+	</script>
+</body>
+</html>

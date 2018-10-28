@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+<body>
+<dl>
+	<dt>设置溢出和英文的样式</dt>
+    <dd>
+    	<p>overflow：溢出如何显示<br/>overflow-x:hidden //水平方向裁切<br/>overflow-y:hidden //垂直方向裁切<br/>overflow:hidden //两个方向裁切</p>
+        <ol>
+        	<li>visible：默认值。溢出的内容不会被修剪，会呈现在元素框之外</li>
+            <li>hidden：溢出的内容会被修剪，并且其余内容是不可见的</li>
+            <li>scroll：溢出的内容会被修剪，浏览器会显示滚动条以便查看其余的内容</li>
+            <li>auto：如果溢出的内容被修剪，则浏览器会显示滚动条以便查看其余的内容（常用）</li>
+            <li>inherit：规定应该从父元素继承 overflow 属性的值</li>
+        </ol>
+        <p>text-transform：文字显示方式（英文）</p>
+        <ol>
+        	<li>none：默认值，文字显示不发生变化</li>
+            <li>capitalize：将每个单词的第一个字母转换成大写字母</li>
+            <li>uppercase：将每个单词的所有字母转换成大写字母</li>
+            <li>lowercase：将每个单词的所有字母转换成小写字母</li>
+        </ol>
+        <p>!important：样式最高优先级（尽量不要用）</p>
+        
+    </dd>
+    <dt>iframe：框架标签（在当前页面显示多个网页）</dt>
+    <dd>
+    	<p>iframe的属性：</p>
+        <ol>
+        	<li>scrolling：是否有滚动条，值为yes（有）/no（无），默认为auto（需要的时候出现）</li>
+            <li>frameBorder：是否有边框，值为正整数，默认为1，值为0时无边框</li>
+            <li>align：对齐方式</li>
+            <li>src：嵌套页面地址</li>
+            <li>width/height：嵌套页面区域的宽高</li>
+            <li>name：配合a的target属性值等于iframe的name，可以让a在超链接的跳转打开页面时在iframe区域打开</li>
+        </ol>
+        <p>iframe的优缺点：</p>
+        <ol>
+        	<li>优点：<br/>解决加载缓慢的第三方内容图标和广告等的加载问题<br/>iframe无刷新文件上传<br/>iframe跨域通信</li>
+            <li>缺点：<br/>iframe会阻塞主页面的onload事件<br/>无法被一些搜索引擎索引到<br/>页面会增加服务器的http请求<br/>会产生很多页面，不容易管理。</li>
+        </ol>
+    </dd>
+    <dt>雪碧图</dt>
+    <dd>
+    	<p>sprites（雪碧图）原理</p>
+        <ol>
+        	<li>首先把网页中一些背景图片整合到一张图片文件中（png格式）</li>
+            <li>再利用CSS的"background-image"引入图片，配合"background- repeat"禁止平铺</li>
+            <li>最后利用css的"background-position"进行背景精确的定位出背景图片的位置</li>
+        </ol>
+        <p>优点：</p>
+        <ol>
+        	<li>减少网页的http请求次数，并防止切换图片出现的闪白</li>
+            <li>减少图片的字节数，并解决了图片命名上的困扰，只需对一张集合的图片上命名就可以了，不需要分别对每一个小元素进行命名</li>
+            <li>更换风格方便，只需要在一张或少张图片上修改图片的颜色或样式，整个网页的风格就可以改变</li>
+        </ol>
+        <p>缺点：</p>
+        <ol>
+        	<li>在宽屏，高分辨率的屏幕下的自适应页面，雪碧图如果不够宽，容易出现背景断裂</li>
+            <li>在开发的时候，需要通过photoshop或其他工具测量计算每一个背景单元的精确位置</li>
+            <li>在维护的时候比较麻烦，如果页面背景有少许改动，一般就要修改整张合并的图片</li>
+        </ol>
+    </dd>
+    <dt>常见面试问题及兼容性问题</dt>
+    <dd>
+    	<p>1.img 的alt属性和title有什么区别:<br/>alt图片加载不出来代替照片；title标题</p>
+        <p>2.action = "javascript:void(0);"和不写有什么区别（包括a标签的javascript:void(0);）不跳转</p>
+        <p>前端页面的三层结构：(必考)</p>
+        <ol>
+        	<li>结构层：由 HTML 或 XHTML 之类的标记语言负责创建，仅负责语义的表达。解决了页面"内容是什么"的问题</li>
+            <li>表现层：由CSS负责创建，解决了页面"如何显示内容"的问题</li>
+            <li>行为层：由脚本负责。解决了页面上"内容应该如何对事件作出反应"的问题</li>
+        </ol>
+        <p>table在布局时的缺点：</p>
+        <ol>
+        	<li>太深的嵌套，比如table>tr>td>h3，会导致搜索引擎读取困难，而且，最直接的损失就是大大增加了代码量</li>
+            <li>灵活性差，比如要将tr设置border等属性，是不行的，得通过td</li>
+            <li>代码臃肿，当在table中套用table的时候，阅读代码会显得异常混乱</li>
+            <li>混乱的colspan与rowspan，用来布局时，频繁使用他们会造成整个文档顺序混乱</li>
+            <li>table需要多次计算才能确定好其在渲染树中节点的属性，通常要花3倍于同等元素的时间</li>
+            <li>不够语义</li>
+        </ol>
+        <p>标签语义化：</p>
+        <ol>
+        	<li>当元素去掉或者丢失样式的时候能够让页面呈现出清晰的结构</li>
+            <li>有利于SEO（搜索引擎优化），语义化标签可以和搜索引擎建立良好沟通，有助于爬虫抓取更多的有效信息——爬虫依赖于标签来确定上下文和各个关键字的权重</li>
+            <li>方便其他设备解析（如屏幕阅读器、盲人阅读器、移动设备）以意义的方式来渲染网页</li>
+            <li>便于团队开发和维护，语义化更具可读性，遵循W3C标准的团队都遵循这个标准，可以减少差异化</li>
+        </ol>
+        <p>经常遇到的浏览器兼容性有哪些：</p>
+        <ol>
+        	<li>不同浏览器默认的margin和padding不同</li>
+            <li>透明性IE用filter:Alpha(Opacity=60)，而其他主流浏览器用 opacity:0.6</li>
+        </ol>
+		<p>什么是外边距重叠：外边距重叠就是margin-collapse，相邻的两个盒子（可能是兄弟关系也可能是祖先关系）的外边距可以结合成一个单独的外边距。这种合并外边距的方式被称为折叠，并且因而所结合成的外边距称为折叠外边距，折叠结果遵循下列计算规则：</p>
+        <ol>
+        	<li>两个相邻的外边距都是正数时，折叠结果是它们两者之间较大的值</li>
+            <li>两个相邻的外边距都是负数时，折叠结果是两者绝对值的较大值</li>
+            <li>两个外边距一正一负时，折叠结果是两者的相加的和</li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、做一个不显示滚动条的溢出滚动效果</p>
+        <p>2、利用雪碧图做一个导航</p>
+    </dd>
+</dl>
+</body>
+</html>

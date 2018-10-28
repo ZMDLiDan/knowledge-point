@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<input type="text"/>
+<input type="button" value="加密"/>
+<p id="p1"></p>
+<input type="button" value="解密"/>
+<p id="p2"></p>
+<script>
+var aInput = document.getElementsByTagName("input");
+var aP = document.getElementsByTagName("p");
+aInput[1].onclick = function (){
+	var str = aInput[0].value;
+	var str1 = "";
+	for(var i=0;i<str.length;i++){
+		str1 += String.fromCharCode(str.charCodeAt(i)+400);
+	}
+	aP[0].innerHTML = str1;
+}
+aInput[2].onclick = function (){
+	var str = aP[0].innerHTML;
+	var str1 = "";
+	for(var i=0;i<str.length;i++){
+		str1 += String.fromCharCode(str.charCodeAt(i)-400);
+	}
+	aP[1].innerHTML = str1;
+}
+</script>
+</body>
+</html>

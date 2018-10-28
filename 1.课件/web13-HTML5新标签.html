@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>HTML5基础</dt>
+    <dd>
+    	<p>HTML5的新标签</p>
+    	<ol>
+        	<li>html5之前只能使用div作为结构元素，html5新增了很多带有语义的标签（语义化对于SEO和其他程序员的阅读有很大的帮助）</li>
+        	<li>header（双标签）：页眉，用于页面的头部的信息介绍或者板块头部</li>
+            <li>footer（双标签）：页脚，用于页面的底部或者版块底部</li>
+            <li>section（双标签）：版块，用于划分页面上的不同区域，或者划分文章里不同的节，属于article的一个部分</li>
+            <li>hgroup（双标签）：页面上的一个标题组合，一个标题和一个子标题，或者标语的组合，如：
+                <pre>
+    &lt;hgroup&gt;
+        &lt;h1&gt;h1&lt;/h1&gt;
+        &lt;h2&gt;h2&lt;/h2&gt;
+    &lt;/hgroup&gt;</pre>
+            </li>
+            <li>nav（双标签）：导航，包含链接的的一个列表，如：
+                <pre>
+    &lt;nav&gt;
+        &lt;h2&gt;新卓越计算机课程&lt;/h2&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="#"&gt;javascript&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;html+css&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/nav&gt;</pre>
+            </li>
+            <li>article（双标签）：用来在页面中表示一套结构完整且独立的内容部分，可以用来呈现论坛的一个帖子，杂志或报纸中的一篇文章，一篇博客，用户提交的评论内容，可互动的页面模块挂件等<br/>可以用header/footer/section等来做头部/脚部/部分</li>
+            <li>aside（双标签）：元素标签可以包含与当前页面或主要内容相关的引用、侧边栏、广告、nav元素组，以及其他类似的有别与主要内容的部分，aside 的内容应该与 article 的内容相关
+				<ul>
+                	<li>被包含在article中作为主要内容的附属信息部分，其中的内容可以是与当前文章有关的引用、词汇列表等</li>
+                    <li>在article之外使用，作为页面或站点全局的附属信息部分；最典型的形式是侧边栏(sidebar)，其中的内容可以是友情链接、附属导航或广告单元等</li>
+                </ul>
+			</li>
+            <li>figure（双标签）：用于对元素进行组合，一般用于图片或视频（类似一个列表）<br/>figcaption（双标签）：figure的子元素 用于对figure的内容 进行说明（img的alt就不需要了），如：
+            <pre>
+    &lt;figure&gt;
+    	&lt;figcaption&gt;新卓越计算机&lt;/figcaption&gt;
+        &lt;img src="aaa.png"/&gt;
+        &lt;img src="bbb.png"/&gt;
+        &lt;img src="ccc.png"/&gt;
+    &lt;/figure&gt;</pre>
+            </li>
+            <li>time（双标签）：用来表现时间或日期<br/>datetime属性规定日期或时间。在该元素的内容中未指定日期或时间时，使用该属性，该属性在所有浏览器中不会渲染任何特殊的效果。如：
+            <pre>
+    &lt;p&gt; 我在 &lt;time datetime="2008-02-14"&gt;情人节&lt;/time&gt; 有个约会。 &lt;/p&gt;</pre>
+            </li>
+            <li>datalist（双标签）：选项列表。与 input 元素配合使用，来定义 input 可能的值。list属性的值等于datalist的id(必须)。<br/>option（双标签）：datalist的选择项，有一个label属性，作为注释，如：
+            <pre>
+    &lt;input type="text" list="valList" /&gt;
+    &lt;datalist id="valList"&gt;
+        &lt;option value="javascript" label="脚本"&gt;javascript&lt;/option&gt;
+        &lt;option value="html" label="内容"&gt;html&lt;/option&gt;
+        &lt;option value="css"  label="样式"&gt;css&lt;/option&gt;
+    &lt;/datalist&gt;</pre>
+            </li>
+            <li>details（双标签）：用于描述文档或文档某个部分的细节，
+该元素用于摘录引用等。应该与页面的主要内容区分开的其他内容，open属性默认展开（open="open"）<br/>summary（双标签）：details元素的标题，如：
+			<pre>
+    &lt;details&gt;
+        &lt;summary>新卓越计算机&lt;/summary&gt;
+        &lt;p>西安邮电的培训教育&lt;/p&gt;
+    &lt;/details&gt;</pre>
+			</li>
+            <li>address（双标签）：定义文章或页面作者的详细联系信息（斜体）</li>
+            <li>mark（双标签）：需要标记的词或句子（黄色背景）</li>
+            <li>meter（双标签）：用于表示一个已知最大值和最小值的计数仪表，如剩余电量、速度表等<br/>value是当前值默认为0，可指定一个浮点小数<br/>min（0）、max（1）最小和最大值，默认为0和1<br/>low指定计数仪表指定范围的最小值，必须大于min<br/>high指定计数仪表指定范围的最大值，必须小于max<br/>optimum计数仪表有效范围内的最佳值，如果大于high则越大越好，如果小于low则越小越好</li>
+			<li>progress（双标签）：定义进度条，如：
+            <pre>
+    &lt;progress max="100" value="76"&gt;
+    	&lt;span&gt;76&lt;/span&gt;%
+    &lt;/progress&gt;</pre>
+            </li>
+            <li>keygen（表单元素单标签）：秘钥(yue)对生成器，提供一种验证用户的可靠方法。当我们提交表单时，它生成两个键，一个私钥，一个公钥。<br/>私钥储存于客户端，公钥则被发到服务器，公钥可用于之后验证用户的客户端证书，如<pre>
+    &lt;form action="demo_keygen.asp" method="get"&gt;
+        Username: &lt;input type="text" name="usr_name" /&gt;
+        Encryption: &lt;keygen name="security" /&gt;
+        &lt;input type="submit" /&gt;
+    &lt;/form&gt;</pre></li>
+            <li>embed（单标签）：标签定义嵌入的内容，比如插件，如：
+            <pre>
+	&lt;embed src="helloworld.swf" /&gt;</pre>
+            </li>
+            <li>针对IE6-8这些不支持HTML5语义化标签的浏览器我们可以使用javascript来解决他们 方法如下：在页面的头部加下：
+            <pre>
+    &lt;script&gt;
+        document.createElement("header");
+        document.createElement("nav");
+        document.createElement("footer");
+        ……
+    &lt;/script&gt;</pre>
+HTML5语义化标签在IE6-8下，我们用js创建出来之后，他是不会有任何默认样式的甚至是 display，所以在样式表里 要对这些标签定义一下它默认的display，也可以直接用html5shiv.js(可下载拿来用)
+			</li>
+        </ol>
+    </dd>
+</dl>
+</body>
+</html>

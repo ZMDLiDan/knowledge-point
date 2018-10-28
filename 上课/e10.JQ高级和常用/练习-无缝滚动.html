@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+body{margin:0;}
+.wrap{width:400px; height:240px; margin:100px auto; overflow:hidden; position:relative;}
+ul{margin:0; padding:0; list-style:none; overflow:hidden; position:absolute; left:0; top:0;}
+li{width:200px; height:240px; float:left;}
+img{display:block;}
+</style>
+</head>
+<body>
+<div class="wrap">
+	<ul>
+    	<li><img src="img/1.png" width="200" height="240"/></li>
+        <li><img src="img/2.png" width="200" height="240"/></li>
+        <li><img src="img/3.png" width="200" height="240"/></li>
+        <li><img src="img/4.png" width="200" height="240"/></li>
+    </ul>
+</div>
+<script src="jquery.min.js"></script>
+<script>
+$("ul").html($("ul").html()+$("ul").html()).css("width",$("li").length*$("li").outerWidth()+"px");
+var timer = setInterval(wufeng,30);
+$(".wrap").hover(function (){
+	clearInterval(timer);
+},function (){
+	timer = setInterval(wufeng,30);
+})
+function wufeng(){
+	$("ul").css("left",($("ul").position().left-4<=-$("ul").outerWidth()/2 ? 0 : $("ul").position().left-4+"px"));
+}
+</script>
+</body>
+</html>

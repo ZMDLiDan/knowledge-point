@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<script>
+function setCookie(key,value,t){
+	var oDate = new Date();
+	oDate.setDate(oDate.getDate()+t); 
+	document.cookie = key+'='+encodeURI(value)+';expires='+oDate.toGMTString();
+}
+function getCookie(key){
+	var arr1 = document.cookie.split('; ');
+	for(var i=0;i<arr1.length;i++){
+	var arr2 = arr1[i].split('=');
+	if(arr2[0]==key){
+		return decodeURI(arr2[1]);}
+	}
+}
+function removeCookie(key){
+	setCookie(key,'',-1);
+}
+setCookie("key1","value1",1);
+setCookie("key2","value2",2);
+setCookie("key3","value3",3);
+removeCookie("key2");
+alert(getCookie("key2"));
+</script>
+</body>
+</html>

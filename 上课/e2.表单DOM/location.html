@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<!--<input type="button" value="跳转百度"/>-->
+<input type="button" value="xq1"/>
+<input type="button" value="xq2"/>
+<input type="button" value="xq3"/>
+<input type="button" value="xq4"/>
+<input type="button" value="xq5"/>
+<script>
+/*var oBtn = document.getElementsByTagName("input")[0];
+oBtn.onclick = function (){
+	window.location.href = "locationnew.html?123";
+}*/
+var aBtn = document.getElementsByTagName("input");
+for(var i=0;i<aBtn.length;i++){
+	aBtn[i].onclick = function (){
+		window.location.href = "locationnew.html#"+this.value;
+	}
+}
+
+</script>
+</body>
+</html>

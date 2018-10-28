@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+body{margin:0; background-color:#deefff; color:#333;}
+dl{padding:0 25px;}
+dt{font-size:26px; color:#600000;}
+p{font-size:22px; margin:20px 0;}
+li{font-size:20px; color:#066; margin:10px 0;}
+pre{border-radius:20px; background-color: #666; color:#ccc; font-size:24px; line-height:30px; text-shadow:0px 1px #999; border:3px #FFC solid;}
+</style>
+</head>
+<body>
+<dl>
+	<dt>WEB基础知识和选择器</dt>
+    <dd>
+    	<p>WEB的三要素：</p>
+        <ol>
+        	<li>Server（服务器）</li>
+            <li>Client（客户端）/Browser（浏览器）</li>
+			<li>HTTP（传输通信）/HTTPS（加密传输）</li>
+            <li>直接打开的html文件并没有经过WEB的三要素</li>
+            <li>正式项目时需要安装环境，练习的时候可以在本地打开</li>
+        </ol>
+        <p>网页的组成部分：</p>
+        <ol>
+        	<li>html（Hypertext Markup Language：超文本标记语言）—— 结构层</li>
+            <li>css（Cascading Style Sheets：层叠样式表）—— 样式层</li>
+			<li>js（javascript：脚本语言）—— 行为层</li>
+        </ol>
+        <p>常用的样式表引入方法：</p>
+        <ol>
+        	<li>行间样式表 —— 只对当前元素有效（尽量不用）<br/>使用方式：写在元素的style属性里 —— &lt;div style="……"&gt;&lt;/div&gt;</li>
+            <li>内部样式表 —— 对当前页面有效（适量使用，如全站中唯一一个表单的样式）<br/>使用方式：写在style标签里（通常在head标签中） —— &lt;style&gt;…………&lt;/style&gt;</li>
+			<li>外部样式表 —— 对所有引用它的页面都有效（推荐，但文件不要太多，会让请求次数太多）<br/>使用方式：样式写在一个css文件里，并用link标签链入本页面 —— &lt;link href="style.css" rel="stylesheet"/&gt;</li>
+            <li>其中内部样式表和外部样式表需要使用选择器来选中页面中的元素</li>
+        </ol>
+        <p>四个基本选择器</p>
+        <ol>
+        	<li>*：通配选择器——获取范围内的所有子元素</li>
+            <li>标签名（如：div）：类型选择器——获取范围内的所有该种元素</li>
+            <li>.class名：类名选择器——获取范围内的所有具有该类名的元素</li>
+            <li>#id值：id选择器——获取范围内的具有该id值的元素</li>
+        </ol>
+        <p>基本选择器的组合使用</p>
+        <ol>
+        	<li>以上任意两种或以上的选择器连续使用，中间用空格分割：包含选择器（如#id .class）——获取范围内第一种选择器后代中第二种选择器选中的元素</li>
+            <li>以上任意两种或以上的选择器连续使用，中间用,分割：群组选择器（如#id,.class）——获取范围内第一种选择器和第二种选择器选中的元素</li>
+        </ol>
+        <p>选择器的优先级</p>
+        <ol>
+            <li>类型选择器>通配选择器</li>
+            <li>class选择器>类型选择器</li>
+            <li>id选择器>class选择器</li>
+            <li>行间样式>id选择器</li>
+            <li>包含选择器层级较多时，可以约分包含选择器：如#id .class的优先级高于#id; #id .class与.class #id的优先级相同</li>
+            <li>如果多个选择器优先级一致：后面覆盖前面</li>
+        </ol>
+        <p>相对路径和绝对路径：</p>
+        <ol>
+        	<li>绝对路径："file:///C:/x.jpg"  相对于本台计算机机，换成另一台机器或文件夹时需要修改路径</li>
+            <li>相对路径：相对于该（代码）文件的路径，只要整个文件夹不变路径就不会改变</li>
+			<li>很多标签都有含有路径的属性，如上面的link标签就有href属性用以将外部css样式文件引入此页面，常用的还有a标签和img标签</li>
+            <li>a标签 —— 超链接，a的常用属性：<br/>Href（链接） —— 作用引用；<br/>target（打开方式） —— 作用设置新页面的打开方式：_blank（新页面）/_self（当前页面）</li>
+            <li>img标签 —— 图片，img的常用属性：<br/>src（来源） —— 作用引入；<br/>width/height（宽高） —— 作用为图片设置宽高；<br/>alt（代替文字）：作用无法显示图片时的替换文本</li>
+        </ol>
+    </dd>
+    <dt>常用表格的标签</dt>
+    <dd>
+    	<p>定义表格：&lt;table&gt;</p>
+        <ol>
+        	<li>表格标题：&lt;caption&gt;</li>
+            <li>表格表头：&lt;thead&gt;</li>
+            <li>表格正文：&lt;tbody&gt;</li>
+            <li>表格页脚：&lt;tfoot&gt;</li>
+            <li>表头单元格：&lt;th&gt;</li>
+            <li>表格行：&lt;tr&gt;</li>
+            <li>表格单元格：&lt;td&gt;</li>
+        </ol>
+        <p>表格常用属性和专用样式：</p>
+        <ol>
+        	<li>表格对其方式：align（左中右）</li>
+            <li>表格边框宽度：border</li>
+            <li>表格边框颜色：bordercolor</li>
+            <li>表格背景色：bgcolor</li>
+            <li>表格背景图：background</li>
+            <li>单元间间隙：cellspacing</li>
+            <li>表格内边距：cellpadding</li>
+            <li>横向合并单元格（td属性）：colspan="2"  </li>
+            <li>纵向合并单元格（td属性）：rowspan="2"</li>
+            <li>合并相邻单元格边框（table样式）：border-collapse:collapse;</li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、分别用行间样式、内部样式和外链样式修饰3个相同的p标签（样式为：字体颜色白色，背景样式红色）</p>
+        <p>2、创建一个表格，要求3行7列，总宽度800像素，行高80像素，并合并单元格成为以下样子：</p>
+        <img src="img/表格.jpg" width="1000" height="170"/>
+        <p>3、一个p标签，一个div标签，一个span标签和3个css文件，要求一个用id选择器，一个用class选择器，一个用标签选择器，与上面3个标签一一对应并将这3个外链样式引入页面（修改一下字体颜色即可）</p>
+    </dd>
+</dl>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<script>
+/*var str = 'aaa';
+var re = /a/g;
+str=str.replace(re,function ($0){
+	alert($0);
+});*/
+
+function makeArr(n){
+	var str = new Array(n+1).join("a");
+	var arr = [];
+	var i = 1;
+	str.replace(/a/g,function (){
+		arr.push(i++);
+	})
+	return arr;
+}
+console.log(makeArr(5)); //[1,2,3,4,5]
+//alert(str);
+</script>
+</body>
+</html>

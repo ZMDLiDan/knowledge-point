@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<ul id="ul1"></ul>
+<input type="text" id="te"/><input type="button" value="发送" id="btn"/>
+<script>
+var oUl = document.getElementById("ul1");
+var oText = document.getElementById("te");
+var oBtn = document.getElementById("btn");
+var valueZ = "value";
+oBtn.onclick = function (){
+	oUl.innerHTML += "<li>"+oText[valueZ]+"</li>";
+}
+</script>
+</body>
+</html>

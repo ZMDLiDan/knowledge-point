@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+    <dt>css3、HTML5和移动端</dt>
+    <dd>
+    	<p>canvas</p>
+        <ol>
+        	<li>绘制环境，getContext('2d')：目前只支持2d场景</li>
+            <li><pre>
+    &lt;style&gt;
+    body{ background:black;}
+    #c1{ background:white;}
+    span{ color:white;}
+    &lt;/style&gt;
+    &lt;body&gt;
+    &lt;canvas id="c1" width="400" height="400"&gt;
+        &lt;span&gt;不支持canvas浏览器&lt;/span&gt;
+    &lt;/canvas&gt; &lt;!--默认：宽300 高150--&gt;
+    &lt;script&gt;
+    var oC = document.getElementById('c1');
+    var oGC = oC.getContext('2d'); 
+    &lt;/script&gt;
+    &lt;/body&gt;</pre>注意：不能在样式里设置宽高，否则变成等比缩放（包括里面画的内容也会等比缩放）</li>
+            <li>绘制图形：
+            	<ul>
+                	<li>绘制方块：<br/>
+fillRect(L,T,W,H)：（填充的）方块（默认颜色黑色）<br/>
+strokeRect(L,T,W,H)：（带边框的）方块（默认1px）<br/>
+oGC.strokeRect(50.5,50.5,100,100); 注意使用.5的原因</li>
+					<li>设置绘图：<br/>
+fillStyle：填充颜色（绘制canvas是有顺序的）<br/>
+lineWidth：线宽度，是一个数值<br/>
+strokeStyle：边线颜色<br/>
+oGC.fillStyle = 'red';</li>
+					<li>边界绘制：<br/>
+lineJoin：边界连接点样式<br/>
+miter（默认）、round（圆角）、bevel（斜角）<br/>
+lineCap：端点样式<br/>
+butt（默认）、round（圆角）、square（高度多出为宽的一半）<br/>
+oGC.lineWidth = 20;<br/>
+oGC.lineCap = 'round';</li>
+					<li>绘制路径：<br/>
+beginPath：开始绘制路径（防止后面设置影响上面绘图）<br/>
+closePath：结束绘制路径（闭合绘图）<br/>
+moveTo：移动到绘制的新目标点<br/>
+lineTo：新的目标点<br/>
+stroke：画线，默认黑色<br/>
+fill：填充，默认黑色<br/>
+rect：矩形区域（与fill组成fillRect方法）<br/>
+clearRect：删除一个画布的矩形区域<br/>
+save：保存路径（与restore一起组成一个设置区）<br/>
+restore：恢复路径</li>
+					<li>绘制圆（圆弧）：<br/>
+arc(x,y,半径,起始弧度,结束弧度,旋转方向)<br/>
+x,y：起始圆心坐标<br/>
+起始位置在3点钟位置<br/>
+弧度与角度的关系：弧度=角度*Math.pi/180<br/>
+旋转方向：顺时针（默认：false）、逆时针（true）<br/>
+oGC.moveTo(200,200);<br/>
+oGC.arc(200,200,150,0,90*Math.PI/180,false);  true区别<br/>
+//oGC.closePath();(闭合绘制)<br/>
+oGC.stroke();<br/></li>
+					<li>变换（与css3中的变化类似）：<br/>
+translate（偏移）：从起始点为基准点，移动当前坐标位置<br/>
+rotate（旋转）：参数为弧度（默认的旋转中心是左上角）<br/>
+scale（缩放）：x，y方向缩放到原本大小的倍数</li>
+					<li>插入图片（该方法也可以插入视频）：<br/>
+需要等图片加载完再执行canvas操作<br/>
+图片预加载：在onload里调用方法<br/>
+drawImage(oImg,x,y,w,h)//后面两个参数代表:图片在canvas画布里显示的宽高<br/>
+oImg：当前图片；x,y：坐标；w,h：宽高（不写为原图大小），如：<pre>
+    var yImg = new Image();//创造一个图片的对象实例
+    yImg.onload = function(){
+    draw(this);}
+    yImg.src = 'a.png';
+    function draw(obj){
+    oGC.drawImage(obj,0,0);} //写了宽高会拉伸图片</pre></li>
+					<li>设置背景：<br/>
+需要等图片加载完再执行canvas操作<br/>
+图片预加载：在onload里调用方法<br/>
+createPattern(oImg,平铺方式)<br/>
+与css类似：repeat、repeat-x、repeat-y、no-repeat，如：<pre>
+    var yImg = new Image();
+    yImg.onload = function(){
+    draw(this);}
+    yImg.src = 'a.png';
+    function draw(obj){
+    oGC.fillStyle = oGC.createPattern(obj,'repeat');
+    oGC.fillRect(0,0,300,300);} </pre></li>
+                </ul>
+            </li>
+            <li>jCanvaScript（canvas的jquery，有很多类似jquery的动画和方法）：可以做出很多实际应用，地址<a href="https://projects.calebevans.me/jcanvas/">https://projects.calebevans.me/jcanvas/</a></li>
+        </ol>
+        <p>在客户端存储数据(面试问题)</p>
+        <ol>
+        	<li>HTML5 提供了两种在客户端存储数据的新方法：<br/>
+localStorage - 没有时间限制的数据存储<br/>
+sessionStorage - 针对一个 session 的数据存储</li>
+			<li>之前，这些都是由 cookie 完成的。但是 cookie 不适合大量数据的存储，因为它们由每个对服务器的请求来传递，这使得 cookie 速度很慢而且效率也不高。</li>
+            <li>在 HTML5 中，数据不是由每个服务器请求传递的，而是只有在请求时使用数据。它使在不影响网站性能的情况下存储大量数据成为可能。对于不同的网站，数据存储于不同的区域，并且一个网站只能访问其自身的数据。</li>
+            <li>localStorage 方法：localStorage 方法存储的数据没有时间限制。第二天、第二周或下一年之后，数据依然可用，如：<pre>
+    localStorage.lastname="Smith";
+    document.write(localStorage.lastname);<hr/>
+    localStorage.pagecount ? localStorage.pagecount=Number(localStorage.pagecount) +1 :  localStorage.pagecount=1;
+    document.write("Visits "+ localStorage.pagecount + " time(s).");</pre></li>
+    		<li>sessionStorage 方法：sessionStorage 方法针对一个 session 进行数据存储。当用户关闭浏览器窗口后，数据会被删除，如：<pre>
+    sessionStorage.lastname="Smith";
+    document.write(sessionStorage.lastname);<hr/>
+    sessionStorage.pagecount ? sessionStorage.pagecount=Number(sessionStorage.pagecount) +1 :  sessionStorage.pagecount=1;
+    document.write("Visits "+ sessionStorage.pagecount + " time(s).");</pre></li>
+    		<li>cookie、localStorage和sessionStorage的区别：<br/>
+cookie：每个域名存储量比较小（各浏览器不同，大致 4K ）；所有域名的存储量有限制（各浏览器不同，大致 4K ）；有个数限制（各浏览器不同）；会随请求发送到服务器<br/>
+localStorage：永久存储；单个域名存储量比较大（推荐5MB ，各浏览器不同）；总体数量无限制<br/>
+sessionStorage：只在 session 内有效；存储量更大（推荐没有限制，但是实际上各浏览器也不同）</li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、用鼠标在canvas中画线</p>
+        <p>2、方块移动动画</p>
+        <p>3、用绘制圆弧来做一个即时钟表</p>
+        <p>4、用变换做一个旋转缩放的方块</p>
+    </dd>
+</dl>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+#div1{width:150px; height:150px; background-color:red;}
+</style>
+</head>
+<body>
+请输入样式名称：<input type="text" id="text1"/><br/>
+请输入样式的值：<input type="text" id="text2"/><br/>
+<input type="button" value="改变样式" id="btn"/>
+<div id="div1"></div>
+<script>
+var oText1 = document.getElementById("text1");
+var oText2 = document.getElementById("text2");
+var oBtn = document.getElementById("btn");
+var oDiv = document.getElementById("div1");
+oBtn.onclick = function (){
+	oDiv.style[oText1.value] = oText2.value;
+}
+</script>
+</body>
+</html>

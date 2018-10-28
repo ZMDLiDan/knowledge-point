@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>javascript</dt>
+    <dd>
+    	<p>JavaScript的控制流：</p>
+        <ol>
+        	<li>流程控制的循环写法：[do ]while/for[ in]（for in会在后面json里详解）</li>
+            <li>如下为while的循环：<pre>
+    var i=0;
+    while(i&lt;3){
+    	alert(i);
+        i++;
+    }
+    //等同于do while的以下写法（先执行do里的在判断，因此至少会执行一次）：
+    var i=0;
+    do{
+        alert(i);
+        i++;
+    }
+    while(i&lt;3)
+    //等同于for的以下写法：
+    //注意执行顺序：1声明变量i；2判断；3判断为真时执行代码块；4变量自增
+    for(var i=0;i&lt;3;i++){
+    	alert(i);
+    }</pre></li>
+    		<li>关键字：break（跳出）、continue（跳过）例子：<pre>    for(var i=0;i&lt;6;i++){
+        if(i==4){break;} //当i=4的时候跳出该循环
+        alert(i);
+    }
+    for(var i=0;i&lt;6;i++){
+        if(i==4){continue;} //当i=4的时候跳过本次循环，继续后续循环
+        alert(i);
+    };</pre></li>
+    		<li>流程控制的判断写法：if/switch</li>
+            <li>如下为switch的判断：<pre>
+    switch(str){
+        case "js":break;
+        case "html":break;
+        default:alert(str);
+    }   
+    //等同于if的以下写法：
+    if(str=="js"){
+    }else if(str=="html"){
+    }else{
+    	alert(str);
+    }</pre></li>
+    		<li>关键字： cass （判断str的值）、 break （跳出判断，既判断成功后不再继续判断后续）、 default（否则，在上面判断都未通过时执行）</li>
+            <li>with语句：将对象放在with里，代码块中的方法和属性默认是该对象的，如<pre>
+    with(document){
+    	write("hello&lt;br/&gt;");
+        write("hi&lt;br/&gt;");
+    }//相当于：
+    document.write("hello&lt;br/&gt;");
+    document.write("hi&lt;br/&gt;");</pre></li>
+        </ol>
+        <p>JavaScript常用的数学方法：</p>
+        <ol>
+        	<li>Math.floor()：向下取整（下舍去）</li>
+            <li>Math.ceil()：向上取整（上进入）</li>
+            <li>Math.round()：四舍五入</li>
+            <li>Math.abs()：取绝对值</li>
+			<li>Math.cos()：余弦值</li>
+            <li>Math.sin()：正弦值</li>
+            <li>Math.max()：比较（取大）</li>
+    		<li>Math.min()：比较（取小）</li>
+            <li>Math.random：0~1的一个随机数</li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、把一个数字（如67890秒）转换成时分秒的格式（写成如下的格式01:10:08）</p>
+        <p>2、封装一个函数，要求参数为两个数字，返回这两个数字的绝对值的和</p>
+        <p>3、分别使用判断、三元运算、与或和数学方法4个方法完成下面问题：封装一个函数，要求参数n小于100时，返回值为n，参数大于等于100时，返回值为100</p>
+        <p>4、封装一个函数，要求参数传入班级人数n，返回值为随机学号（该学号必须为整数且大于等于1，小于等于总人数n）</p>
+    </dd>
+</dl>
+</body>
+</html>

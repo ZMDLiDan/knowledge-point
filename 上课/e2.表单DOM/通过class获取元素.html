@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<div class="box"></div>
+<div class="box1"></div>
+<div class="box"></div>
+<div class="box box1"></div>
+<script>
+//var aDiv = document.getElementsByClassName("box");
+/*console.log(aDiv);*/
+function getByClass(cla){
+	if(document.getElementsByClassName){
+		return document.getElementsByClassName(cla);
+	}else{
+		var arr = [];
+		var aEle = document.getElementsByTagName("*");
+		for(var i=0;i<aEle.length;i++){
+			var arr1 = aEle[i].className.split(" ");
+			for(var j=0;j<arr1.length;j++){
+				if(arr1[j]==cla){
+					arr.push(aEle[i]);
+					break;
+				}
+			}
+		}
+		return arr;
+	}
+}
+
+function addClass( obj, className){
+	if( obj.className ==''){
+		obj.className = className;
+	}else{
+		var arrClassName = obj.className.split(' ');
+		if(arrIndexOf( arrClassName, className) ==-1){
+			obj.className += ' '+className;
+		}
+	}
+}
+function removeClass( obj, className){
+	if(obj.className !=''){
+		var arrClassName = obj.className.split(' ');
+		if(arrIndexOf( arrClassName,className )!=-1 ){
+			arrClassName.splice(arrIndexOf( arrClassName,className ),1);
+			obj.className = arrClassName.join(' ');
+		}
+	}
+}
+console.log(getByClass("box"));
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<div id="div1">
+    <input type="button" value="1"/>
+    <input type="button" value="2"/>
+    <input type="button" value="3"/>
+    <input type="button" value="4"/><br/>
+    <img src="img/1.png" width="391" height="479"/>
+</div>
+<div id="div2">
+    <input type="button" value="1"/>
+    <input type="button" value="2"/>
+    <input type="button" value="3"/><br/>
+    <img src="img/1.png" width="391" height="479"/>
+</div>
+<script>
+var aDiv = document.getElementsByTagName("div");
+var arr1 = ["img/1.png","img/2.png","img/3.png","img/4.png"];
+var arr2 = ["img/1.png","img/2.png","img/3.png"];
+
+changPic(aDiv[0],arr1,"onclick");
+changPic(aDiv[1],arr2,"onmouseover");
+function changPic(par,arr,attr){
+	var aBtn = par.getElementsByTagName("input");
+	var oImg = par.getElementsByTagName("img")[0];
+	for(var i =0;i<aBtn.length;i++){
+		aBtn[i].index = i;
+		aBtn[i][attr] = function (){
+			oImg.src = arr[this.index];
+		}
+	}
+}
+
+</script>
+</body>
+</html>

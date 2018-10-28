@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>ECMAScript 6标准</dt>
+    <dd>
+        <p>ECMAScript 6标准（简称ES6）</p>
+        <ol>
+        	<li>由于浏览器发布时就确定了JavaScript的版本，加上很多用户还在使用IE6这种古老的浏览器，这就导致你在写JavaScript的时候，要照顾一下老用户，不能一上来就用最新的ES6标准写，否则，老用户的浏览器是无法运行新版本的JavaScript代码的。</li>
+			<li>strict模式，在strict模式下运行的JavaScript代码，强制通过var申明变量，未使用var申明变量就使用的，将导致运行错误，启用strict模式的方法是在JavaScript代码的第一行写上：<pre>
+    'use strict';</pre>这是一个字符串，不支持strict模式的浏览器会把它当做一个字符串语句执行，支持strict模式的浏览器将开启strict模式运行JavaScript</li>
+			<li>来测试一下你的浏览器是否能支持strict模式：<pre>
+    'use strict';
+    // 如果支持strict模式代码将报ReferenceError错误:
+    abc = 'Hello, world';
+    alert(abc);</pre>如果浏览器不报错，说明浏览器太古老了，需要尽快升级</li>
+    		<li>ES6语法：
+            	<ul>
+                	<li>多行字符串：由于多行字符串用\n写起来比较费事，所以最新的ES6标准新增了一种多行字符串的表示方法，用`...`（1左侧的键）表示：<pre>
+    alert(`多行
+    字符串
+    测试`);</pre></li>
+    				<li>console.log的特殊首参数：console.log()是在控制台打印数据，但如果你看到它的第一个参数输入了一个"%s"的参数时，它的意思是占位符，目前支持的有：字符（%s）、整数（%d）、css样式(%c)、浮点数（%f）、DOM对象（%O）和JS对象（%o）。如：<pre>
+    console.log("%s",{name:"魏老师"}); //输出结果:[object Object] (是一个叫object的对象)
+    console.log("%d年%d月%d日",2011,3,26); //输出结果:2011年3月26日
+    console.log("%chello world", "color: red;font-size: 24px;font-weight: bold;text-decoration: underline;"); //输出结果：hello world（带有样式）
+    console.log("圆周率是%f",3.14159); //输出结果：圆周率是3.14159
+    console.log("%o",{name:"魏老师"}); //输出结果：Object { name: "魏老师" }</pre></li>
+    				<li>json的简写：当key等于value时，可以写成如下写法：<pre>
+    var width = 10;
+    var height = 20;
+    var bg = 30;
+    var json = {width,height,bg};</pre></li>
+    				<li>json中函数的简写：json中属性值是一个函数时可以写成如下写法：<pre>
+    var json = {fnName:function (){alert(123)}}  //函数名和函数，可以简写成：
+    var json = {fnName(){alert(123)}}</pre></li>
+                    <li>新类型：JavaScript的对象有个小问题，就是键必须是字符串。但实际上Number或者其他数据类型作为键也是非常合理的，为了解决这个问题，最新的ES6规范引入了新的数据类型Map和Set：<pre>
+    'use strict';
+    var m = new Map();
+    var s = new Set();
+    alert('你的浏览器支持Map和Set！');</pre></li>
+                    <li>Map：它是一组键值对的结构，具有极快的查找速度。举个例子，假设要根据同学的名字查找对应的成绩，如果用Array实现，需要两个Array：<pre>
+    var names = ['Michael', 'Bob', 'Tracy'];
+    var scores = [95, 75, 85];</pre>给定一个名字，要查找对应的成绩，就先要在names中找到对应的位置，再从scores取出对应的成绩，Array越长，耗时越长。如果用Map实现，只需要一个"名字"-"成绩"的对照表，直接根据名字查找成绩，无论这个表有多大，查找速度都不会变慢。用JavaScript写一个Map如下：<pre>
+    var m = new Map([['Michael', 95], ['Bob', 75], ['Tracy', 85]]);
+    m.get('Michael'); // 95</pre>初始化Map需要一个二维数组，或者直接初始化一个空Map。Map具有以下方法：<pre>
+    var m = new Map(); // 空Map
+    m.set('Adam', 67); // 添加新的key-value
+    m.set('Bob', 59);
+    m.has('Adam'); // 是否存在key 'Adam': true
+    m.get('Adam'); // 67
+    m.delete('Adam'); // 删除key 'Adam'
+    m.get('Adam'); // undefined</pre>由于一个key只能对应一个value，所以，多次对一个key放入value，后面的值会把前面的值覆盖</li>
+					<li>Set：Set和Map类似，也是key的集合，但不存储value。由于key不能重复，所以，在Set中没有重复的key。要创建一个Set，需要提供一个Array作为输入，或者直接创建一个空Set：<pre>
+    var s1 = new Set(); // 空Set
+    var s2 = new Set([1, 2, 3]); // 含1, 2, 3<hr/>
+    //重复元素在Set中自动被过滤
+    var s = new Set([1, 2, 3, 3, '3']);
+    console.log(s); // Set {1, 2, 3, "3"}
+    //通过add(key)方法可以添加元素到Set中，可以重复添加，但不会有效果
+    s.add(4);
+    console.log(s); // Set {1, 2, 3, "3", 4}<hr/>
+    //通过delete(key)方法可以删除元素
+    var s = new Set([1, 2, 3]);
+    console.log(s);; // Set {1, 2, 3}
+    s.delete(3);
+    console.log(s);; // Set {1, 2}</pre></li>
+            		<li>iterable类型：遍历Array可以采用下标循环，遍历Map和Set就无法使用下标。为了统一集合类型，ES6标准引入了新的iterable类型，Array、Map和Set都属于iterable类型。具有iterable类型的集合可以通过新的for ... of循环来遍历，这是ES6引入的新的语法：<pre>
+    'use strict';
+    var a = [1, 2, 3];
+    for (var x of a) {// 遍历Array（Set与Map相同）
+    	alert(x);
+    }
+    alert('你的浏览器支持for ... of');</pre>你可能会有疑问，for ... of循环和for ... in循环有何区别？for ... in循环由于历史遗留问题，它遍历的实际上是对象的属性名称。一个Array数组实际上也是一个对象，它的每个元素的索引被视为一个属性，当我们手动给Array对象添加了额外的属性后，for ... in循环会将给Array添加的属性一起遍历</li>
+    				<li>rest参数：由于JavaScript函数允许接收任意个参数，于是我们就不得不用arguments来获取所有参数：<pre>
+    function foo(a, b) {
+    var i, rest = [];
+    if (arguments.length > 2) {
+    for (i = 2; i&lt;arguments.length; i++) {
+    	rest.push(arguments[i]);}}
+    console.log('a = ' + a); 
+    console.log('b = ' + b);
+    console.log(rest);}</pre>为获取除了已定义参数a、b之外的参数不得不用arguments，循环要从索引2开始以便排除前两个参数，这种写法很别扭，只是为了获得额外的rest参数，有没有更好的方法？ES6标准引入了rest参数，上面的函数可以改写为：<pre>
+    function foo(a, b, ...rest) {
+    console.log('a = ' + a);
+    console.log('b = ' + b);
+    console.log(rest);}
+    foo(1, 2, 3, 4, 5); // 结果:// a = 1// b = 2// Array [ 3, 4, 5 ]
+    foo(1); // 结果:// a = 1// b = undefined// Array []</pre>rest参数只能写在最后，前面用...标识，从运行结果可知，传入的参数先绑定a、b，多余的参数以数组形式交给变量rest，所以，不再需要arguments我们就获取了全部参数。</li>
+    				<li>let与const声明：JavaScript的变量作用域实际上是函数内部，在for循环等语句块中无法定义具有局部作用域的变量，为解决块级作用域，ES6引入了新关键字let，用let替代var可以申明块级作用域的变量<pre>
+    'use strict';
+    function foo() {
+    	var sum = 0;
+    	for (let i=0; i&lt;100; i++) {sum += i;}
+    	i += 1; // SyntaxError报错，let声明在循环完后变量被销毁
+    }</pre>var和let申明的是变量，如果要申明一个常量，在ES6之前是不行的，可以用全部大写的变量来表示"这是一个常量，不要修改它的值"。ES6标准引入了新的关键字const来定义常量，const与let都具有块级作用域。</li>
+    			</ul>
+            </li>
+        </ol>
+    </dd>
+</dl>
+</body>
+</html>

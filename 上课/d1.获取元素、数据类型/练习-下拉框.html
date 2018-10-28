@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+input{width:150px; height:40px;}
+div{width:150px; height:400px; background-color:blue; display:none;}
+</style>
+</head>
+<body>
+<input type="button" value="下拉框" id="btn"/>
+<div id="div1"></div>
+<script>
+document.getElementById("btn").onclick = function (){
+	document.getElementById("div1").style.display = "block";
+}
+</script>
+</body>
+</html>

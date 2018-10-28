@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+#div1{font-size:30px;}
+#div1 span{font-size:2em;}
+#div2{font-size:30px;}
+#div2 span{font-size:2rem;}
+#div3{width:5rem; height:5rem; background-color:red;}
+</style>
+</head>
+<body>
+<div id="div1">
+	<span>我是em</span>
+</div>
+<div id="div2">
+	<span>我是rem</span>
+</div>
+<div id="div3"></div>
+<script>
+window.onload = window.onresize = fontSelf;
+
+function fontSelf() {
+	var wHtml = document.documentElement;
+	var w = document.documentElement.clientWidth;
+	wHtml.style.fontSize = w * 0.045 + 'px';
+};
+</script>
+</body>
+</html>

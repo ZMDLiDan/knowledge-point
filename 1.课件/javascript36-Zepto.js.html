@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>Zepto</dt>
+    <dd>
+        <p>Zepto和Jquery：</p>
+        <ol>
+        	<li>jQuery它是一个JavaScript函数库，运行快，效率高，其中最鲜明的特点是写得少，做得多；还为我们提供了丰富的插件。jQuery库包含以下功能：HTML 元素选取；HTML 元素操作；CSS 操作；HTML 事件函数；JavaScript 特效和动画；HTML DOM 遍历和修改；AJAX等</li>
+			<li>jQuery 团体知道JS在不同浏览器中存在着大量的兼容性问题，目前jQuery兼容于所有主流浏览器, 包括Internet Explorer。jQuery 版本 2 以上不支持 IE6，7，8 浏览器。如果需要支持 IE6/7/8，那么请选择1.x版本</li>
+			<li>再来看看zepto：Zepto是一款开源软件，是一个轻量级的针对现代高级浏览器的JavaScript库， 它与jquery有着类似的api。如果你会用jquery，那么你也会用zepto。Zepto的设计目的是提供 jQuery 的类似的API，但并不是100%覆盖 jQuery 。Zepto设计的目的是有一个5-10k的通用库、下载并快速执行、有一个熟悉通用的API，所以你能把你主要的精力放到应用开发上。</li>
+    		<li>那他们有什么区别：
+            	<ul>
+                	<li>Zepto特点：Zepto是为现代智能手机浏览器推出的Javascript 框架, 有着和jQuery相似的语法, 但是和jQuery相比下来, 他有很多的优点, 在大小方面 , 压缩后的 zepto.min.js 大小只有21K, 使用服务器端 gzip 压缩后大小只有5~10K, 可以说非常的小, 功能很齐全, 并且多出来了一些触摸屏的事件,它对PC的浏览器就不是那么理想,尤其是在IE上直接过滤不兼容, 所以这个轻量级的js用它来开发手机端和iOS，Android网页都是是不错的选择，极大的减轻了整个app的负载量。</li>
+                    <li>jquery特点：jquery主要是用于PC端的页面开发中，jquery是目前最流行的javascript框架，以其兼容全部主流浏览器，插件丰富，代码简洁，最关键的是更新快，其中最好的dom选择器被广泛的使用。而手机wap方面的话，jquery也推出jquery-mobile，也很好用。</li>
+                    <li>相同点：Zepto最初是为移动端开发的库，是jQuery的轻量级替代品，因为它的API和jQuery相似，而文件更小。Zepto最大的优势是它的文件大小，只有8k多，是目前功能完备的库中最小的一个，尽管不大，Zepto所提供的工具足以满足开发程序的需要。大多数在jQuery中·常用的API和方法Zepto都有，Zepto中还有一些jQuery中没有的。另外，因为Zepto的API大部分都能和jQuery兼容，所以用起来极其容易，如果熟悉jQuery，就能很容易掌握Zepto。你可用同样的方式重用jQuery中的很多方法，也可以方便地把方法串在一起得到更简洁的代码，甚至不用看它的文档。</li>
+					<li>不同点：<br/>1,针对移动端程序，Zepto有一些基本的触摸事件可以用来做触摸屏交互（tap事件、swipe事件），Zepto是不支持IE浏览器的，这不是Zepto的开发者Thomas Fucks在跨浏览器问题上犯了迷糊，而是经过了认真考虑后为了降低文件尺寸而做出的决定，就像jQuery的团队在2.0版中不再支持旧版的IE（6 7 8）一样。因为Zepto使用jQuery句法，所以它在文档中建议把jQuery作为IE上的后备库。那样程序仍能在IE中，而其他浏览器则能享受到Zepto在文件大小上的优势，然而它们两个的API不是完全兼容的，所以使用这种方法时一定要小心，并要做充分的测试。<br/>2,Dom操作的区别：添加id时jQuery不会生效而Zepto会生效，如：<pre>
+    (function($) {
+        $(function() {
+            var $insert = $('&lt;p&gt;jQuery 插入&lt;/p&gt;', {
+                id: 'insert-by-jquery'
+            });
+            $insert.appendTo($('body'));
+        });
+    })(window.jQuery);   
+    // &lt;p&gt;jQuery 插入&lt;p&gt;
+     
+    Zepto(function($) {  
+        var $insert = $('&lt;p&gt;Zepto 插入&lt;/p&gt;', {
+            id: 'insert-by-zepto'
+        });
+        $insert.appendTo($('body'));
+    });
+    // &lt;p id="insert-by-zepto"&gt;Zepto 插入&lt;/p&gt;</pre>3,事件触发的区别：使用 jQuery 时 load 事件的处理函数不会执行；使用 Zepto 时 load 事件的处理函数会执行。<br/>4,事件委托的区别：<pre>
+    var $doc = $(document);
+    $doc.on('click', '.a', function () {
+        alert('a事件');
+        $(this).removeClass('a').addClass('b');
+    });
+    $doc.on('click', '.b', function () {
+        alert('b事件');
+    });</pre>在Zepto中，当a被点击后，依次弹出了内容为"a事件"和"b事件"，说明虽然事件委托在.a上可是却也触发了.b上的委托。但是在 jQuery 中只会触发.a上面的委托弹出"a事件"。Zepto中，document上所有的click委托事件都依次放入到一个队列中，点击的时候先看当前元素是不是.a，符合则执行，然后查看是不是.b，符合则执行。而在jQuery中，document上委托了2个click事件，点击后通过选择符进行匹配，执行相应元素的委托事件。<br/>5,width()和height()的区别：Zepto由盒模型(box-sizing)决定，用.width()返回赋值的width，用.css('width')返回加border等的结果；jQuery会忽略盒模型，始终返回内容区域的宽/高(不包含padding、border)。<br/>6,offset()的区别：Zepto返回{top,left,width,height}；jQuery返回{width,height}。<br/>7,Zepto无法获取隐藏元素宽高，jQuery 可以。<br/>8,Zepto中没有为原型定义extend方法而jQuery有。<br/>9,Zepto 的each 方法只能遍历 数组，不能遍历JSON对象。<br/>10,Zepto在操作dom的selected和checked属性时尽量使用prop方法，在读取属性值的情况下优先于attr。Zepto获取select元素的选中option不能用类似jQuery的方法$('option[selected]'),因为selected属性不是css的标准属性。应该使用$('option').not(function(){ return !this.selected })。<br/>10,Zepto不支持的选择器：<br/><img src="img/Zepto不支持的选择器.jpg" width="824" height="202"/></li>
+                </ul>
+            </li>
+            <li>简单的理解就是：Zepto专用于手机端；jQuery专用于pc端 （但jq又开发出了jquery-mobile,专门用于手机）<br/>
+需要注意的是：<br/>
+需要注意的是Zepto的一些可选功能是专门针对移动端浏览器的；因为它的最初目标在移动端提供一个精简的类似jquery的js库。<br/>
+在浏览器上(Safari、Chrome和Firefox)上开发页面应用或者构建基于html的web-view本地应用，你如PhoneGap，使用Zepto是一个不错的选择。<br/>
+总之，Zepto希望在所有的现代浏览器中作为一种基础环境来使用。Zepto不支持旧版本的Internet Explorer浏览器(小于10)。</li>
+        </ol>
+    </dd>
+</dl>
+</body>
+</html>

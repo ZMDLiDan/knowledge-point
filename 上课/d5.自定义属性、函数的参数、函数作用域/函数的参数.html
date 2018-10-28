@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<script>
+function alertA(a){  //var a = 10
+	alert(a);
+}
+//alertA(10);
+
+fn5(window,document); 
+function fn5(w,d){
+	w.onload = function(){
+		d.body.innerHTML=123;
+	}
+};
+alert(fn5.length);
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+    <dt>css3、HTML5和移动端</dt>
+    <dd>
+    	<p>HTML5表单验证</p>
+        <ol>
+        	<li>自定义错误信息：指的是在提交表单时，如果输入框中的值不是我们想要的，抛出一个自定义的错误提醒。</li>
+            <li>如何自定义错误信息？首先我们要了解HTML5为所有表单元素添加了一个JS属性：input.validity(有效性)<pre>
+    &lt;span style="font-size:24px;"&gt;
+        &lt;form action=""&gt;
+            用户名: &lt;input type="text" id="user"/&gt;&lt;br/&gt;
+            &lt;input type="submit" value="提交"/>  
+        &lt;/form&gt;
+    &lt;/span&gt;  </pre>我们给input添加一个id为user,在控制台输出user.validity查看该属性的内容：<br/><img src="img/h5表单验证.jpg" width="1000" height="500"/>
+    			<ul>
+                	<li>valid:true//当前输入是否有效(所有都是false才是true,有一个true就是false)</li>
+                    <li>badInput: false //输入无效，如number框输入abc</li>
+                    <li>patternMismatch: false //正则表达式验证失败</li>
+                    <li>rangeOverflow:  false //输入值超过max的限定</li>
+                    <li>rangeUnderflow: false //输入值小于min的限定</li>
+                    <li>tooLong : false //输入的字符数超过maxlength</li>
+                    <li>tooShort :   false //输入的字符数小于minlength</li>
+                    <li>stepMismatch : false //输入的数字不符合step限制</li>
+                    <li>typeMismatch : false //输入值不符合email、url的验证</li>
+                    <li>valueMissing : false //未输入值，违反了required要求</li>
+                    <li>customError :  false //是否存在自定义错误</li>
+                </ul>
+            </li>
+            <li>上述属性值的特性：
+            	<ul>
+                	<li>只要有一个验证方面错误，某个属性就为true，valid值为false</li>
+                    <li>只有没有任何验证错误，所有的属性都为false，valid才能为true</li>
+                    <li>上述的每个错误在浏览器内部都有一个预定义的错误提示消息</li>
+                    <li>所有的错误消息中，只要存在"自定义的错误消息"，浏览器只显示自定义的错误消息，优先级高于浏览器预定义的错误消息</li>
+                    <li>当前没有自定义错误消息，所以customError :  false</li>
+                </ul>
+ 			</li>
+            <li>设置和取消自定义错误消息的方法：<pre>
+    input.setCustomValidity('错误提示消息');
+    //这个相当于将input.validity.customError:true
+    input.setCustomValidity("");
+    //这个相当于将input.validity.customError:false</pre>demo如下：<pre>
+    &lt;span style="font-size:24px;"&gt;
+        &lt;form action=""&gt;  
+            用户名: &lt;input type="text"   id="user" required/&gt;&lt;br/&gt;  
+            &lt;input type="submit" value="提交"/&gt;  
+        &lt;/form&gt;  
+    &lt;/span&gt; 
+    &lt;script&gt;  
+        var user =document.getElementById("user");  
+        user.setCustomValidity("哎，我说！！！你忘了填写用户名！！！");  
+    &lt;/script&gt;</pre></li>
+        </ol>
+        <p>validation表单验证库，需要配合jquery一起使用，使用方法详见demo</p>
+        <p>bootsrap</p>
+        <ol>
+            <li>简洁、直观、强悍的前端开发框架，让WEB开发更迅速、简单。</li>
+            <li>来自Twitter，是目前很受欢迎的前端框架之一。</li>
+            <li>bootsrap是基于HTML、CSS、JAVASCRIPT的，让书写代码更容易。</li>
+            <li>移动优先，响应式布局开发。</li>
+            <li><a href="http://getbootstrap.com/">http://getbootstrap.com/</a></li>
+            <li><a href="https://github.com/twbs">https://github.com/twbs</a></li>
+            <li><a href="http://www.bootcss.com/">http://www.bootcss.com/</a></li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、用JS来显示当前range的数值</p>
+        <p>2、将一个结构复杂json复制到另一个变量里</p>
+        <p>3、用自定义数据做一个改变属性的值切换元素背景颜色的效果</p>
+    </dd>
+</dl>
+</body>
+</html>

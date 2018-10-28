@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+body{ background:black;}
+#c1{ background:white;}
+span{ color:white;}
+</style>
+</head>
+<body>
+<canvas id="c1" width="400" height="400">
+	<span>不支持canvas浏览器</span>
+</canvas> <!--默认：宽300 高150-->
+<script>
+var oC = document.getElementById('c1');
+var oGC = oC.getContext('2d'); 
+oGC.moveTo(200,200);
+oGC.arc(200,200,150,0,90*Math.PI/180,true); 
+//true区别
+oGC.closePath();
+oGC.stroke();
+</script>
+</body>
+</html>

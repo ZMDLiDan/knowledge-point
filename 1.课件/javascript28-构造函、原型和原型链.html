@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>javascript</dt>
+    <dd>
+    	<p>构造函数：</p>
+        <ol>
+            <li>在Javascript中，创建对象的方式包括两种：对象字面量和使用new表达式。对象字面量是一种灵活方便的书写方式，我们之前经常使用'var 变量名 = 对象'这种方式创建一个变量，而没有用过new的方式创建。
+</li>
+            <li>实际上js里并没有类的概念，所以也就没有面向对象，但是new的方法却模拟了面向对象，因此new的方法（var 变量名 = new 函数()）也就成了唯一能够区别一般函数和构造函数的区别。</li>
+    		<li>如果一个函数的返回值是引用类型（对象）的数据，那么这个函数作为构造函数用new运算符执行构造时，运算的结果将被它的返回值取代，这时候，构造函数体内的this值丢失了，取而代之的是被返回的对象，如：<pre>
+    function test(){
+        this.a = 10;
+        return function(){return 1;}
+    }
+    var m = new test();
+    var n = test();
+    alert(m);//返回return后面的闭包
+    alert(n);//返回return后面的闭包</pre></li>
+    		<li>如果一个函数的返回值是一个值类型（this或者非对象），那么这个函数作为构造函数用new运算符执行构造时，它的返回值将被丢弃。new 表达式的结果仍然是this所引用的对象，如：<pre>
+    function test(){
+        this.a = 10;
+        return 1;
+    }
+    var m = new test();
+    var n = test();
+    alert(m)//返回Object
+    alert(n)//返回1</pre>以及没有return既返回值为undefined时，也会变成Object。</li>
+    		<li>(面试)在用new来调用一个构造函数的时候，发生了下面四件事：
+            	<ul>
+                	<li>var obj ={};  //创建一个空对象obj</li>
+                    <li>obj.__proto__(构造器的原型) = text.prototype; //创建一个指向text.prototype的指针</li>
+                    <li>text.call(obj); //将构造函数的作用域赋给新对象，因此m函数中的this指向新对象obj，然后再调用text函数。于是我们就给obj对象赋值了一个成员变量a，这个成员变量的值是10</li>
+                    <li>return obj;   //返回新对象obj。</li>
+                    <li>这里calll与aplly是函数调用的一种特殊方法</li>
+                </ul>
+			</li>
+            <li>第一个例子中由于返回的是对象，因此此返回语句在text作为构造函数时没有意义，若改成下面写法既可以变成构造函数了：<pre>
+    function test(){
+        this.a = 10;
+        this.b = function(){alert(this.a);}
+        return this.a;
+    }
+    var m = new test();
+    var n = test();
+    m.b();//(this.a)结果为10 
+    alert(n); //(return的返回值)结果为10</pre>在函数内的变量有如下分类：
+                <ul>
+                    <li>其中例子中写成this.a代表类的成员变量（实例变量，每个实例独立的存储）</li>
+                    <li>函数名.b是类变量（函数的属性，静态变量，所有实例共享存储）</li>
+                    <li>而var定义的则是局部变量（函数执行时临时存储）</li>
+                    <li>Javascript是动态语言，是可以动态的增加属性和方法的</li>
+                </ul>
+     		</li>
+        </ol>
+        <p>原型：</p>
+        <ol>
+        	<li>每一个对象都连接到一个原型对象，并且可以从中继承属性。所有通过字面量创建的对象都具有同一个原型对象，并可以通过Object.prototype获取对原型 对象的引用。通过new关键字后跟构造函数创建的对象的原型，就是构造函数的prototype 属性的值
+比如通过new Object()创建的对象和字面量创建的对象一样也继承自 Object.prototype</li>
+            <li><pre>var sum = {name: "百度", type: "加法"}
+Object.prototype.add = function(){
+//创建原型对象的一个方法
+alert("原型对象的方法");}
+sum.add(); // =>在sum上调用原型对象的方法
+</pre></li>
+        </ol>
+        <p>原型链：</p>
+        <ol>
+        	<li>首先，构造器（构造器包括: Object；Function；Array；Date；String，这里都是函数）才有prototype属性，对象（除Object）拥有__proto__。</li>
+            <li>而javascript中的对象就是一个指向prototype的指针和一个自身的属性列表。</li>
+            <li>原型链继承就是创建一个新的指针，指向构造器的prototype属性</li>
+            <li>用一张图来表示：prototype（原型）、constructor（构造器）、__proto__（构造器的原型——constructor.prototype）<br/><img src="img/构造器和原型链.jpg" width="535" height="612"/><br/>所谓原型链，指的就是图中的proto这一条指针链！</li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+		<p>1、创建一个dog的对象，有属性：name、age和varieties。在Object的原型上增加一个color属性和值，用for in 遍历对象属性，然后通过document.write输出对象的全部属性和值</p>
+    </dd>
+</dl>
+</body>
+</html>

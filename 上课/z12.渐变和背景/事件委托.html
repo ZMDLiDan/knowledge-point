@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<ul>
+	<li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+<script src="jquery.min.js"></script>
+<script>
+/*$('li').on('click',function(){
+	this.style.background = 'red';
+});
+$("<li>").appendTo($("ul"));*/
+$('ul').delegate('li','click',function(){
+	this.style.background = 'red';
+	$('ul').undelegate();
+});
+$("<li>").appendTo($("ul"));
+</script>
+</body>
+</html>

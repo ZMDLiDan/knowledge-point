@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+.normal{font-size:16px;}
+.big{font-size:22px;}
+.small{font-size:10px;}
+</style>
+</head>
+<body>
+<input type="button" value="变小" id="btn1"/>
+<input type="button" value="变大" id="btn2"/>
+<input type="button" value="中等" id="btn3"/>
+<p id="p1" class="normal">毕加索是现代艺术的创始人，西方现代派绘画的主要代表。毕加索于1907年创作的《亚威农少女》是第一张被认为有立体主义倾向的作品，是一幅具有里程碑意义的著名杰作。毕加索全名是什么呢？下面小编向大家介绍一下毕加索的全名。
+　　毕加索个人生活介绍：
+
+　　毕加索是个始终引起争议的人，除了他那让人倾倒与折服的过人才华。他为自己的几任妻子、情人和孩子们画过许多画，他的亲人们对这位天才画家的评价却褒贬不一。毕加索于1973年以92岁的高龄去世。他在世时人们争先恐后地同他结交，在他去世四分之一世纪以后，世人仍在为他的故事和名声争执不休。
+
+毕加索的全名
+　　毕加索绘画上的成就可谓登峰造极，但他的家庭私事却弄得一塌糊涂。他的悲惨故事世人皆知：他的遗孀杰奎琳·罗克是自杀身亡的；他的一位情人玛丽埃·德莱塞亦是，她为他生下了女儿玛雅；他的孙子巴勃里多在杰奎琳将他赶出爷爷葬礼之后也自杀而死；巴勃里多的姐姐马里娜两年前写了一些回忆录披露自己悲惨的少年时代，并把一切过错归咎于毕加索。望梅止渴的近义词
+
+　　毕加索全名是什么？毕加索的全名很长，全名是：巴布罗·迪戈·何塞·法兰西斯科·狄·保拉·胡安·纳波穆西诺·玛莉亚·狄·洛斯·雷梅迪奥斯·西普里亚诺·狄·拉·圣地西玛·特里尼达·克里托·瑞兹.布拉斯科.毕加索。 </p>
+<script>
+var iFontSize = 16;
+var oBtn1 = document.getElementById("btn1");
+var oBtn2 = document.getElementById("btn2");
+var oBtn3 = document.getElementById("btn3");
+var oP = document.getElementById("p1");
+/*oBtn1.onclick = function (){
+	oP.className = "small";
+}
+oBtn2.onclick = function (){
+	oP.className = "big";
+}
+oBtn3.onclick = function (){
+	oP.className = "normal";
+}*/
+oBtn1.onclick = function (){
+	if(iFontSize>=12){
+		iFontSize--;
+	}
+	oP.style.fontSize = iFontSize+"px";
+}
+oBtn2.onclick = function (){
+	if(iFontSize<=22){
+		iFontSize++;
+	}
+	oP.style.fontSize = iFontSize+"px";
+}
+</script>
+</body>
+</html>

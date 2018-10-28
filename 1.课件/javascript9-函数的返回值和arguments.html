@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>javascript</dt>
+    <dd>
+    	<p>函数的返回值：</p>
+        <ol>
+        	<li>return关键字后面的既是返回值</li>
+            <li>用函数名+()就可以得到函数的返回值，如：<pre>
+    function fn1(){return 100;}; 
+    alert(fn1());</pre></li>
+            <li>return关键字可以返回字符串、数字、布尔值、函数、对象（[]/{}/null）、未定义，如返回字符串就有.length属性等，typeof(fn1());可以判断返回值的类型</li>
+            <li>返回函数时，会把这个函数变成字符串返回（包括注释），实际上调用这个函数相当于返回值函数的名字，如：<pre>
+    function fn2(){
+        return function(){alert(1);};
+    }
+    fn2()(); //前面fn2()是fn2的返回值，后面的()代表调用该返回值</pre></li>
+    		<li>也可以给上面两个函数分别传参，如：<pre>
+    function fn2(a){
+        return function(b){alert(a+b);};
+    }
+    fn2(20)(10); //看下a和b应该分别等于什么</pre></li>
+    		<li>利用传参和返回值这种方式可以封装很多效果，如jq里面的$就是用这种方式来实现的，我们也可以这样累积出来一个js库，反复使用</li>
+        </ol>
+        <p>返回值需要注意的事项：</p>
+        <ol>
+        	<li>只有函数代码块里才可以用return，如果一个函数没有return或return后无返回值，则会返回一个未定义</li>
+            <li>return返回值之后的任何代码都不会执行,*for循环里不能放return</li>
+            
+        </ol>
+        <p>函数的arguments：</p>
+        <ol>
+        	<li>函数的形参：形式上的参数，用一个变量代表值的参数，通常只会出现在函数声明的时候，如：<pre>
+    function fn1(a,b,c){} //这里的a，b，c就是形参</pre></li>
+    		<li>函数的实参：给函数实际传递的参数值，通常只会出现在函数被调用的时候，如：<pre>
+    fn1(1,2,3); //这里的1，2，3就是实参</pre></li>
+    		<li>当函数没有形参时，实参依然会被传入函数，但是没有形参接收，它们被保存在了arguments里（实参的集合，类数组），可以对其使用.length、[]等</li>
+            <li>当函数的参数数量不确定的时候，就非常适合使用arguments</li>
+            <li>arguments.length是实参的数量，而函数名的长度（fn1.length）则是形参的数量</li>
+            <li>arguments可以在函数内修改——当你修改形参变量的值时，arguments内对应的数据也会发生变化；修改arguments内的某个数据时，对应的形参变量也会随之改变</li>
+        </ol>
+        <p>JavaScript的高阶函数：</p>
+        <ol>
+        	<li>高阶函数：参数能够接收别的函数的函数</li>
+            <li>JavaScript的函数其实都指向某个变量。既然变量可以指向函数，函数的参数能接收变量，那么一个函数就可以接收另一个函数作为参数，这种函数就称之为高阶函数。</li>
+            <li>一个最简单的高阶函数：<pre>
+    function add(x, y, f) {return f(x) + f(y);}</pre>当我们调用add(-5, 6, Math.abs)时，参数x，y和f分别接收-5，6和函数Math.abs，根据函数定义，我们可以推导计算过程为：f(x) + f(y) ==> Math.abs(-5) + Math.abs(6) ==> 11</li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、写一个带参数的函数（参数为标签元素的id），返回你用此id获取的元素</p>
+        <p>2、封装函数，数字参数n，每次调用时返回一个1到n的数组</p>
+        <p>3、封装函数，传两个数字参数a和b，每次调用时返回一个从小到大的数组</p>
+        <p>4、封装函数，要求：参数的数量任意，返回他们的和；<br/>
+将上面的练习升级成简单的加减法计算器，要求：最后一个参数为"+"或"-"，返回第一个参数与后面参数依次加法或者减法的结果</p>
+    </dd>
+</dl>
+</body>
+</html>

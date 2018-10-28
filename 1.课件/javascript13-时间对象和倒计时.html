@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>javascript</dt>
+    <dd>
+    	<p>JavaScript的时间对象：</p>
+        <ol>
+        	<li><pre>
+    var myTime  = new Date();//当前时间（既计算机读到这句函数时）系统的时间对象object，构造函数生成一个对象</pre> </li>
+            <li>在该对象上获取的详细时间都是number类型，如：<pre>
+    var nY = myTime.getFullYear(); //获取年
+    var nM = myTime.getMonth(); //获取月(从0开始要+1)
+    var nD = myTime.getDate(); //获取日
+    var nW = myTime.getDay(); //获取星期
+    var nH = myTime.getHours(); //获取时
+    var nMi = myTime.getMinutes(); //获取分
+    var nS = myTime.getSeconds(); //获取秒
+</pre></li>
+			<li><pre>
+    var iWeek = myTime.getDay(); 
+    //获取星期是一个0-6的数字，代表星期日到星期六，用下面的方式改成“星期几”的模式：
+    switch(iWeek){
+    	case 0: iWeek = "星期日"; break;
+        case 1: iWeek = "星期一"; break;
+        case 2: iWeek = "星期二"; break;
+        case 3: iWeek = "星期三"; break;
+        case 4: iWeek = "星期四"; break;
+        case 5: iWeek = "星期五"; break;
+        case 6: iWeek = "星期六"; break;
+    };</pre></li>
+    		<li>把当前时间做一个拼接：
+iYear +'年/'+iMonth+'月/'+iDate+'日  '+iWeek+' '+iHours+':'+iMin+':'+iSec;通常时间格式中时分秒应该是两位数，因此需要把所有的时分秒个位数前面补'0'，如果当前的数字小于10则变成'0'+当前值，并统一成字符串</li>
+        </ol>
+        <p>倒计时原理：</p>
+        <ol>
+        	<li>经常会用在团购，抢购等网站的效果</li>
+            <li>原理是现在的时间点（一直在变）与终点（不会变）两个时间的差就是倒计时（毫秒）</li>
+			<li>如果在声明时间对象时给其传参就可以设置未来时间，有如下的两种格式：<pre>
+    var iNew = new Date(); 
+    new Date(2016,8,1,9,48,12); //数字形式，这里的月也是当前月份-1
+    new Date('September 1,2016 9:48:12'); //字符串形式
+    var t = (iNew - iNow)/1000; //用math.floor向下取整，再转换成天时分秒等</pre></li>
+</li>
+			<li>时间转换公式（t为秒数）接着上面的代码：<pre>
+    var iD = Math.floor(t/86400); //天
+    var iH = Math.floor(t%86400/3600); //时
+    var iM = Math.floor(t%3600/60); //分
+    var iS = t%60; //秒</pre></li>
+    		<li>然后把倒计时得到的t保存在str中并拼接起来，得到倒计时时间：<pre>
+    var str = iD+'天'+iH+'时'+iM+'分'+iS+'秒';</pre></li>
+    		<li>时间戳new Date().getTime():是1970日1月1日0时0分0秒到现在的时间的毫秒数，用途：可以用来判断一段程序运行的时间，或者每次需要得到一个不同的数字时使用</li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、小明情人节给女朋友做了一段js，并定了饭店，可女朋友没有去，请问原因是什么：</p>
+<pre>
+    var oTime = new Date();
+    if (oTime.getMonth() === 2 && oTime.getDate() === 14) {
+        alert('亲爱的，我预定了晚餐，晚上6点在餐厅见！');
+    }</pre>
+    	<p>2、用计时器把当前时间的时分秒每1秒钟在页面的p标签中展示一次时间格式（xx:xx:xx的格式），做出一个时钟效果，第一秒页面也要展示一次时间</p>
+        <p>3、用老师给的图片做一个图片时钟效果，要求与上面的时钟效果相同，但是所有文字和":"用图片显示出来</p>
+    </dd>
+</dl>
+</body>
+</html>

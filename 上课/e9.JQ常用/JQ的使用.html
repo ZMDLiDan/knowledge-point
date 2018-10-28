@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<ul>
+	<li class="li"></li>
+    <li id="li1"></li>
+    <li class="li"></li>
+    <li></li>
+</ul>
+<script src="jquery.min.js"></script>
+<script>
+//document.getElementById("li1").style.backgroundColor = "red";
+//$("#li1").css("backgroundColor","red");
+/*var aLi = document.getElementsByTagName("li");
+for(var i=0;i<aLi.length;i++){
+	aLi[i].style.backgroundColor = "red";
+}*/
+//$("li").css("backgroundColor","red");
+//$(".li").css("backgroundColor","red");
+//$('li:eq(2)').css('background','red');
+$('li').filter('.li').css('background','red');
+window.onload = function (){};
+$(function (){
+	
+})
+</script>
+</body>
+</html>

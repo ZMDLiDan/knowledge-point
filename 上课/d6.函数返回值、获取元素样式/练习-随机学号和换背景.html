@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<script>
+	function who(n){
+		return Math.round(Math.random()*(n-1))+1;
+	}
+	//alert(who(29));
+	
+	var r = Math.round(Math.random()*255);
+	var g = Math.round(Math.random()*255);
+	var b = Math.round(Math.random()*255);
+	document.body.style.backgroundColor = "rgb("+r+","+g+","+b+")";
+	//1-29 ===>29-1=28，Math.round(Math.random()*28)+1
+	//a-b  ===>Math.round(Math.random()*(b-a))+a
+</script>
+</body>
+</html>

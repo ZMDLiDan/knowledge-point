@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+#app div{width:100px; height:100px;}
+#app div.box1{background-color:red;}
+#app div.box2{background-color:blue;}
+#app div.box3{color:#fff;}
+#app div.box4{font-size:30px;}
+</style>
+</head>
+<body>
+<div id="app">
+	<div v-bind:class="className">div1</div>
+</div>
+<script src="vue.js"></script>
+<script>
+var app = new Vue({
+	el : "#app",
+	data : {
+		className : {
+			"box1":true,
+			"box2":true,
+			"box3":true,
+			"box4":true
+		}
+	}
+})
+</script>
+</body>
+</html>

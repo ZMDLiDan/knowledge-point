@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<p style="width:400px;">我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字</p>
+<input type="button" value="收缩"/>
+<script>
+var oP = document.getElementsByTagName("p")[0];
+var oBtn = document.getElementsByTagName("input")[0];
+var str = oP.innerHTML;
+var bOn = true;
+oBtn.onclick = function (){
+	if(bOn){
+		oP.innerHTML = str.substring(0,20)+"......";
+		this.value = "展开";
+	}else{
+		oP.innerHTML = str;
+		this.value = "收缩";
+	}
+	bOn = !bOn;
+}
+</script>
+</body>
+</html>

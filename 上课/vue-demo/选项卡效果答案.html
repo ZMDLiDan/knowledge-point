@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+body{margin:0;}
+ul{margin:0; padding:0; list-style:none; overflow:hidden;}
+.box{ width:500px; border:1px #000 solid;}
+li{width:100px; float:left; background-color:#6FF; height:50px; line-height:50px; text-align:center; cursor:pointer;}
+li.active{background-color:#fff;}
+.box .content{height:50px; padding:50px;}
+</style>
+</head>
+<body>
+<div class="box">
+	<ul>
+		<li v-for="city,index of cities"
+        :class="{active:index==n}"
+        @mouseover="choose(index)">{{city}}</li>
+    </ul>
+    <div class="content">{{contents[n]}}</div>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+new Vue({
+	el : ".box",
+	data : {
+		cities : ["北京","上海","重庆","广州","西安"],
+		contents : ["这是北京的内容","这是上海的内容","这是重庆的内容","这是广州的内容","这是西安的内容"],
+		n : 0
+	},
+	methods : {
+		choose (index){
+			this.n = index;
+		}
+	}
+})
+</script>
+</body>
+</html>

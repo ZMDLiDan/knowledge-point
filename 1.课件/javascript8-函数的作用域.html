@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>javascript</dt>
+    <dd>
+    	<p>JavaScript的作用域：</p>
+        <ol>
+        	<li>JavaScript的作用域：域：空间、范围、区域作用</li>
+            <li>例如：写js必须放在script里，css放在style里</li>
+            <li>（在一个范围内）读和写</li>
+        </ol>
+        <p>浏览器有读js的解析器，从script标签开始解析：</p>
+        <ol>
+        	<li>第1步--预解析，找到全局的var和function，var的变量的值设置undefind ，function函数名和内容会整体保存为字符串，变量名和函数名重名时保留函数（既有内容的），函数和函数重名时后面的字符串覆盖前面的字符串</li>
+            <pre>
+     alert(a);
+     var a = 10; 弹出：underfind</pre>
+            <li>第2步--逐行读代码，变量在赋值之前一直是undefind，除非读到=、+、-、*、/、%、++、--、！等表达式后才有值，而逐行读到函数时则什么都不会做，直到函数被调用才会执行其内容代码</li>
+            <li>看一下以下两个代码的结果的区别：
+            <pre>
+    alert(a);var a = 1;
+    alert(a);a = 1;</pre></li>
+            <li>分析该案例中的alert(a)都弹出什么：
+            <pre>
+    alert(a);  弹出：（都是a，只要函数） function a(){alert(4);}
+    var a=1;
+    alert(a);  弹出：1
+    function a(){alert(2);}
+    alert(a);  弹出：（逐行执行代码）1
+    var a = 3;
+    alert(a);  弹出：3
+    function a(){alert(4);}
+    alert(a); 弹出：3</pre></li>
+			<li>在script里定义的变量是全局变量和函数
+            	<ul>
+                	<li>两个script标签是2个域，每个域的预解析独立进行</li>
+                    <li>上面script标签弹出下面script标签的内容会报错</li>
+                    <li>下面script标签弹出上面script标签的内容会正常执行</li>
+                    <li>一个函数的内部也是一个域，因此函数被调用时也会第一时间开始域解析</li>
+                </ul>
+            </li>
+            <li>继续分析下面这道题：<pre>
+    var a=1;
+    function fn1(){alert(a);var a=2;} （局部变量：在函数里面声明的变量，被调用后，销毁）
+    fn1();
+    alert(a);
+    弹出：underfind 1</pre>
+            </li>
+            <li>然后修改成以下题继续分析：
+			<pre>
+    var a=1;
+    function fn1(){alert(a);a=2;}
+    fn1();
+    alert(a);
+    弹出：1 2</pre><pre>
+    var a=1;       //参数就是局部变量a-->var a
+    function fn1(a){alert(a);a=2;} 
+    fn1();
+    alert(a);
+    弹出：underfind 1</pre></li>
+    		<li>作用域链：在一个域内没有找到某变量时，会由里到外，自上到下去更高级的域中去寻找，再改一下后分析：<pre>
+    var a=1;
+    function fn1(){alert(a);a=2;}   //a是全局变量
+    fn1(a);
+    alert(a);
+    弹出：1 2</pre></li>
+            <li>函数内的var定义一个局部变量，没有办法从外面找到函数里面的东西，如：<pre>
+    function fn1(){var a = 'abc';} //在全局里a找不到</pre>如果想要获取函数里的内容的可以用全局变量储存：<pre>
+    var str = '';   //全局中存了局部的值
+    function fn1(){var a = 'abc'; str = a;}   //str:全局变量 a:局部变量
+    fn1();   alert(str);</pre>还可以使用局部函数调用的方法：<pre>
+    function fn1(){var a = 'abc';  fn2(a);}   //
+    function fn2(str){alert(str); }</pre>
+            </li>
+        </ol>
+        <p>注意事项：</p>
+        <ol>
+        	<li>if(){}和for(){}的花括号不是域</li>
+            <li>在alert一个if的{}里的函数应该一起解读出来，但是在FF里会出现错误，不能解析if{}或其他里面，因此应该把函数写在外面防止出现错误</li>
+            <li>类似的window.onload = fucntion(){},{}里也是一个域，里面的变量也是局部变量</li>
+            <li>当出现错误的时候，如果不是代码写错了，那就是代码的解析机制想错了</li>
+        </ol>
+    </dd>
+</dl>
+</body>
+</html>

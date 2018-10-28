@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<div id="app">
+    <p v-once="message">{{message}}</p>
+    <input v-model="message">
+</div>
+<script src="vue.js"></script>
+<script>
+new Vue({
+  el: '#app',
+  data: {
+    message: '菜鸟教程!'
+  }
+})
+</script>
+</body>
+</html>

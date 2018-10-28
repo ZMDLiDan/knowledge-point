@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+#div1{width:200px; height:200px; background-color:red;}
+</style>
+</head>
+<body style="height:2000px;">
+<div id="div1"></div>
+<script src="myJs.js"></script>
+<script>
+var oDiv = document.getElementById("div1");
+mouseScroll(oDiv,function (){
+	oDiv.style.height = parseInt(getStyle(oDiv,"height")) - 3 + "px";
+},function (){
+	oDiv.style.height = parseInt(getStyle(oDiv,"height")) + 3 + "px";
+})
+</script>
+</body>
+</html>

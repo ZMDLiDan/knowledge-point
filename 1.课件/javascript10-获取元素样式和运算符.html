@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>javascript</dt>
+    <dd>
+    	<p>JavaScript获取元素样式的兼容做法：</p>
+        <ol>
+        	<li>通过元素.style.width获取的样式是元素的行间样式，而通过选择器写在css里的样式则无法获取</li>
+            <li>而获取浏览器通过计算后得到的样式的代码在不同的浏览器中不同：
+            	<ul>
+                	<li>getComputedStyle(元素).width（标准浏览器）</li>
+                    <li>元素.currentStyle.width(IE8及以下浏览器)</li>
+                </ul>
+			</li>
+            <li>因此需要判断一下结果是哪个浏览器，DOM的操作要处理兼容性：<pre>
+    if(元素.currentStyle){
+    	元素.currentStyle.width
+    }else{
+        getComputedStyle(元素).width
+    }</pre>把上面代码进行封装就可以解决每次需要处理的兼容性问题并且每次可以直接使用该方法</li>
+    		<li>封装代码：<pre>
+    function getStyle(obj,attr){
+    	return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj)[attr]; 
+        //三元运算，if判断的特殊写法
+    }
+    getStyle(元素,'样式名'); //通过函数名和传参进行调用</pre></li>
+    		<li>需要注意的问题：
+            	<ul>
+                	<li>获取一些样式是带有单位的数据（如width是100px），若用来计算会出错，需要对其使用parseInt或者parseFloat方法转换成数字</li>
+                    <li>本来就有的兼容性问题：如background这种复合样式不能使用，要分别用backgroundColor等获取；颜色获取到的返回值有的是16进制数，有的是rgb格式，因此不能用来判断，但可以用来赋值</li>
+                    <li>传参的字符串里面不能出现空格，否则变成未定义</li>
+                    <li>未设置的样式不要获取，有的浏览器会将未设置的样式值设置为auto，导致结果出现错误</li>
+                </ul>
+            </li>
+        </ol>
+        <p>JavaScript运算符：</p>
+        <ol>
+        	<li>算术：+（加）、-（减）、*（乘）、/（除）、%（求余）</li>
+            <li>a ? b : c 三元运算：既if/else特殊写法，等同于if(a){b}else(c)，如：<pre>
+    if(12 &lt; 45){alert("yes")}else{alert("no")}//判断
+    12 &lt; 45 ? alert("yes") : alert("no"); //三元运算
+    alert(12 &lt; 45 ? "yes" : "no"); //再次简写</pre>
+            </li>
+            <li>赋值：=（左边被赋值为右边）、+=、-=、*=、/=、%=（后面的如同+=，既左侧的值等于左侧+右侧）</li>
+			<li>判断：&lt;、&gt;、&lt;=、&gt;=、==、!=、===、!==(绝对不等于)<br/>==和!=比较若类型不同，先尝试转换类型，再作值比较，最后返回值比较结果<br/>=== 和 !== 只有在相同类型下,才会比较其值</li>
+            <li>运算优先级：用()把优先级较低的括进去可先执行，如同算式</li>
+            <li>逻辑：&amp;&amp;——逻辑"与"操作；||——逻辑"或"操作；!——取反操作
+            	<ul>
+            		<li>a&amp;&amp;b逻辑"与"定义：从左向右读到false就返回（后面数据不会继续判断），如所有数据都是ture则返回最后一个（因此都为true时返回的是true）</li>
+                    <li>a||b逻辑"或"定义：从左向右读到true就返回（后面数据不会继续判断），如所有数据都是false则返回最后一个（因此都为false返回的是false）</li>
+					<li>&amp;&amp; 优先级高于 ||：因此若需要先执行||则需要用()改变运算优先级</li>    
+                </ul>
+            </li>
+    		<li>真与假：
+            	<ul>
+                	<li>数据类型--数字：除了NaN和0都是真</li>
+                    <li>数据类型--字符串：所有非空字符串都是真</li>
+                    <li>数据类型--布尔值：true和false</li>
+                    <li>数据类型--对象（函数）：true</li>
+                    <li>数据类型--对象（element）：能找到的就是true，找不到的是false；</li>
+                    <li>数据类型--对象（[]和{}）：true</li>
+                    <li>数据类型--对象（null）：false</li>
+                    <li>数据类型--未定义：false</li>
+                </ul>
+			</li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、用js创建22个li元素，利用算术的求余让所有li元素每5个使用下面的arr做背景色，var arr=["red","black","blue","yellow","green"]<br/>把上面的练习中的li元素再加上鼠标移入时背景变灰，移开时变回去的效果，可以从下面两个方法中选择一个：1、索引值；2、保存颜色
+</p>
+        <p>2、思考一下以下逻辑返回的值：<br/>
+        var a = '' || null || 3 || 4（返回3）<br/>
+        var b = 4 &amp;&amp; 5 &amp;&amp; null &amp;&amp; '0' （返回null）<br/>
+        var c = null &amp;&amp; false || 4 &amp;&amp; 5 （返回5）</p>
+    </dd>
+</dl>
+</body>
+</html>

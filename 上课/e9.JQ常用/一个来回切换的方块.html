@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+	<style type="text/css">
+		div{width:150px; height:150px; background-color:red; color:#fff; font-size:40px;}
+	</style>
+</head>
+<body>
+	<div>div1</div>
+	<script src="jquery.min.js"></script>
+	<script>
+		var bOn = true
+		$("div").click(function (){
+			$(this).html(bOn ? "div2" : "div1").css({"backgroundColor":(bOn ? "yellow":"red"),"color":(bOn ? "red" : "#fff")});
+		bOn = !bOn;
+		})
+	</script>
+</body>
+</html>

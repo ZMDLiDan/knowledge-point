@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<input type="text"/>
+<input type="button" value="判断数字"/>
+<script>
+var aInput = document.getElementsByTagName("input");
+aInput[1].onclick = function (){
+	var str = aInput[0].value;
+	for(var i=0;i<str.length;i++){
+		if(str.charCodeAt(i)<48||str.charCodeAt(i)>57){
+			alert("不是数字");
+			break;
+		}
+	}
+	if(i==str.length){
+		alert("是数字");
+	}
+}
+</script>
+</body>
+</html>

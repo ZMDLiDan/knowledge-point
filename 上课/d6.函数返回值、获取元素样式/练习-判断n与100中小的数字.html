@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<script>
+	function fMin(n){
+	/*	if(n<100){
+			return n;
+		}else{
+			return 100;
+		}*/
+		//return n<100 ? n : 100;
+		//return Math.min(n,100);
+		return n>100 && 100 || n;
+	}
+	console.log(fMin(50));  //50
+	console.log(fMin(150));  //100
+</script>
+</body>
+</html>

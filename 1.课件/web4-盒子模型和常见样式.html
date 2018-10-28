@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+	body{margin:0; background-color:#deefff; color:#333;}
+	dl{padding:0 25px;}
+	dt{font-size:26px; color:#600000;}
+	p{font-size:22px; margin:20px 0;}
+	li{font-size:20px; color:#066; margin:10px 0;}
+	pre{border-radius:20px; background-color: #666; color:#ccc; font-size:24px; line-height:30px; text-shadow:0px 1px #999; border:3px #FFC solid;}
+</style>
+</head>
+<body>
+<dl>
+	<dt>区块元素和内联元素</dt>
+	<dd>
+    	<p>区块元素：每个元素独占一行；支持所有的样式；不设置宽度时宽度等于父元素宽度，不设置高度，高度为0，可被内容撑开；换行符不会解析；<br/>如：div（盒子）、ul（无序列表）、ol（有序标签）、dl（组合标签）、li（列表项标签）、p（段落标签）、h1~h6（标题标签）、table、form（表单元素）、pre（显示源代码，可解决代码换行被解析）等元素</p>
+        <p>内联元素：在一行有空间时，多个元素可以在同一行显示；不支持宽高样式，使用上下margin和padding等样式会出现问题；宽度由内容（文字图片等）撑开；换行符会被解析（不同浏览器下显示的宽度也不同）<br/>如：span、a（超链接）、b、strong、em、i、input（内联块元素：支持所有css样式）、img（内联块元素）等元素</p>
+    </dd>
+	<dt>盒子模型图解</dt>
+    <dd>
+		<img src="img/盒子模型.png" width="792" height="418"/>
+        <ol>
+        	<li>content：内容</li>
+            <li>padding：内填充</li>
+            <li>border：边框</li>
+            <li>margin：外边距</li>
+        </ol>
+        <p>box-sizing: border-box（边框盒模型）/content-box（默认）</p>
+        <img src="img/盒模型计算.jpg" width="500px" height="500px"/>
+    </dd>
+    <dt>块状元素与内联元素的转换</dt>
+    <dd>
+		<p>display样式</p>
+        <ol>
+        	<li>block：当前元素转换为区块元素</li>
+            <li>inline：当前元素转换为内联元素</li>
+            <li>inline-block：当前元素转换为内联块元素</li>
+            <li>none：当前元素转换为不占位元素（既该元素隐藏）</li>
+        </ol>
+    </dd>
+    <dt>常见样式</dt>
+    <dd>
+    	<ol>
+            <li>width/height：为一个区块元素设置宽度/高度</li>
+            <li>background-image: url(bg.jpg); 背景图<br/>
+            	background-repeat: no-repeat; （repeat-x:x轴平铺）背景图是否重复<br/>
+            	background-position: center（水平） 0px（垂直）; 背景图位置（负值：左上；正值：右下）<br/>
+				background:#ff0 url(bg.jpg) no-repeat center 0px;背景复合样式
+            </li>
+            <li>border-width：边框宽度<br/>
+            	border-style：边框样式（solid/dashed/dotted：实线/虚线/点线）<br/>
+            	border-color：边框颜色<br/>
+            	border : 1px #000 solid; 边框复合样式
+            </li>
+            <li>padding-top：上内填充<br/>
+            	padding-right：右内填充<br/>
+            	padding-bottom：下内填充<br/>
+            	padding-left：左内填充<br/>
+            	padding: top right bottom left; 内填充复合样式
+            </li>
+            <li>margin-top：上外边距<br/>
+            	margin-right：右外边距<br/>
+           		margin-bottom：下外边距<br/>
+           		margin-left：左外边距<br/>
+            	margin: top right bottom left; 外边距复合样式
+            </li>
+            <li>内填充和外边距的注意事项：
+            	<ul>
+                	<li>当padding和margin复合样式只传入一个值时指的是四个方向都为该值；只传入两个值时指的是上下为第一个值，左右为第二个值；只传入三个值时指的
+                    	是上为第一个值，左右为第二个值，下为第三个值
+                    </li>
+                    <li>上下的外边距会叠压，只保留最大的</li>
+                    <li>父子级元素包含的时候子级的margin-top会传递给父级（解决方法为：内填充替代外边距）</li>
+                    <li>因此边距遵循能用内填充尽量不用外边距的原则</li>
+                </ul>
+            </li>
+            <li>常用样式应用和注意事项：
+            	<ul>
+                	<li>块状元素常用的居中方法：margin:0 auto;（水平居中）</li>
+                    <li>font:由font-size（字体大小）、font-weight（字体加粗：bold/normal）、font-style（斜体：italic/normal）、line-height（行高
+                    	）、font-family（字体："微软雅黑"）组成，循序须按照加粗、斜体、大小/行高、字体顺序书写（大小和字体必须写，否则无效，因此除了设置默认样
+                        式很少使用该集合样式）
+                    </li>
+                    <li>border-width其实也是复合样式：由border-top-width、right、bottom、left组成，例如利用边框做一个三角形</li>
+                    <li>因此边距遵循能用内填充尽量不用外边距的原则</li>
+                </ul>
+            </li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、将一个区块元素的宽高设置成100X100px，内填充和外边距各10px，边框2px黑色实线，背景颜色为红色<br/>将一个内联元素的字体颜色为红色，背景颜色为黄色（文字简短，不要超出范围）</p>
+        <p>2、用一个区块元素的边框画出一个蓝色三角形（要求三个角分别为60deg，60deg和60deg）</p>
+    </dd>
+</dl>
+</body>
+</html>

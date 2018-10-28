@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+#div1{width:200px; height:50px; text-align:center; line-height:50px; background-color:yellow;}
+#div3{width:200px; height:50px; text-align:center; line-height:50px; background-color:red;}
+#div4{width:200px; height:50px; text-align:center; line-height:50px; background-color:blue;}
+</style>
+</head>
+<body>
+<textarea id="text1"></textarea>
+<input type="button" value="生成" id="btn"/>
+<div id="div2">我是div2的内容</div>
+<script>
+var oText = document.getElementById("text1");
+var oBtn = document.getElementById("btn");
+var oDiv = document.getElementById("div2");
+oBtn.onclick = function (){
+	oDiv.innerHTML = oText.value;
+}
+</script>
+</body>
+</html>

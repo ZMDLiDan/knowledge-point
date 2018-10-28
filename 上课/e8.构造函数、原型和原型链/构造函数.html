@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<script>
+/*function test(){
+	this.a = 10;
+	return function(){return 1;}
+}
+var m = new test();
+var n = test();
+console.log(m);//返回return后面的闭包
+console.log(n);//返回return后面的闭包*/
+
+/*function test(){
+	this.a = 10;
+	return 1;
+}
+var m = new test();
+var n = test();
+console.log(m)//返回Object
+console.log(n)//返回1*/
+
+function test(){
+	this.a = 10;
+	this.b = function(){console.log(this.a);}
+	return this.a;
+}
+var m = new test();
+//var n = test();
+m.b();//结果为10 
+//console.log(n); //结果为10
+</script>
+</body>
+</html>

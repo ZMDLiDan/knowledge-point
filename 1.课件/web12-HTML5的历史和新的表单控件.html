@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+<body>
+<dl>
+	<dt>HTML5基础</dt>
+    <dd>
+    	<p>Web目前存在的问题</p>
+        <ol>
+        	<li>在html升级到4后，为了让各个浏览器厂商统一而出了XHTML严格版，这个版本不允许使用样式标签和属性，必须使用严格的标签和css</li>
+            <li>这个初衷是好的，但是世界上已经有成千上万个网站使用这些标签和属性搭建了（94%的网站都用了有错误的写法），而且会强制其他程序员修改他们的习惯，受到了很多人的抵触</li>
+			<li>因此XHTML的过渡版出现了，即我们之前使用的版本。
+在那之后HTML5的标准出现了</li>
+        </ol>
+        <p>HTML5出现的目的</p>
+        <ol>
+        	<li>Web各种浏览器之间的兼容性低</li>
+            <li>文档结构不够明确，不够语义化</li>
+            <li>Web应用程序功能受限，需要很多额外的插件</li>
+        </ol>
+        <p>HTML5的标准</p>
+        <ol>
+        	<li>目前知名浏览器厂商（微软、Google、苹果等）都对HTML5支持（但是目前还有没正式版本，部分内容不完全支持或兼容有问题）</li>
+            <li>HTML5的声明：&lt;!doctype html&gt;</li>
+            <li>HTML5的设置：&lt;meta charset="utf-8"/&gt;</li>
+</li>
+        </ol>
+        <p>语义化标签的由来：下面是一个浏览器对于各种命名使用数量的统计</p>
+        <img src="img/语义化标签.png" width="641" height="445"/>
+        <p>HTML5新特性的浏览器支持情况：http://www.caniuse.com/#index</p>
+        <p>HTML5新属性</p>
+        <ol>
+        	<li>contentEditable：值设置成true会使该元素的内容可被编辑，该属性默认是可继承的</li>
+            <li>designMode：全局属性，值设置成true会使整个页面的designMode设为on/off（document.designMode='on'）时，所有支持contentEditable属性的元素都可被编辑</li>
+			<li>hidden="hidden"：input属性，隐藏一个表单元素（和display:none一样）</li>
+            <li>spellcheck：input属性，会对用户输入内容对单词进行拼写检查（兼容很差）</li>
+        </ol>
+        <p>HTML5新的输入型控件和标签（input元素的新type属性值）（了解，在学js时详解）</p>
+        <ol>
+        	<li>email：电子邮箱文本框，跟普通的没什么区别
+当输入不是邮箱的时候，验证通不过（移动端的键盘会有变化）</li>
+            <li>tel：电话号码</li>
+            <li>url：网页的URL，需要加上http</li>
+            <li>search:搜索引擎（chrome下输入文字后，会多出一个关闭的X）</li>
+            <li>range：特定范围内的数值选择器，min、max、step( 步数 )（比较特殊）</li>
+            <li>number：只能包含数字的输入框</li>
+            <li>color：颜色选择器</li>
+            <li>datetime-local：显示完整日期，不含时区（兼容性很差）</li>
+            <li>time：显示时间，不含时区</li>
+            <li>date：显示日期</li>
+            <li>week：显示周</li>
+            <li>month：显示月</li>
+            <li>button（双标签）：与input的type="button"相同，但是可以向里嵌套其他标签如b或者img标签等<br/>如果设置type="submit"，可以变成提交按钮</li>
+            <li>output（双标签）：输出标签，很多新控件没有数值，如果range和color等，可以使用output输出其值</li>
+        </ol>
+        <p>HTML5新的表单控件</p>
+        <ol>
+        	<li>form属性：定义给form元素外的表单元素添加该属性，值等于表单的id值，即可在提交时让该表单元素的值一起被提交</li>
+            <li>formaction属性：在submit里定义的提交地址，可以让我们的form拥有多个提交地址，如邮箱里的发送邮件和保存在草稿箱就属于不同的地址</li>
+            <li>formmethod属性：在submit里定义的提交地址的提交方式（get和post）</li>
+            <li>formenctype属性：在submit里定义的提交格式<br/>application/x-www-form-urlencoded：在发送前编码所有字符（默认，空格转换为 "+" 加号，特殊符号转换为 ASCII HEX 值）<br/>
+multipart/form-data：不对字符编码。在使用包含文件上传控件的表单时，必须使用该值。<br/>text/plain：空格转换为 "+" 加号，但不对特殊字符编码。</li>
+            <li>formtarget属性：在submit里定义新页面的打开方式（self和blank）</li>
+            <li>placeholder属性：定义给输入框显示一个提示信息</li>
+            <li>autofocus属性:定义给指定表单获取输入焦点</li>
+        </ol>
+    </dd>
+</dl>
+</body>
+</html>

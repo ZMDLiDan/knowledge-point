@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<script>
+alert(encodeURI('你好\n你好'));
+//得到的值再用下面的弹出：      
+alert(decodeURI(encodeURI('你好\n你好')));
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body style="background-image:url(img/1.png);">
+<input type="button" value="换背景"/>
+<input type="button" value="停止"/>
+<script>
+var aBtn = document.getElementsByTagName("input");
+var i =0;
+var timer = null;
+function changPic(){
+	i++;
+	document.body.style.backgroundImage = "url(img/"+(i%4+1)+".png)"
+}
+aBtn[0].onclick = function (){
+	changPic();
+	clearInterval(timer);
+	timer = setInterval(changPic,3000);
+}
+aBtn[1].onclick = function (){
+	clearInterval(timer);
+}
+</script>
+</body>
+</html>

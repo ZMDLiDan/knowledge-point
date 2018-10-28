@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<textarea></textarea>
+<input type="button" value="过滤"/>
+<p></p>
+<script>
+var oTe = document.getElementsByTagName("textarea")[0];
+var oBtn = document.getElementsByTagName("input")[0];
+var oP = document.getElementsByTagName("p")[0];
+var re = /哇哈哈|呵呵|嘻嘻/g;
+oBtn.onclick = function (){
+	var str = oTe.value;
+	str = str.replace(re,function ($0){
+		return new Array($0.length+1).join("*");
+	})
+	oP.innerHTML = str;
+}
+</script>
+</body>
+</html>

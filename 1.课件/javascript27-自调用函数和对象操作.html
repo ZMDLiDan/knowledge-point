@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>javascript</dt>
+    <dd>
+    	<p>自调用（立即执行）函数</p>
+        <ol>
+            <li>函数的几种写法：
+            	<ul>
+                	<li>函数声明：<pre>
+    function fnName () {…};</pre>使用function关键字声明一个函数，再指定一个函数名。叫做函数声明</li>
+					<li>函数表达式：<pre>
+    var fnName = function (){…}; </pre>使用function关键字声明一个函数，但未给函数命名，最后将匿名函数赋予一个变量，叫函数表达式，这是最常见的函数表达式语法形式。</li>
+					<li>匿名函数：<pre>
+    function () {};</pre>使用function关键字声明一个函数，但未给函数命名，所以叫匿名函数，匿名函数属于函数表达式，匿名函数有很多作用，赋予一个变量则创建函数，赋予一个事件则成为事件处理程序或创建闭包等等。</li>
+                </ul>
+            </li>
+            <li>函数的执行顺序（函数声明）：<pre>
+    fnName();
+    function fnName(){ ... }
+    //正常，因为'提升'了函数声明，函数调用可在函数声明之前（预解析）</pre></li>
+    		<li>函数的执行顺序（函数表达式）：<pre>
+    fnName();
+    var fnName=function (){ ... }
+    //报错，变量fnName还未保存对函数的引用，函数调用必须在函数表达式之后</pre></li>
+    		<li>函数的自调用：<pre>
+    (function (){…})();
+    (function (){…}())</pre>这两种自调用函数的写法，在函数体后面加括号就能立即调用，这个函数必须是函数表达式，不能是函数声明，如：<pre>
+    (function(a){console.log(a);})(123);//带有参数的自调用函数，控制台输出123</pre></li>
+    		<li>在li点击时弹出其下标的练习中，我们使用了自定义函数来做，原因是li被点击时才会执行函数，但是循环早已结束，i已经变成最后一个值（li的数量）；而使用自调用函数时，因为点击事件是在自调用函数表达式闭包内部，i的值作为locked的索引存在，在循环执行结束以后，尽管最后i的值变成了li元素总数，但闭包内部的index值是没有改变，因为他已经执行完毕了，所以当点击连接的时候，结果就正确了</li>
+        </ol>
+        <p>对象操作：</p>
+        <ol>
+        	<li>Delete操作符
+            	<ul>
+                	<li>语法：delete 对象名.属性名。</li>
+                    <li>这是删除属性的唯一方法。把属性设置为undefined或者null不能真正的删除属性，它只是移除了属性和值的关联</li>
+                </ul>
+            </li>
+            <li>hasOwnProperty()函数
+            	<ul>
+                	<li>语法：object.hasOwnProperty(proName)</li>
+                    <li>用途：对象是属性的集合，我们经常会检测集合中成员的所属关系——判断某个属性是否属于某个对象</li>
+                    <li>object为必需参数，是对象的实例；proName必需参数。一个属性名称的字符串值</li>
+                    <li>如果object对象中存在指定名称的属性，则返回true，反之则返回false</li>
+                    <li>hasOwnProperty 是 JavaScript 中唯一一个处理属性但是不查找原型的函数</li>
+                </ul>
+           </li>
+        </ol>
+        <p>面向对象和面向过程：</p>
+        <ol>
+        	<li>面对对象：把数据及对数据的操作方法放在一起，作为一个相互依存的整体——对象。对同类对象抽象出其共性，形成类。类中的大多数数据，只能用本类的方法进行处理。类通过一个简单的外部接口与外界发生关系，对象与对象之间通过消息进行通信。程序流程由用户在使用中决定。</li>
+            <li>面向过程：自顶向下顺序执行，逐步求精；其程序结构是按功能划分为若干个基本模块，这些模块形成一个树状结构；各模块之间的关系尽可能简单，在功能上相对独立；每一模块内部均是由顺序、选择和循环三种基本结构组成；其模块化实现的具体方法是使用子程序。程序流程在写程序时就已决定。</li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+		<p>1、给三个li设置点击事件，当该li被点击时弹出它的下标（可以用自定义属性来做）<br/>使用自调用函数将此练习做出来</p>
+		<p>2、创建一个cat对象，包含属性：name、sex和color。然后用delete删除name属性，给sex赋值为undefined，给color赋值为null。用hasOwnProperty()函数判断各个属性是否存在</p>
+    </dd>
+</dl>
+</body>
+</html>

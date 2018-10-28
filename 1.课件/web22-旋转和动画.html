@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+    <dt>css3、HTML5和移动端</dt>
+    <dd>
+    	<p>css3的遮罩，只支持webkit浏览器，并且必须加上-webkit-</p>
+        <ol>
+        	<li>遮罩路径，可以用渐变代替图片，如：<pre>
+    -webkit-mask-image:url(circle.svg); 
+    -webkit-gradient(linear,left top,left bottom,from(rgba(0,0,0,1)),to(rgba(0,0,0,0))); //渐变 </pre></li>
+            <li>遮罩平铺方式：<pre>
+    -webkit-mask-repeat:repeat | repeat-x | repeat-y | no-repeat</pre></li>
+            <li>遮罩位置：<pre>
+    -webkit-mask-position:x y;</pre></li>
+        </ol>
+        <p>css3的倒影</p>
+        <ol>
+        	<li>样式：box-reflect，只支持webkit浏览器，并且必须加上-webkit-</li>
+            <li>direction  倒影方向  above|below|left|right;</li>
+            <li>如下是一个倒影例子的集合样式：<pre>
+    -webkit-box-reflect:right 10px -webkit-linear-gradient(right,rgba(0,0,0,1) 0,rgba(0,0,0,0) 50%);从左到右依次的值为倒影方向，倒影距离，渐变（可选）</pre></li>
+        </ol>
+        <p>css3的旋转/变换</p>
+        <ol>
+            <li>2D变换：transform</li>
+            <li>*旋转函数<pre>
+    transform:rotate(角度)  // 取值度数（deg）,默认圆心顺时针旋转
+    transform-origin:水平x 垂直y   //旋转的基点(0 0:左上角)</pre></li>
+            <li>倾斜函数<pre>
+    transform:skew()   //取值度数（deg）
+    transform:skewX()  //水平方向倾斜
+    transform:skewY()  //垂直方向倾斜</pre></li>
+            <li>*缩放函数<pre>
+    transform:scale()  //取值（正数、负数和小数）
+    transform:scaleX() //水平方向缩放
+    transform:scaleY() //垂直方向缩放</pre></li>
+			<li>位移函数<pre>
+    transform:translate()  //像素值
+    transform:translateX() //水平方向位移
+    transform:translateY() //垂直方向位移</pre></li>
+        	<li>3D变化环境设置：<pre>
+    transform-style:preserve-3d //建立3D空间
+    perspective: 景深（像素）
+    perspective-origin:x y 景深基点</pre></li>
+            <li>3D变化新增函数<pre>
+    transform:rotateX()  //水平方向旋转
+    transform:rotateY()  //垂直方向旋转
+    transform:rotateZ()  //z轴方向旋转（默认2d旋转）
+    transform:translateZ() //z轴方向位置
+    transform:scaleZ()  //z轴方向缩放</pre></li>
+        </ol>
+        <p>css3动画：animation</p>
+        <ol>
+        	<li>关键帧——keyFrames：类似于flash，只需指明两个状态，之间的过程由计算机自动计算</li>
+            <li>关键帧的时间单位<br/>
+数字：0%、25%、100%等<br/>
+字符：from(0%)、to(100%)</li>
+			<li>格式<pre>
+    @keyframes 动画名称
+    {
+    动画状态
+    }
+    
+    @keyframes  test
+    {
+        from { background:red; }
+        to { background:green; }
+    }可以只有to</pre></li>
+    		<li>animation-fill-mode:forwards; 当动画完成后，保持最后一个属性值（在最后一个关键帧中定义）。</li>
+            <li>调用的标签(#div1、xxx:hover之类的)</li>
+            <li>必要属性<br/>
+animation-name		动画名称（关键帧名称）<br/>
+animation-duration		动画持续时间<br/>
+例如：<br/>
+-webkit-animation-name: 'xinzhuoyue';<br/>
+-webkit-animation-duration: 4s;</li>
+			<li>animation-play-state 播放状态（ running 播放 和paused 暂停 ）</li>
+            <li>可选属性：<br/>
+animation-timing-function	动画运动形式<br/>
+linear	匀速。<br/>
+ease		缓冲。<br/>
+ease-in	由慢到快。<br/>
+ease-out	由快到慢。<br/>
+ease-in-out	由慢到快再到慢。<br/>
+cubic-bezier(number, number, number, number)：	特定的贝塞尔曲线类型，4个数值需在[0, 1]区间内<br/>
+animation-delay			动画延迟，只是第一次<br/>
+animation-iteration-count		重复次数，infinite为无限次<br/>
+animation-direction			播放前重置，动画是否重置后再开始播放<br/>
+alternate	动画直接从上一次停止的位置开始执行<br/>
+normal	动画第二次直接跳到0%的状态开始执行</li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、动态遮罩效果</p>
+        <p>2、做一个倒影的实例</p>
+        <p>3、钟表效果</p>
+        <p>4、3D盒子</p>
+    	<p>5、做一个进度条加载效果</p>
+        <p>6、无缝滚动</p>
+    </dd>
+</dl>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<video controls>
+    <source src="Intermission-Walk-in.ogv"></source>
+    <source src="Intermission-Walk-in_512kb.mp4"></source>
+</video>
+<span></span>
+<script>
+var oVid = document.querySelector("video");
+var oSp = document.querySelector("span");
+oVid.currentTime = 60;
+//console.log(oVid.currentTime);
+function showTime(){
+	var num = oVid.currentTime;
+	var h = Math.floor(num/3600);
+	var m = Math.floor(num%3600/60);
+	var s = Math.round(num%60);
+	oSp.innerHTML = h+":"+m+":"+s;
+	setTimeout(arguments.callee,1000);
+}
+showTime();
+</script>
+</body>
+</html>

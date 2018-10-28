@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+    <dt>css3、HTML5和移动端</dt>
+    <dd>
+    	<p>HTML5表单的新输入型控件</p>
+        <ol>
+        	<li>email  :  电子邮箱文本框，跟普通的没什么区别，当输入不是邮箱的时候，验证通不过，移动端的键盘会有变化</li>
+            <li>tel   :   电话号码</li>
+            <li>url   :   网页的URL 需要加上http</li>
+            <li>search  :  搜索引擎，chrome下输入文字后，会多出一个关闭的X</li>
+            <li>range  :  特定范围内的数值选择器，min、max、step( 步数 )</li>
+            <li>number  :  只能包含数字的输入框</li>
+			<li>color  :  颜色选择器</li>
+            <li>以下在chrome浏览器里展示
+            	<ul>
+                	<li>datetime-local  :  显示完整日期，不含时区</li>
+                    <li>time  :  显示时间，不含时区</li>
+                    <li>date  :    显示日期</li>
+                    <li>week  :  显示周</li>
+                    <li>month  :  显示月</li>
+                </ul>
+            </li>
+        </ol>
+        <p>HTML5表单的新属性</p>
+        <ol>
+        	<li>placeholder  :  输入框提示信息</li>
+            <li>autocomplete  :  启动自动完成（form属性，基于用户之前输入的值）
+默认为on，关闭提示选择off</li>
+            <li>autofocus  :  指定表单获取输入焦点</li>
+            <li>list属性和datalist标签  :  为输入框构造一个选择列表
+list值为datalist标签的id</li>
+			<li>required  :  此项必填，不能为空(不适合在pc端使用，可以通过调试器干掉)</li>
+            <li>pattern : 正则验证pattern="\d{1,5}"，用title显示规则 (不适合在pc端使用，可以通过调试器干掉)</li>
+            <li>formaction : 在submit里定义提交地址</li>
+        </ol>
+        <p>HTML5的新选择器</p>
+        <ol>
+            <li>querySelector  //类似jq里的$()方法，但是只能取到第一个元素</li>
+            <li>querySelectorAll  //同上，但是只能取到一个集合，即使只有一个元素</li>
+            <li>getElementsByClassName  //通过class的方式取到一个元素集合</li>
+            <li>注意前两个方法里面要写成.box,#div1类似jq的写法，后一种规定是class，因此只需要写class的值即可</li>
+        </ol>
+        <p>*HTML5class列表属性</p>
+        <ol>
+        	<li>classList（获取一个元素的class集合，类数组的对象），以下是基于classList的方法</li>
+            <li>length :  class的长度</li>
+			<li>add()  :  添加class方法</li>
+    		<li>remove()  :  删除class方法</li>
+            <li>toggle() :  切换class方法(没有就添加，有就删除)</li>
+        </ol>
+        <p>*HTML5JSON的新方法</p>
+        <ol>
+        	<li>JSON.parse() : 把字符串转成json，字符串中的属性要严格的加上引号</li>
+            <li>JSON.stringify() : 把json转化成字符串，会自动的把双引号加上</li>
+            <li>新方法与eval的有区别，新方法可以用于深度克隆新对象（构造器指针引起的问题）</li>
+        </ol>
+        <p>HTML5data自定义数据：dataset</p>
+        <ol>
+        	<li>data-name（属性） :  可以用元素.dataset.name获取</li>
+            <li>data-name-first（属性）  :  可以用元素.dataset.nameFirst </li>
+			<li>data数据在很多框架和库（如jquery mobile）中有着重要作用</li>
+            <li>KnockOut（KO）就是用这种方法制作的实用库，KnockOut是什么呢？他是一个很优秀的JavaScript库，可以使用很少的代码实现双向绑定，大大的减少了代码量，这种双向绑定类似于angularJS中的双向绑定，所以，学过angularJS的读者学习KnockOut可能更好上手。knockout的一个demo，首先将KnockOut的js引入进来：<pre>
+    &lt;!--静态绑定--&gt;  
+    &lt;div class='liveExample'&gt;   
+        &lt;p&gt; First name: &lt;input data-bind='value: firstName' /&gt; &lt;/p&gt;   
+        &lt;p&gt; Last name: &lt;input data-bind='value: lastName' /&gt; &lt;/p&gt;   
+        &lt;h2&gt; Hello, &lt;span data-bind='text: fullName'&gt;  &lt;/span&gt; !&lt;/h2&gt;   
+    &lt;/div&gt;     
+    // 定义一个ViewModel  
+    var ViewModel = function (first, last) {  
+        this.firstName = ko.observable(first);  
+        this.lastName = ko.observable(last);  
+        this.fullName = ko.computed(function () {  
+            // 根据firstName和lastNamecomputed出fullName  
+            return this.firstName() + " " + this.lastName();  
+        }, this);  
+    };  
+    //knockout调用applybindings激活ViewModel，即，使得ViewModel与上述div中的静态绑定联系起来  
+    ko.applyBindings(new ViewModel("zhang", "zhang"));</pre></li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、用JS来显示当前range的数值</p>
+        <p>2、将一个结构复杂json复制到另一个变量里</p>
+        <p>3、用自定义数据做一个改变属性的值切换元素背景颜色的效果</p>
+    </dd>
+</dl>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>Jquery和velocity</dt>
+    <dd>
+        <p>Velocity.js介绍：</p>
+        <ol>
+        	<li>在Web上使用CSS实现动画并不是唯一的方式，我们也可以使用JS来实现，并且JS还有一些CSS无法替代的优势。</li>
+			<li>CSS来实现动画，将以样式表内容膨胀，丧失对动画时间的控制为代价，并且无法灵活地实现基于物理运动模型的动画设计。</li>
+			<li>但是CSS动画在Web中扮演重要的角色-----独自的实现动画或是同JS协作实现。 特别的，CSS在一些简单基本的动画交互上表现的特别好，比如hover和focus等（客观的看待CSS动画和JS动画，他们各有优点）</li>
+    		<li>然而，对于几乎所有事情，JS都是不错的选择，因为他的能力太强大了。 你可能不相信JS的动画性能比CSS出色。因为用jQuery设计的动画非常糟糕，比如动画出现抖动、不平滑，这不能草率地归咎于JS语言！不要混淆JS和jQuery这俩种不同的生物！</li>
+            <li>jQuery 是由许多原生JS写的函数组成的库，就像C++的标准库一样。jQuery原本不是以动画引擎为目标设计的，而是为了使烦人的DOM操作变得方便高效。</li>
+            <li>目前就有一些开源的动画库，使你可以绕开jQuery去利用原生JS那令人惊叹的魔力。通过这些动画库,您可以建立一个可控的动画工作流，而且这一切都基于能大幅提升网站动画性能的特征层之上。 
+Velocity专为动画而设计 ，简单易用，功能强大，广泛地被一些主流公司所使用。 Velocity模仿了jQuery的语法，可以完美地同jQuery协作，当然也能独立地使用，所以对你来说应该很容易学。</li>
+			<li>为了提高你所有动画的性能，只需要简单地将目前jQuery的animate()函数调用换成velocity()，因为Velocity将原来 jQueryanimate()函数的语法和功能在velocity()函数内部都做了解释映射，所以能兼容以前animate()的使用方式 (velocity()还扩展了animate()的功能)。但即使是这样的一个小改变，也能使你的网站有一个显著的性能提升。 </li>
+            <li>要想使用velocity必须先引入它：
+("jquery.min.js")("velocity.min.js")("velocity.ui.min.js")最后一个是特效库，不是必须的</li>
+        </ol>
+        <p>Velocity.js的方法的使用：</p>
+        <ol>
+        	<li>楼层监听就是一种流行常见的js效果，并且无法使用css制作，你只需在目标元素上调用velocity()方法并传入"scroll"命令和过渡时间：<pre>
+    $element.velocity("scroll", 1000);</pre>这个方法将使浏览器滚动到选定的元素（jQuery对象,$element）,过渡时间为1000ms。仅使用jQuery实现这个功能也会很复杂，而且将用到多个函数操作。 </li>
+    		<li>Velocity允许你设置窗口滚动后元素上边缘距窗口上边缘的距离，你只需设置offset选项即可完成（向上为负，向下为正）：<pre>
+    $element.velocity("scroll", { duration: 1000, offset: "-100px" });</pre></li>
+    		<li>在jQuery中，想要使元素恢复成动画运行之前的状态，你必须手动的设置元素原来的属性值，比如：<pre>
+    $element.animate({ width: "100px" }, 400); 
+    $element.animate({ width: "50px" }, 400);
+    //而在Velocity里只是一个运行"reverse"命令: 
+    $element.velocity({ width: "100px" }, 400);  
+    $element.velocity("reverse");</pre></li>
+    		<li>Velocity 接收一个或更多的参数，只有第一个参数是是强制要求的，它可以是一个命令（就像上面例子中的"scroll"），或者是由CSS属性值组成的对象（这些值是动画的目标值）：<pre>
+    $element.velocity({ opacity: "0.5", left: "500px"});</pre>第二个参数是由动画附加选项组成的对象，比如过渡时长，张弛度，延时还有回调函数：<pre>
+    $element.velocity({ left: "500px" }, { delay: 1000, duration :500,easing:[ 1000, 40 ],complete:function(){alert(123)}});</pre>其中重要的属性都有默认值： easing的默认值是swing,duration的默认值是400ms，其他的属性则是可选的。<br/>
+你只能为一个CSS属性设置一个值，所以 "padding:'10px 15px'"是不合法的。应该写成： {paddingLeft:"10px",paddingTop:"15px",….}。这样不仅表达清晰，而且意味着你可以特别指定每一个css分属性的值，而不是只设置一个整体的，给予了你足够的空间定制动画。（注意变成了驼峰命名了）
+</li>
+			<li>运动曲线easing（缓动）的取值：<br/>
+"ease-in-out" 动画一开始要逐渐加速最后要逐渐减速。<br/>
+"ease-in" 动画在一开始就达到加速的目的，然后一直到动画结束。<br/>
+"ease-out"动画以恒定速度开始一段时间，然后在动画结束前减速。<br/>
+为了方便模拟现实世界的运动，Velocity提供弹性动画功能（spring），以一个张弛度（默认500）和一个摩擦系数（默认20）作为他的参数：<pre>
+    $element.velocity({ width: "100px"}, {easing:[ 500, 20 ]}</pre>较高的张弛度将提高整体速度和动画的反弹力度，较小的摩擦系数将提高动画结束时的速度。 </li>
+    		<li>第二个参数常用名称：<br/>begin（开始）和complete（完成）可以指定要在动画中的特定时间点触发的函数：为begin设置的函数会在动画开始前触发。与之相反，为complete设置的函数会在动画完成时调用。<br/>loop（循环）将loop选项设置为一个整数，该整数是几，动画就在调用的属性映射汇总的值与调用之前元素的值之间交替几次，除了可以传入整数以外，还可以将true传给loop，这样会无限触发循环。<br/>delay（延迟）将delay指定为多少毫秒，在动画开始之前就会暂停多长时间。delay选项的目的是将动画的定时逻辑完全保留在velocity内，而不是在velocity的动画开始时依赖jquery的$.delay()函数来更改。</li>
+            <li>值的使用：<br/>如果CSS属性值没有给定确切的单位，那么时间默认是：ms，长度默认是px，角度默认是deg。为了表达清晰最好还是显示注明单位，如果有一个值不仅仅由数字表示，那么必须加引号。比如：duration:500（默认是500ms）是合法的，但是duration:500ms就不合法，必须加上引号：duration:"500ms"。<br/>JS动画运许传入简单的表达式作为CSS的属性值，但这些表达式只限于：+=,-=,*=,/=，表示目标值在其本来的值的基础上加多少，减多少，乘多少，除多少，任何其他的表达式是不允许的。比如：<pre>
+    $element.velocity({ width: "+= 50px", height: "/= 2" });</pre>在Velocity动画引擎里使用这些快速功能保证了动画的逻辑可读性，使代码简洁清晰（消除了值的手工计算），而且向Velocity引擎提供更多有关于你动画意图的信息将有助于提高动画的性能。</li>
+    		<li>velocity的链式调用即在同一个元素上一个动画完成之后马上进入另一个动画，这样一个一个的执行下去：<pre>
+    $element.velocity({ width: "500px", height: "300px"}).velocity({ opacity: 0 }); //等价于： 
+    $element.velocity({ width: "500px", height: "300px"});    
+    $element.velocity({ opacity: 0 });</pre>这允许你不需要任何手动的计算,就能使那些复杂的、有时间限制的多级动画如当初计划的一样,一个接一个的执行。 </li>
+    		<li>velocity 允许制作基于颜色变换的动画，比如:color,backgroundColor,borderColor还有outlineColor.所有这些颜色的值只允许是16进制的字符串（黑色：#000000 , 脸谱蓝：#3b5998（for Facebook blue））.也许你想使用rgb格式的颜色设置,甚至指定颜色透明度（值介于0到1），只需简单地在CSS颜色名后面加上 "Red"，"Green","Blue" 或者"Alpha"即可：<pre>
+    $element.velocity({ 
+    borderColor: "#ffff00", 
+    backgroundColorAlpha: 0.6,//背景颜色透明度变到60% 
+    colorBlue: 200 //rgb 方式 
+    });</pre></li>
+    		<li>设置一些CSS3变换，允许你做一些2D或3D的动画，比如平移，扩大，旋转。注意不会影响元素在网页中的位置，也不会影响周围 的元素在页面中的位置。 Velocity支持下面的变换：<br/>
+translateX: 从左向右沿x轴移动元素 <br/>
+translateY: 从上到下沿y轴移动元素 <br/>
+rotateZ: 关于z轴旋转元素 <br/>
+rotateX: 关于x轴旋转元素（看起来由里向外）<br/> 
+rotateY: 关于y轴旋转元素（由左到右）<br/> 
+scaleX: 成倍数改变元素宽度 <br/>
+scaleY: 成倍数改变元素高度 <br/>
+如：<pre>
+    $element.velocity({ 
+        rotateZ: "180deg", scaleX: 2.0
+    });</pre></li>
+    		<li>stop结束当前动画，类似jq的stop<pre>
+    $element.velocity("stop") //结束当前动画（开始执行后续动画）
+    $element.velocity("stop",true)  //结束当前和之后的动画
+    $element.velocity("finish"); //结束当前动画，并达到动画终点，类似jq的stop(true,true)  </pre></li>
+    		<li>创建一个velocity动画序列，并使用$.Velocity.RunSequence(变量)来执行动画序列，优点是可以反复使用，见例子
+预定义动画和自定义动画：预定义动画是velocity.ui已经定义好的一些动画，而自定义动画则是我们自己定义一个动画</li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、用动画库做一个固定定位的返回顶部按钮，要求下拉距离超过200px后才能显示出来，否则隐藏，点击时过渡到页面顶部</p>
+        <p>2、用动画库做一个旋转加缩放的方块的动画效果，要求时间4秒，旋转720deg，缩放从100%变成0再变成200%，颜色从红色到蓝色</p>
+        <p>3、用动画库做一个导航下划线滑动特效</p>
+    </dd>
+</dl>
+</body>
+</html>

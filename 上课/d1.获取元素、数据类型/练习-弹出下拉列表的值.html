@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<input type="text" id="text1"/>
+<select id="se1">
+	<option value="北京">北京</option>
+    <option value="上海">上海</option>
+    <option value="天津">天津</option>
+    <option value="西安">西安</option>
+</select>
+<input type="button" value="弹出select的值" id="btn"/>
+<script>
+var oText = document.getElementById("text1");
+var oSe = document.getElementById("se1");
+var oBtn = document.getElementById("btn");
+oBtn.onclick = function (){
+	alert(oText.value + "在" + oSe.value);
+}
+</script>
+</body>
+</html>

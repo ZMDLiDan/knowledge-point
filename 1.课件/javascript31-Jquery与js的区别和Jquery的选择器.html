@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>Jquery</dt>
+    <dd>
+    	<p>什么是JQ：一个优秀的JS库，风靡web界很多年，可以说是很多优秀库的参考标准之一。当然，JQ只是辅助工具。</p>
+        <p>用JQ的好处：</p>
+        <ol>
+        	<li>简化JS的复杂操作</li>
+            <li>不用再需要关心兼容性问题</li>
+            <li>提供大量的实用方法</li>
+        </ol>
+        <p>如何学习JQ：</p>
+        <ol>
+        	<li>官网：<a href="http://www.jquery.com">www.jquery.com</a></li>
+        	<li>中文API：<a href="http:/www.css88.com/jqapi-1.9">www.css88.com/jqapi-1.9</a></li>
+        </ol>
+        <p>JQ设计思想：</p>
+        <ol>
+        	<li>选择网页元素：模拟了CSS选择元素的方法，提供多种筛选方法，且有其独有表达式选择</li>
+            <li>JQ书写方法：属性函数化，链式操作，取值赋值合体</li>
+            <li>JQ与JS关系：可以共存，但不能混用</li>
+        </ol>
+        <p>JQ和js写法区别对比（上面是原生js，下面是JQ）：</p>
+        <ol>
+        	<li>赋值：<pre>
+    document.getElementById("div1").style.background = "red";
+    document.getElementsByTagName("div"); //需要遍历
+    getByClass(document,"box"); //需要遍历
+    $("#div1").css("background","red");
+    $("div").css("background","red");
+    $(".box").css("background","red");</pre></li>
+    		<li>页面加载：<pre>
+    window.onload = function(){};
+    $(function(){});</pre></li>
+    		<li>事件调用：<pre>
+    document.getElementById("div1").onclick = function(){};
+    $("#div1").click(function(){});</pre></li>
+    		<li>this和属性的区别：<pre>
+    alert(this.innerHTML);
+    alert($(this).html());</pre></li>
+        </ol>
+        <p>JQ的选择器（详见api）：</p>
+        <ol>
+        	<li>JQ的选择器与css的选择器非常类似，还增加了一些css没有的方法和筛选功能，如<pre>
+    $('li:eq(2)').css('background','red');
+    $('li').eq(2).css('background','red');  //获取第三个li
+    $('li:odd').css('background','red');
+    $('li').filter('.box').css('background','red');
+    $('li').filter('[title=hello]').css('background','red');</pre></li>
+    		<li>注意：上面的$()是JQ的一个全局函数，作为元素选择使用，里面的参数写法如同css；后面的css等都是方法，就是JQ的属性方法化</li>
+        </ol>
+        <p>原生js和JQ的转换：</p>
+        <ol>
+        	<li>错误写法和注意事项：<pre>
+    alert( $(this).innerHTML );  //错误的写法
+    alert( this.html() );       //错误的写法
+    oDiv.innerHTML = 'hello';  //js赋值
+    alert( oDiv.innerHTML );   //js取值
+    $('#div1').html('hello');    //jq赋值
+    alert( $('#div1').html() );   //jq取值
+    alert( $('li').html() );  //jq获取一组元素的时候，取值是一组中的第一个
+    $('li').html('hello');  //jq获取一组元素的时候,赋值是一组中的所有</pre></li>
+    		<li>原生js和JQ的转换：<pre>
+    jq对象.get(i)/[i]  //把jq对象转化为原生js对象
+    jq对象.get(0)/[0]  //把第一个jq对象转化为原生js对象
+    $(原生对象) //把原生js对象转化为jq对象</pre></li>
+        </ol>
+        <p>JQ的链式操作：</p>
+        <ol>
+        	<li>链式操作：<pre>
+    $('#div1').html('hello').css('background','red').click(function(){
+        alert(123);
+    });</pre></li>
+    		<li>里面的方法依次执行，由于每个方法内部设置了return this，因此方法执行后依然得到该对象，可以继续执行其他方法，上面的例子中的结果为对象的内容变成hello（赋值操作），然后背景颜色变成red，最后如果被点击弹出123</li>
+        </ol>
+        <p>$()下的常用方法：</p>
+        <ol>
+        	<li>筛选功能：<pre>
+    $('div').filter('.box').css('background','red');  //过滤（当前元素）
+    $('div').not('.box').css('background','red');   //filter的反义
+    $('div').has('.box').css('background','red');   //包含（后代元素）
+    $('div').next().css('background','red'); //下一个同级元素
+    $('div').find('h2').eq(1).css('background','red'); //后代元素
+    alert( $('#h').index() );  //索引是当前元素在所有兄弟节点中的位置</pre></li>
+    		<li>有些属性没有方法，可以用这个方法取值赋值：<pre>
+    alert($('div').attr('title'));  //取值
+    $('div').attr('title','456');  //赋值</pre></li>
+    		<li>类名操作：<pre>
+    $('div').addClass('box2 box4');   //添加类名
+    $('div').removeClass('box1');   //移除类名</pre></li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、利用JQ选择器做一个隔行变色效果</p>
+        <p>2、制作一个红色背景白色文字（div1）的div，当点击该元素时，背景色变成黄色，文字变成div2颜色为红色，再次点击时则变回来</p>
+        <p>3、用三个按钮和三个div方块编写一个选项卡，要求按钮在选项卡切换时变化背景颜色</p>
+    </dd>
+</dl>
+</body>
+</html>

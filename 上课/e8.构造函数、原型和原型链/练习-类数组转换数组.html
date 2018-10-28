@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<script>
+var json = {"0":111,"1":22,"2":3,"length":3};
+console.log(json[0]);
+console.log(json.length);
+console.log(json.constructor);
+var arr = Array.prototype.slice.call(json);
+console.log(arr);
+console.log(arr.constructor);
+//Array.prototype
+arr.__proto__.numSort = function (){
+	for(var i=0;i<this.length;i++){
+		for(var j=0;j<this.length-1;j++){
+			if(this[j]>this[j+1]){
+				var temp = this[j];
+				this[j] = this[j+1];
+				this[j+1] = temp;
+			}
+		}
+	}
+}
+arr.numSort();
+console.log(arr);
+</script>
+</body>
+</html>

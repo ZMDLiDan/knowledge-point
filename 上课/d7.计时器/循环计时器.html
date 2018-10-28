@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>0</title>
+</head>
+<body>
+<input type="button" value="停止"/>
+<script>
+var oBtn = document.getElementsByTagName("input")[0];
+function titleZZ(){
+	document.title++;
+}
+var timer = setInterval(titleZZ,100);
+oBtn.onclick = function (){
+	clearInterval(timer);
+}
+</script>
+</body>
+</html>

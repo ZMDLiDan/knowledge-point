@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+#div1{width:300px; height:300px; background-color:red;}
+#div2{width:300px; height:300px; background-color:red;}
+</style>
+</head>
+<body>
+<div id="div1"></div>
+<div id="div2"></div>
+<script src="jquery.min.js"></script>
+<script>
+$('#div1').hover(function(){
+	$(this).css('background','blue');
+	//$('#div2').hide(1000);    //隐藏
+	//$('#div2').fadeOut(1000);  //透明   默认400
+	//$('#div2').slideUp();     //收缩
+	$('#div2').fadeTo(1000,0.5);  //透明度到
+},function(){
+	$(this).css('background','red');
+	//$('#div2').show(1000);	 //展示
+	//$('#div2').fadeIn(1000);  //不透明 
+	//$('#div2').slideDown();   //展开
+	$('#div2').fadeTo(1000,1);
+});
+</script>
+</body>
+</html>

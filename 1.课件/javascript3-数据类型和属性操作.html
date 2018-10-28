@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>javascript</dt>
+    <dd>
+    	<p>变量和命名规则：变量就是用于存储信息的容器</p>
+        <ol>
+        	<li>没人天天叫毕加索的全名，js里也可以用一个名字储存数据，将事件加在名字上可以大大减少代码量</li>
+            <li>变量的命名规则：变量必须以字母开头；虽然变量也能以$和_符号开头（不过不推荐这么做）；变量名称也对大小写敏感（a和A是不同的变量)。</li>
+            <li>变量使用var关键字声明：var 名字 = ，后面可以是数字，字符串或者一个对象等等</li>
+            <li>好的代码编写习惯是总是用var声明变量的，并且始终存放相同类型的值，常用的命名规则：
+            	<ul>
+                	<li>Camel标记法：首字母是小写的，接下来的单词都以大写字母开头。</li>
+                    <li>Pascal标记法：首字母是大写的，接下来的单词都以大写字母开头。</li>
+					<li>（最好使用）匈牙利标记法：在以Pascal标记法命名的变量前附加一个小写字母说明该变量的类型。如 i表示整数,s表示字符串,b代表boolean值</li>
+                </ul>
+            </li>
+        </ol>
+        <p>数据类型：JavaScript中有5种原始数据类型——Undefined（未定义）、Null（空对象）、Boolean（布尔值）、Number（数字）、String（字符串）和特殊一个引用型类型——Object（对象）</p>
+        <ol>
+        	<li>Undefined（未定义）这个值表示变量不含值</li>
+            <li>Null（空对象）可以通过设置这个值清空变量</li>
+            <li>Boolean（布尔值）只有true和false两个值</li>
+            <li>Number（数字）不分整数和浮点</li>
+            <li>String（字符串）用双引号或单引号括起来的部分</li>
+        </ol>
+        <p>属性操作(替换，不是加入)：</p>
+        <ol>
+        	<li>&lt;input id="btn1" type="button"/&gt;<br/>上面元素的属性名（id），属性值（btn1）<br/>读：获取某元素属性值（元素.属性）<br/>写：替换某元素属性值（元素.属性="新值"）替换操作</li>
+            <li>获取的属性的值都是以字符串形式显示，“+”可以用来做字符串的拼接</li>
+			<li>而delete操作符是删除属性的唯一方法。把属性设置为undefined或者null只是移除了属性和值的关联<br/>语法：delete 元素.属性名</li>
+			<li>元素.innerHTML：元素的内容属性，用以读取页面中元素的所有html内容<br/>写入：元素.innerHTML="新内容"<br/>内容其实就是html文件，可以用以加入新的标签</li>
+			<li>"[]"的一种用法类似"."<br/>"."后面的值不能变（如.style.width的width不能用变量）<br/>而"[]"里面的值可以变（如.style.width可以写成.style["width"]，或者用变量，通过修改变量改变要修改的样式如：.style[attr]</li>
+			
+            
+        </ol>
+        <p>自增/自减：num+=x; num++;（num+=1的简写）/num-=x; num--;（num-=1的简写）</p>
+        <p>js中的css写法：js里不能出现"-"，如font-size需写成fontSize</p>
+        <p>class和关键字、保留字：可以使用class来同时改变多个样式，但class应写成className<br/>关键字：js里用到的单词（如：function var）<br/>保留字：js里保留的单词（如：class ）<br/>不要使用关键字和保留字来给变量命名</p>
+        <p>if判断：</p>
+        <ol>
+        	<li>if(条件){} //满足条件时。。。</li>
+            <li>if(条件){}else{} //满足条件时。。。否则。。。</li>
+            <li>if(条件1){}else if(条件2){}......else{}//满足条件时。。。否则如果。。。否则如果。。。</li>
+            <li>判断的注意事项：
+            	<ul>
+                	<li>js获取元素的href/src不是相对路径而是绝对路径，因此不能用来做判断</li>
+                    <li>颜色值也不能用来做判断（因为有很多颜色值的输出方式，如英文、rgb和16进制数）</li>
+                    <li>innerHTML也不能用来做判断（在低版本浏览器上会有兼容性的问题）</li>
+                    <li>当需要判断上面这些值时可以使用布尔值开关的方式解决问题</li>
+                    <li>当需要判断内容是否相等时，需要用"=="（数值相等）或"==="（绝对相等—类型数值都相等，推荐），一个等号"="叫做赋值操作，意思是将等号右侧的值赋给左侧</li>
+                </ul>
+            </li>
+        </ol>
+        <p>属性兼容性问题：</p>
+        <ol>
+        	<li>直接通过js去修改input的type值（ie6-ie8不兼容）<br/>解决方法：可以绕过该方法，利用其他方法去做，如隐藏原有input框，显示新的input</li>
+            <li>没有style.float的这种写法，style.styleFloat是ie写法；style.cssFloat是其他浏览器写法<br/>
+解决方法：也可以绕过该方法，例如用添加class的方式去修改样式</li>
+			<li>因此当你需要解决兼容问题时，要么知道做如何解决兼容问题（如封装带有兼容问题的代码），要么会使用其他的解决方案（如上面的添加class的方法解决绕过该问题）</li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、通过select和按钮弹出select的value</p>
+        <p>2、利用字符串链接通过input里输入一个东西，配合select弹出一个这个东西在哪的效果（如淘宝在杭州）</p>
+        <p>3、读写输入结合，点击按钮切换图片</p>
+        <p>4、向一个textarea输入一个带有样式的标签，通过一个按钮点击事件展示出来</p>
+        <p>5、使用"[]"做两个input输入框和一个input按钮，通过分别向两个输入框输入样式名和样式的值的方法来改变一个div的样式</p>
+        <p>6、分别使用改变样式和改变class两个方法做出文字点击变大缩小变色的特效</p>
+        <p>7、分别用三个判断做出以下效果：<br/>文字点击变大缩小变色的例子，让其有个变化范围12px-28px<br/>输入框input为空时的验证，弹出输入框内容不能为空<br/>前端通关验证，如：输入html、css和javascript时通过，否则通关失败</p>
+    </dd>
+</dl>
+</body>
+</html>

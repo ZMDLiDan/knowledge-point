@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+</style>
+<script src="jCanvaScript.js"></script>
+<script>
+window.onload = function(){
+	var aBtn = document.getElementsByTagName('input');
+	aBtn[0].onclick = function(){
+		start_1('canvas_1');
+	}
+	aBtn[1].onclick = function(){
+		stop_1('canvas_1');
+	}
+	onload_1('canvas_1');
+}
+function startShow(){
+    var r = Math.round(Math.random() * (255)),
+        g = Math.round(Math.random() * (255)),
+        b = Math.round(Math.random() * (255)),
+        x = Math.round(Math.random() * (440)),
+        y = Math.round(Math.random() * (520)),
+        color = "rgba("+r+", "+g+", "+b+", 0.5)",
+        filled = true,
+        radius = 1;
+    jc.circle(x, y, radius, color, filled)
+        .animate({radius:100, opacity:0}, 1500, function(){
+            this.del();
+        });
+}
+function onload_1(idCanvas){
+    jc.start(idCanvas, true);
+    interval_1 = setInterval(startShow, 200);
+}
+function start_1(idCanvas){
+    if(interval_1)return;
+    onload_1();
+}
+function stop_1(idCanvas){
+    clearInterval(interval_1);
+    interval_1 = 0;
+    jc.clear(idCanvas);
+}
+</script>
+</head>
+<body>
+<input type="button" value="开始" />
+<input type="button" value="暂停" />
+<canvas id='canvas_1' width="440px" height="520px"></canvas>
+</body>
+</html>

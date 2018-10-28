@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<script>
+/*function fn2(){
+	return function(){
+		alert(1);//我是返回值
+	}; 
+}
+//alert(fn2());
+fn2()();*/
+
+function fn2(a){
+	return function(b){
+		alert(a+b);//我是返回值
+	}; 
+}
+//alert(fn2());
+fn2(10)("100");
+</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>javascript</dt>
+    <dd>
+    	<p>JavaScript代码出现的位置：</p>
+        <ol>
+        	<li>html中的js代码必须放在script标签里面，script标签可以放在页面中head和body标签中。如：<pre>
+    &lt;script&gt;
+        document.write("hello world!");
+    &lt;/script&gt;</pre>&lt;script&gt;这是script 开始标签，告诉浏览器后面的代码是js而不是html；<br/>document.write("Hello, world!"); 获得文档窗口并在其中写入"Hello, world!"；<br/>一行结束就被认定为语句的结束，通常在结尾加上一个分号";"来表示语句的结束；<br/>&lt;/script&gt;这结束JavaScript，并告诉浏览器后面的代码是html。</li>
+            <li>有时候我们经常需要让多个html页面共享一个脚本，所以就把脚本保存到外部文件中。外部JavaScript文件的文件扩展名是 .js。如需使用外部文件，在 &lt;script&gt; 标签的 "src" 属性中设置该 .js 文件。如引入一个myScript.js：<pre>
+    &lt;script src="myScript.js"&gt;&lt;/script&gt;</pre>注意：外部JavaScript文件中不能出现&lt;script&gt;标签</li>
+        </ol>
+        <p>JavaScript代码的语法和特征：</p>
+        <ol>
+        	<li>注释与Java，C相同，支持单行注释 //；与多行注释/*…*/</li>
+            <li>JavaScript区分大小写，a和A是两个不同的变量</li>
+            <li>变量是弱类型的，定义变量只用var运算符，可以将它初始化为任意值，也可以随时改变变量所存数据的类型，可以用“,”将多个变量定义在一个var中，如：<pre>
+    var color="red";
+    color=16;
+    var num=25;
+    var visible=true;
+    var a = "5", b = 5;</pre>每行结尾的分号可有可无，好的代码编写习惯是总是加入分号，加上分号也会在某些情况下增进代码的性能，因为这样解析器就不必再花时间推测应该在哪里插入分号了。</li>
+            <li>有时我们需要脚本向用户提供反馈的信息。如创建一个弹出的警告窗口，提示用户重要信息。这是使用alert实现的，里面可以是数字或者字符串等<br/>将alert逐行放置，如果alert未执行，说明上面的代码有错误。初学者应养成随时写随时测试的习惯，以防做完一堆代码都是不能用的。</li>
+        </ol>
+        <p>javascript的事件：鼠标事件、键盘事件、系统事件、表单事件、自定义事件等，如下的鼠标事件</p>
+        <ol>
+        	<li>鼠标左键点击：onclick</li>
+            <li>鼠标左键双击：ondblclick</li>
+			<li>鼠标移入：onmouseover</li>
+			<li>鼠标移出：onmouseout</li>
+			<li>鼠标左键落下：onmousedown</li>
+			<li>鼠标左键抬起：onmouseup</li>
+			<li>鼠标移动：onmousemove  ....</li>
+        </ol>
+        <p>获取元素的方法：通过ID名称来获取元素，其中.代表"的"：<br/>document.getElementById('link');-->document get element by id 'link'（既在文档上通过id的值来获取元素）<br/></p>
+        <p>上面获取的元素配合事件：元素.onmouseover=元素在鼠标移入该元素时做什么</p>
+        <p>函数（function）：由上面事件命令它做一些事（代码块），但是它不会主动执行</p>
+        <ol>
+        	<li>函数是执行某一任务的JavaScript 语句，可被其他部分调用。</li>
+            <li>我们把完成特定功能的代码块放到一个函数里，再调用这个函数，就省重复输入大量代码的麻烦。如：<pre>
+    function functionName(){  
+        代码块
+    };	
+</pre></li>
+            <li>function：关键字<br/>代码块：是完成某一任务的代码<br/>functionName：是给函数取的名字</li>
+            <li>匿名函数：没有名字的函数
+            	<ul>
+                	<li>上面获取元素的代码放在head头部内部，代码会失效解决方法：<br/>可将代码包在一个函数内，在尾部调用（不推荐）；或直接把代码放在尾部（&lt;/body&gt;前），这样还可以提高用户体验（推荐）
+<br/>若一定要将代码放前面需把代码写入浏览器事件中window.onload=function(){代码}//让浏览器在加载完整个页面后再执行代码块</li>
+					<li>而用事件调用上面这种没有名字的函数就叫做匿名函数：元素.事件=function(){}   //匿名函数</li>
+                    <li>当多个地方需要使用一个函数的时候应该加名字<br/>只在一个事件使用的函数则可以使用匿名函数<br/>onload是加载事件，也可用在一个图片或者body等对象加载上</li>
+                </ul>
+            <br/></li>
+        </ol>
+        <p>函数执行方法：例如有个函数名为abc的函数</p>
+        <ol>
+        	<li>直接调用—函数名加括号（函数其实相当于给window加的方法），如：abc()或window.abc()</li>
+            <li>事件调用—元素.事件 = abc。注意：函数名abc后不能加括号，否则就会变成第一个方法（直接调用），它会得到函数的返回值，会在后面的章节详细讲解。</li>
+        </ol>
+        <p>修改元素的样式：元素.style.样式="新值"</p>
+        <ol>
+        	<li>我们使用该方法给元素的样式赋值，该样式会被加在元素的行间样式中</li>
+            <li>而若使用该方法获取样式，获取的也是行间样式，它不会判断样式的优先级，因此不要用该方法获取样式</li>
+            <li>大多数js的页面效果其实改变的都是css2，因此css2的基础对于js的学习来说是必须的</li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、把下面两句代码分别用单行和多行注释进行标注，分别在注释前和注释后在浏览器里运行：
+alert('我不想执行');    alert('我也不想执行');</p>
+        <p>2、做一个下拉框效果，鼠标点击按钮时，在该元素下显示一个下拉框区域</p>
+    </dd>
+</dl>
+</body>
+</html>

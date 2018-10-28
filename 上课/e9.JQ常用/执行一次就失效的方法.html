@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+	<style type="text/css">
+		div{width:200px; height:200px; background-color:red;}
+	</style>
+</head>
+<body>
+	<div></div>
+	<script src="jquery.min.js"></script>
+	<script>
+		//$("div").one("click",function (){alert(123)})
+		/*var oDiv = document.getElementsByTagName("div")[0];
+		oDiv.a = 0;
+		oDiv.onclick = function (){
+			alert(123);
+			if(++this.a>2){
+				this.onclick = null;
+			}
+		}*/
+		$('div').on('click mouseover',function(){
+			alert(123);
+			$('div').off('mouseover');
+		}); 
+	</script>
+</body>
+</html>

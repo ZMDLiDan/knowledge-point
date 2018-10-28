@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<script>
+var cat = {
+	"name" : "diandian",
+	"sex" : "man",
+	"color" : "orange"
+}
+delete cat.name;
+cat.sex = undefined;
+cat.color = null;
+console.log(cat.hasOwnProperty("name"));
+console.log(cat.hasOwnProperty("sex"));
+console.log(cat.hasOwnProperty("color"));
+</script>
+</body>
+</html>

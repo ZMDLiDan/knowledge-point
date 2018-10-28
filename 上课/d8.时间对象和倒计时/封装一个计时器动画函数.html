@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+#div1{width:150px; height:150px; background-color:red; position:absolute; left:0; top:50px;}
+</style>
+</head>
+<body>
+<input type="button" value="向左移动"/>
+<input type="button" value="向右移动"/>
+<input type="button" value="向上移动"/>
+<input type="button" value="向下移动"/>
+<input type="button" value="向右下移动"/>
+<div id="div1"></div>
+<script src="myJs.js"></script>
+<script>
+var aBtn = document.getElementsByTagName("input");
+var oDiv = document.getElementById("div1");
+function doMove(obj,step,end,attr,endFn){
+	clearInterval(obj.timer);
+	step = end>parseInt(getStyle(obj,attr)) ? step : -step;
+	obj.timer = setInterval(function (){
+		var nowLeft = parseInt(getStyle(obj,attr))+step;
+		if(nowLeft>=end&&step>0||nowLeft<=end&&step<0){
+			nowLeft = end;
+		}
+		obj.style[attr] = nowLeft+"px";
+		if(parseInt(getStyle(obj,attr))==end){
+			clearInterval(obj.timer);
+			/*if(endFn){
+				endFn();
+			}*/
+			endFn && endFn();
+		}
+	},30)
+}
+aBtn[1].onclick = function (){
+	doMove(oDiv,3,500,"left");
+}
+aBtn[0].onclick = function (){
+	doMove(oDiv,3,0,"left");
+}
+aBtn[2].onclick = function (){
+	doMove(oDiv,3,50,"top",function (){alert("到达")});
+}
+aBtn[3].onclick = function (){
+	doMove(oDiv,3,300,"top");
+}
+aBtn[4].onclick = function (){
+	doMove(oDiv,3,500,"left",function (){
+		doMove(oDiv,3,300,"top");
+	});
+}
+</script>
+</body>
+</html>

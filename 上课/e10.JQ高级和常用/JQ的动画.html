@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+div{width:150px; height:150px; background-color:blue;}
+</style>
+</head>
+<body>
+<div id="div1"></div>
+<div id="div2"></div>
+<script src="jquery.min.js"></script>
+<script>
+$(function(){
+	$('#div1').click(function(){
+		$(this).animate({width : 300 , height : 300} , 3000 , 'linear',function(){alert(123);});
+		$('#div2').animate({width : 300 , height : 300} , 3000 , 'swing');
+	});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<script>
+var num = 67890;
+var h = Math.floor(num/3600);
+var m = Math.floor(num%3600/60);
+var s = num%60;
+function addZ(num){
+	return num<10 ? "0"+num : ""+num;
+}
+var str = addZ(h)+":"+addZ(m)+":"+addZ(s);
+alert(str);
+</script>
+</body>
+</html>

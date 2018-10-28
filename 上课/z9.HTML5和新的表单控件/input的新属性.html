@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<form action="#">
+	<input type="button" value="按钮" hidden="hidden"/>
+    <input type="email"/>
+    <input type="tel"/>
+    <input type="url"/>
+    <input type="search"/>
+    <input type="range" min="1" max="10" step="3" id="range1"/>
+    <output id="out1"></output><br/>
+    <input type="color"/>
+    <input type="datetime-local"/>
+    <input type="time"/>
+    <input type="date"/>
+    <input type="week"/>
+    <input type="month"/><br/>
+    <button id="btn1" value="我是value"><i>我是button</i></button>
+    <input type="submit"/>
+</form>
+<script>
+var oRang = document.getElementById("range1");
+var oOut = document.getElementById("out1");
+oRang.onchange = function (){
+	oOut.innerHTML = oRang.value;
+}
+var oBtn = document.getElementById("btn1");
+oBtn.onclick = function (){
+	alert(this.value);
+}
+</script>
+</body>
+</html>

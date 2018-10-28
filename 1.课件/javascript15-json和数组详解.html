@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>javascript</dt>
+    <dd>
+    	<p>JavaScript的JSON详解：</p>
+        <ol>
+        	<li>JSON是JavaScript Object Notation的缩写。<br/>
+它是一种数据交换格式，它出现之前一直用XML来传递数据。XML是一种纯文本格式本身不算复杂，但加上一大堆复杂的规范以后，任何正常的软件开发人员都会感觉头大了.
+道格拉斯·克罗克福特（Douglas Crockford）在2002年发明了JSON这种超轻量级的数据交换格式。它基于ECMAScript的一个子集，采用完全独立的文本格式，但是也使用了类似于C语言家族的习惯（包括C、C++、C#、Java、JavaScript、Perl、Python等），这些特性使JSON成了理想的数据交换语言。易于阅读和编写，同时也易于机器解析和生成，并能提升网络传输速率。由于JSON非常简单，很快风靡Web世界。</li>
+            <li>json的语法：<pre>
+    var json = {name : "cromwell", age : 50};</pre>":"前面是属性名，后面是数据格式（可以是任何格式），用json.name即可输出该属性的值，非常方便，如：之前练习用数组存放图片和文字用两个数组，而用json只需要在里面定义两个名字，并分别给一个数组即可</li>
+    		<li>定义的属性名称用不用引号""都可以，推荐使用""，兼容性和安全性好，json[]调用数据的时候需要注意，应写成json["name"]
+json.name = "改变"可以用来改写json里的数据</li>
+        	<li>用json可以包括数组，数组也可以包括json
+如：<pre>
+    var arr=[{"name":"abc","age":20},{"name":"bcd",age:30}]</pre>用arr[0].name可以获取第一个json里面的详细数据</li>
+            <li>json的遍历（获取里面的数据），我们获取一下json的length发现json没有长度，因此无法使用for循环遍历json。json使用的是for in循环。for循环里使用数字i作为循环的变量对应下标，而json里则使用attr就是属性名称来对应json的属性名：<pre>
+    for(var attr in json){alert(attr+":"+json[attr])}</pre>json[attr] 这里不加''，对这个json遍历里面内容
+</li>
+			<li><pre>
+    var json = {"a":[1,2,3],"b":[4,5,6,7]}</pre>这种json需要for in套for循环来遍历，json[attr].length表示for in遍历到数据的长度；而上面数组里嵌套json的就需要for循环套for in来遍历数据了，例如：我们可以用for in循环获取一下window和document的所有attr，并在html下输出出来，需要注意不同的浏览器的属性和数量也不太一样</li>
+    		<li>eval方法：把字符串解析成JS代码并运行，不安全而耗性能（解析一次运行一次），不推荐使用，语法：var newJson = eval('('+jsonStr+')')，括号在这里表示强制执行，整个'('+jsonStr+')'其实被解释成一个表达式运算，而不是一个复合语句（带有{}，如函数或者判断），因此jsonStr中的大括号{}被当成对象的语法来识别</li>
+        </ol>
+        <p>JavaScript的数组方法：</p>
+        <ol>
+        	<li>数组的定义方法：<pre>
+    var arr = [1,2,3];//推荐这种写法；
+    var arr = new Array(1,2,3)//对象定义数组</pre>但是对象定义数组值只有一个且是数字它会理解为长度，是字符串它会理解为内容，所以用第一种定义方法简单实用</li>
+            <li>数组除了用for可以遍历，用for in也是可以的，这里属性名称就是arr的下标</li>
+            <li>如果定义后的数组重新定义长度，那么数组会变成新的长度，多余的数据舍去，增多的数据为空。例如我们要快速清空一个数组，可以把数组长度设置为0或将数组重新赋值[]（空数组）</li>
+            <li>注意：<br/>1、字符串length重新设置不会改变长度<br/>2、索引赋值时，若超过范围，同样让Array长度变化</li>
+			<li>arr.push()/arr.unshift() //向数组后/前添加数据，这两个方法的返回值是新数组的长度，ie8以下不支持unshift的返回值</li>
+            <li>arr.pop()/arr.shift() //从数组最后/最前删除数据，这两个方法的返回值是被删除的数据</li>
+            <li>splice方法，作用：数组的删除、替换和添加
+                <ul>
+                    <li>删除：splice(a,b)a是删除第一项序号位置，b表示要删除数据的数量</li>
+                    <li>替换：splice(a,b,c)a是替换的起点项位置，b表示要删除数据的数量，c及c后面的所有参数是将一个或多个数据作为新数据替换到被删除数据的位置</li>
+                    <li>添加：splice(a,0,c)a是添加的起点项位置，0表示要删除0个数据既不删除，及c后面的所有参数是将一个或多个数据作为新数据添加到起点项位置</li>
+                    <li>只有删除的时候会有返回值（既被删除的数据）</li>
+                </ul>
+            </li>
+            <li>数组sort，作用：数组的排序。该方法默认的机制是按照数据字符串的Unicode 编码大小把内容按照顺序进行排列，但这样排序数字的时候会出错（因为字符串排列大小是用字符串的比较方法）<br/>sort()的比较函数，就是把一个写好的函数作为一个参数，传入该方法，根据返回值来判断如何排序，如：<pre>
+    arr.sort(function(a,b){  //传入一个匿名函数
+        return a-b 或者 b-a;      //正序(从小到大) 或者 反序(从大到小)
+    })</pre></li>
+    		<li>乱序：既让数组数据随机排序，如：<pre>    arr.sort(function(a,b){  //传入一个匿名函数
+        return Math.random()-0.5; //随机得到正负值 
+    })</pre>
+返回值正反序随机出现，得到数组也就是乱序排列，做游戏和很多随机效果的时候会经常用到这个随机数组排序的方法，做乱序的几个公式：<pre>
+    Math.round(Math.random())    //让结果在0和1随机出现
+    Math.round(Math.random()*a)  //让结果在0到a的整数中随机
+    Math.round(Math.random()*(a-b)+b)    //让结果在b到a的整数中随机</pre></li>
+			<li>数组reverse，作用：把数组变成倒序</li>
+            <li>数组concat，作用：连接数组，arr1.concat(arr2);得到的新数组与之前的两个数组没有关系，需要用新变量保存，也可以传多个参数，用以将多个数组连接一起</li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、用数组的删除和添加的方法做一个数组排队的效果<br/>如： 将['1','2','3','4','5']变成[''5,'1','2','3','4']<br/>这个技巧非常有用，需要记住这个原理</p>
+        <p>2、数组去重（去掉数组的重复数据）<br/>如：var arr =[1,2,2,2,2,3,3,4,4,4,2,3] 变成[1,2,3,4]
+<br/>提示：for循环嵌套，每次删除同时需要减少循环的次数，否则被删除位置的新数据会被漏选</p>
+        <p>3、把数组['345px','23px','10px','1000px']按照数据数字的从小到大的顺序排列</p>
+        <p>4、把一个字符串var str = "abcdef"变成倒序</p>
+        <p>5、随机生成100个1~500之间不重复的整数，将他们保存在一个数组中</p>
+        <p>6、找到数组中某个数据从左向右第一次出现的位置，类似字符串的indexOf</p>
+    </dd>
+</dl>
+</body>
+</html>

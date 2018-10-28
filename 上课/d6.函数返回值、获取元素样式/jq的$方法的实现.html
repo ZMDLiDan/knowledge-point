@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<script>
+$("div")
+$(".box")
+$("#div1")
+$(function (){})  //window.onload = function (){}
+
+$("div1")
+function $(str){  //var str = 
+	if(typeof (str)=="string"){
+		return document.getElementById(str)
+	}else if(typeof (str)=="function"){
+		window.onload = str;
+	}
+	
+}
+//var oDiv = document.getElementById("div1");
+
+function addZ(num){
+/*	if(num<10){
+		num = "0"+num;
+	}else{
+		num = ""+num;
+	}
+	//num<10 ? num = "0"+num : num = ""+num;
+	return num;*/
+	return num<10 ? "0"+num : ""+num;
+}
+console.log(addZ(5));  //05
+console.log(addZ(20));  //20
+
+/*function fn1(){
+	a = 10;
+}
+fn1();
+alert(a);*/
+</script>
+</body>
+</html>

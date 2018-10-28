@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+    <dt>css3、HTML5和移动端</dt>
+    <dd>
+    	<p>SVG</p>
+        <ol>
+        	<li>SVG下载：<br/>svg和canvas特效网站：<a href="http://www.html5tricks.com/tag/svg/">http://www.html5tricks.com/tag/svg/</a><br/>
+阿里巴巴矢量图：<a href="http://www.iconfont.cn">http://www.iconfont.cn</a><br/>
+国外的图标：<a href="https://github.com/nullice/NViconsLib_Silhouette">https://github.com/nullice/NViconsLib_Silhouette</a><br/></li>
+            <li>什么是SVG：在网页中绘制图形，Svg是一种用XML定义的语言，用来描述二维及矢量/栅格图。</li>
+            <li>SVG与canvas的区别：svg不依赖分辨率，支持事件处理器，最适合带有大型渲染区域的应用程序（比如谷歌地图），复杂度高会减慢渲染速度（任何过度使用 DOM 的应用都不快），不适合游戏应用；canvas依赖分辨率，不支持事件处理器，弱的文本渲染能力，能够以 .png 或 .jpg 格式保存结果图像，最适合图像密集型的游戏，其中的许多对象会被频繁重绘</li>
+            <li>svg是基于xml的技术，svg文件，有着和html文件类似的声明和命名空间：<pre>
+    &lt;!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"&gt; //svg根标签
+    xmlns="http://www.w3.org/2000/svg" //svg命名空间</pre></li>
+            <li>在页面中加入SVG的方法：<pre>
+    //在页面中直接引入svg文件：
+    &lt;img src="1svg.svg"/&gt;   //引入
+    &lt;div style="height:200px; width:200px; background:url(1svg.svg) no-repeat"&gt;&lt;/div&gt;  //背景
+    &lt;iframe src="1svg.svg"&gt;&lt;/iframe&gt;  //框架<hr/>
+    //在html页面中书写svg（需要带上命名空间）
+    &lt;div id="div1"&gt;
+        &lt;svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"&gt;
+            &lt;circle cx="100" cy="100" r="40" fill="red"&gt;&lt;/circle&gt;
+        &lt;/svg&gt;
+    &lt;/div&gt;</pre></li>
+    		<li>SVG的语法：
+            	<ul>
+                	<li>circle（圆形）：cx  cy   r  (不能用style) //圆心X/Y轴坐标 半径<br/>
+fill（填充颜色） stroke（边框颜色） stroke-width（边框宽度） stroke-opacity（边框透明度）（可以用style）transparent（在不需要颜色和不需要默认颜色的地方设置透明）
+style方式（不建议）如：<pre>
+    fill="white" stroke="black" stroke-width="5"  //也可以写成
+    style="fill:white;stroke:black;stroke-width:5"</pre></li>
+    				<li>rect（圆角矩形）：width  height  x  y  //宽 高 左上角X/Y轴坐标，rx  ry  //圆角X/Y轴角度（只设置rx则为正圆角）</li>
+                    <li>line（画线，配合stroke颜色）：x1  y1  x2  y2  stroke//起点X/Y轴坐标，终点X/Y轴坐标，颜色</li>
+                    <li>ellipse（椭圆）：cx  cy  rx  ry  	//圆心X/Y轴坐标，X/Y轴半径</li>
+                    <li>polyline（折线）： points  //折点设置，配合fill='transparent'去掉填充，如：<pre>
+    &lt;polyline points="0,0 0,20 20,20 20,40 40,40 40,60" fill='white' stroke='red' stroke-width='2'/&gt;</pre></li>
+    				<li>polygon（多边形）：  同上，不去掉填充</li>
+                    <li>path（路径，单标签）(svp编辑器:将绘制出来的图形转换成path)：d //定义路径点，如：<pre>
+    &lt;path d="M150 0 L75 200 L225 200 Z" /&gt;</pre>路径通常是先绘图，然后使用svg编辑器来获得代码，否则很难直接使用代码绘制</li>
+    				<li>text（文字，双标签）：x  y  text-anchor(middle/start默认/end) //文字在X/Y轴坐标  对齐点，
+颜色用的是fill不是color</li>
+					<li>image（图片）：x  y  width  height  //图片在X/Y轴坐标  
+图片宽高（必须） xlink:href  //图片地址（必须），html5中可以通过js给svg添加image标签来解决不显示图片的问题，如：<pre>
+    //创建SVG
+    var svgDemo= document.createElementNS('http://www.w3.org/2000/svg','svg'); 
+    svgDemo.style.width = "400px";
+    svgDemo.style.height = "400px";
+    document.body.appendChild(svgDemo);
+    //添加图片标签
+    var image=document.createElementNS('http://www.w3.org/2000/svg','image'); 
+    image.setAttribute("x","100"); 
+    image.setAttribute("y","100"); 
+    image.setAttribute("width","100"); 
+    image.setAttribute("height","100"); 
+    image.href.baseVal = "图片的url"; //关键一句，设置image的url图片，要用image.href.baseVal
+    svgDemo.appendChild(image);</pre></li>
+    				<li>g（分组标签）：是一个容器（分组）标签，用来组合元素，这样可以使用共用属性transform="translate(0,0)"（类css方法，移动），如：<pre>
+    &lt;g style="cursor:pointer"&gt;
+    	&lt;circle cx="100" cy="100" r="40" fill="white" stroke="red" stroke-width="3"&gt;&lt;/circle&gt;
+    	&lt;text x="100" y="108" font-size="20" text-anchor="middle"&gt;新卓越&lt;/text&gt;
+    &lt;/g&gt;</pre></li>
+                </ul>
+            </li>
+            <li>SVG的js方法：创建元素createElementNS(命名空间,标签名)，同上面例子，我们也可以像控制元素一样用js或者jq去控制svg元素</li>
+        </ol>
+        <p>swftext（简单flash制作）</p>
+        <ol>
+            <li>用类似的软件可以生成一些简单的flash效果</li>
+            <li>要求在使用时注意现在浏览器的兼容问题</li>
+            <li>尽量做成透明背景而不是图片为背景，这样可以大大减少其大小</li>
+            <li>用embed标签将flash引入页面，如：<pre>
+    &lt;embed src="banner.swf" width="1920" height="806" wmode="transparent"&gt;&lt;/embed&gt; //flash不遮挡内容属性：wmode="transparent"</pre></li>
+        </ol>
+        <p>pano2vr，用来制作vr全景页面效果</p>
+        <ol>
+        	<li>但是必须得有全景图片或者3D图才可以制作</li>
+            <li>注意：同样需要浏览器兼容flash</li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、绘制圆形和g分组来做一个靶心，要求中心为一个红色圆点，周围5个圆环，以及一个十字贯穿整个靶心</p>
+        <p>2、封装createTag函数，用来创建svg标签，要求两个参数，第一个为标签名，第二个为一个json，里面是标签的所有属性和值</p>
+    </dd>
+</dl>
+</body>
+</html>

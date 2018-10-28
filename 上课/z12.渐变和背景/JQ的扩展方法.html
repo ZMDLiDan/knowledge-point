@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<p>我是p的内容</p>
+<script src="jquery.min.js"></script>
+<script>
+/*$.extend({   //工具方法例子
+	leftTrim : function(str){return str.replace(/^\s+/,'');},
+	aaa : function(){alert(1);}
+}); 
+$.aaa();*/
+
+$.fn.highlight1 = function (options) { 
+	//要考虑到各种情况: 1、options为undefined；2、options只有部分key 
+	var bgcolor = options && options.backgroundColor || '#fffceb'; 
+	var color = options && options.color || '#d85030'; 
+	this.css('backgroundColor', bgcolor).css('color', color); 
+	return this; 
+}
+$("p").highlight1({
+	"backgroundColor" : "red",
+	"color" : "#fff"
+});
+
+</script>
+</body>
+</html>

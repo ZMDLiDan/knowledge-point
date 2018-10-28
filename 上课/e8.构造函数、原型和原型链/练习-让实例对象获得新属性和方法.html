@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<script>
+var dog = {
+	"name" : "Q",
+	"age" : "3",
+	"varieties" : "泰迪"
+}
+Object.prototype.color = "yellow";
+Object.prototype.wang = function (){alert("汪汪汪")};
+for(var attr in dog){
+	console.log(attr + ":" + dog[attr]);
+}
+</script>
+</body>
+</html>

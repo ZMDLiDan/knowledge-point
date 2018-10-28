@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<input type="button" value="图1" id="btn1"/>
+<input type="button" value="图2" id="btn2"/>
+<input type="button" value="图3" id="btn3"/>
+<input type="button" value="图4" id="btn4"/><br/>
+<img src="img/1.png" width="391" height="479" id="img1"/>
+<script>
+var oBtn1 = document.getElementById("btn1");
+var oBtn2 = document.getElementById("btn2");
+var oBtn3 = document.getElementById("btn3");
+var oBtn4 = document.getElementById("btn4");
+var oImg1 = document.getElementById("img1");
+oBtn1.onclick = function (){
+	oImg1.src = "img/1.png";
+}
+oBtn2.onclick = function (){
+	oImg1.src = "img/2.png";
+}
+oBtn3.onclick = function (){
+	oImg1.src = "img/3.png";
+}
+oBtn4.onclick = function (){
+	oImg1.src = "img/4.png";
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+#pic{width:391px; height:479px; position:relative;}
+#p1{height:40px; background-color:rgba(255,255,255,0.3); position:absolute; left:0; top:0; margin:0; width:100%; text-align:center; line-height:40px; color:yellow; font-size:22px;}
+#p2{height:40px; background-color:rgba(255,255,255,0.3); position:absolute; left:0; bottom:0; margin:0; width:100%;text-align:center; line-height:40px; color:yellow; font-size:22px;}
+.active{ color:#fff; background-color:red;}
+</style>
+</head>
+<body>
+<div id="button"></div>
+<div id="pic">
+<img src="img/1.png" width="391" height="479"/>
+<p id="p1"></p>
+<p id="p2"></p>
+</div>
+	<script>
+        var arr1 = ["img/1.png","img/2.png","img/3.png","img/4.png"];
+        var arr2 = ["乌鸦","精灵","妖精","超人"];
+        var oDiv = document.getElementById("button");
+        var oP1 = document.getElementById("p1");
+        var oP2 = document.getElementById("p2");
+        var oImg = document.getElementsByTagName("img")[0];
+        oP1.innerHTML = "1/4";
+        oP2.innerHTML = arr2[0];
+        var str = "";
+        for(var i=0;i<arr1.length;i++){
+            str += "<input type='button' value='图"+(i+1)+"' />";
+        }
+        oDiv.innerHTML = str;
+        var aBtn = document.getElementsByTagName("input");
+        aBtn[0].className = "active";
+        for(var i=0;i<aBtn.length;i++){
+            aBtn[i].index = i;
+            aBtn[i].onclick = function (){
+                for(var j=0;j<aBtn.length;j++){
+                    aBtn[j].className = "";
+                }
+                this.className = "active";
+                oImg.src = arr1[this.index];
+                oP1.innerHTML = this.index+1+"/"+arr1.length;
+                oP2.innerHTML = arr2[this.index];
+            }
+        }
+    </script>
+</body>
+</html>

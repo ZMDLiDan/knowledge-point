@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+    <style type="text/css">
+        body{margin:0;}
+        .wrap{width:450px; margin:0 auto; border:1px #000 solid;}
+        ul{margin:0; padding:0; list-style:none; overflow:hidden;}
+        li{float:left; height:40px; line-height:40px; text-align:center; background-color:#ccc; width:150px; cursor:pointer;}
+        li.active{background-color:#fff;}
+        .wrap div{height:260px; display:none; padding:20px}
+    </style>
+</head>
+<body>
+    <div class="wrap">
+	   <ul>
+    	   <li class="active">选项一</li>
+            <li>选项二</li>
+            <li>选项三</li>
+        </ul>
+        <div style="display:block;">我是第一个选项框</div>
+        <div>我是第二个选项框</div>
+        <div>我是第三个选项框</div>
+    </div>
+    <script src="jquery.min.js"></script>
+    <script>
+        //$(".wrap div").eq(0).css("backgroundColor","red");
+        //.siblings()
+        $("li").click(function (){
+	       $(this).addClass("active").siblings().removeClass("active");
+	       $(".wrap div").eq($(this).index()).css("display","block").siblings("div").css("display","none");
+        })
+    </script>
+</body>
+</html>

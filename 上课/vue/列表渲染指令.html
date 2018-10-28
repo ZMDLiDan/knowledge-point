@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<div id="app">
+	<ul>
+    	<li v-for="u,index of users">{{u}}</li>
+    </ul>
+</div>
+<script src="vue.js"></script>
+<script>
+var app = new Vue({
+	el : "#app",
+	data : {
+		users : [1,2,3,4,5,6]
+	}
+})
+</script>
+</body>
+</html>

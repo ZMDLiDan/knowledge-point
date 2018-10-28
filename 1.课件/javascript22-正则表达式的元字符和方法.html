@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>javascript</dt>
+    <dd>
+    	<p>正则表达式的写法：</p>
+        <ol>
+        	<li>做一个找出字符串中的所有数字（用数组装起来）的方法，用字符串方法和正则表达式两种方法：<pre>
+        //字符串的方法:
+        var str = 'haj123sdk54hask33dkhalsd879';
+        function findNum(str){
+            var arr = [];var tmp = '';
+            for(var i=0;i&lt;str.length;i++){
+                if( str.charAt(i)&lt;='9' && str.charAt(i)&gt;='0' ){
+                    tmp += str.charAt(i);
+                }else{
+            	   if(tmp){
+                        arr.push(tmp); tmp = '';
+                    }
+                }
+            }
+            if(tmp){
+                arr.push(tmp); tmp = '';
+            }
+            return arr;
+        }
+
+        //正则表达式的方法:
+        function findNum(str){
+        	return str.match(/\d+/g);
+        }</pre></li>
+            <li>正则表达式——也叫规则，让计算机能够读懂人类的规则，由人提供给计算机，让它进行多方面的判断。</li>
+            <li>使用正则表达式有哪些特点：
+            	<ul>
+                	<li>从上面的例子中可以看出使用正则表达式可以大大简化代码</li>
+                    <li>它的性能也比正常的函数方法要好</li>
+                    <li>正则都是操作字符串的（不要用来操作对象等其他类型）</li>
+                </ul>
+            </li>
+            <li>写法：<pre>
+    var arr=[]; / var arr = new Array(); //数组
+    var obj ={}; / var obj = new Object(); //对象
+    var re = /a/; / var re = new RegExp('a'); //正则</pre>推荐都用前面的写法，前面的写法性能更好，但是当需要给正则传参时必须用后面的写法。正则的写法是//，但是为了防止被计算认为是注释所以加了个a（正则的独有写法，不能加''，不然就变成字符串了），传参写法：<pre>
+    var a = "abc";
+    var re = new RegExp(a);</pre></li>
+        </ol>
+        <p>正则表达式的元字符和方法：</p>
+        <ol>
+        	<li>正则表达式的元字符：
+            	<ul>
+                	<li>\ : 转义字符</li>
+                	<li>\d : 0-9之间的任意一个数字（\d只占一个位置）</li>
+                    <li>\w : 数字，字母 ，下划线（0-9 a-z A-Z _）</li>
+                    <li>\s : 空格或者空白等</li>
+                    <li>\D : 除了\d</li>
+                    <li>\W : 除了\w</li>
+                    <li>\S : 除了\s</li>
+                    <li> . : 除了\n之外的任意一个字符（\.真正的点）</li>
+                    <li>\n : 匹配换行符</li>
+                    <li>\b : 匹配边界 字符串的开头和结尾 空格的两边都是边界 => 不占用字符串位数，例如：<pre>
+    var str='onetwo';  
+    var re = /\bone/;   (/one\b/   =>  one的后面是边界    =>  匹配不出来)
+    alert(re.test(str));//看一下分别弹出什么</pre>获取class的方法就可以用匹配边界来做</li>
+                    <li>\B : 除了\b</li>
+                </ul>
+            </li>
+        	<li>test：正则去匹配字符串，如果成功就返回真，失败则返回假，语法：正则.test(字符串)，返回的是布尔值，用途是判断，如：<pre>
+    var str = 'abcdef';
+    var re = /b/;     //里面是个整体，如果是bd则是假
+    alert(re.test(str));</pre></li>
+    		<li>search：正则去匹配字符串，如果成功返回匹配成功的位置，如果失败就返回-1（类似indexOf），语法：字符串.search(正则)；注意：在正则里默认是区分大小写的，如果需要不区分，在正则的最后加标识i，如：<pre>
+    var str = 'abcdef';
+    var re = /b/i;
+    var re = /B/i;  ( i =>  标识符，不区分大小写)
+    alert(str.search(re)); //字面量写法：
+    var re = new RegExp('B','i');</pre></li>
+            <li>match：正则去匹配字符串，如果成功返回数组，如果失败就返回null，语法：字符串.match(正则)，如开始的例子：<pre>
+    var str = '123abc456def';
+    str.match(/\d+/g);  //123456    =>  g:全局匹配
+    str.match(/\d+/);   //123
+</pre>如果只写\d只会返回一个包含1的数组，原因是正则默认匹配成功时就结束，不会继续匹配，如果需要查找所有数字，需要加一个标识g（全局匹配）；正则后加了g后就会返回单个数字的数组，原因是\d是匹配一个数字，而\d\d是匹配两个，以此类推，如果只要是数字就放在一起，数字的位数也不一定，因此需要在\d后面加一个+（量词：匹配不确定的位置，+(至少出现一次) => 大于等于1）</li>
+    		<li>* replace：类似替换节点（replaceChild），正则去匹配字符串，匹配成功的字符会替换成新的字符串，语法：字符串.replace(正则，新的字符串)，第二个参数可以是字符串也可以是回调函数，回调函数的第一个参数就是每次匹配成功的字符，如：<pre>
+    var str = 'aaa';
+    var re = /a/;
+    str=str.replace(re,'b');
+    alert(str);     //baa</pre></li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、var str = '37482t9348791'; var re = /?/; ?处应该写成什么来判断当前字符串全是数字或者不全是数字</p>
+        <p>2、明感词过滤，在一个文本框输入内容并点击按钮时，明感词换成对应数量的*，并在另一个输入框里展示<br/>注意：需要用到 | ，正则里的或者</p>
+    </dd>
+</dl>
+</body>
+</html>

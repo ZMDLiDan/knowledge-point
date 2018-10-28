@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+ul{margin:0; padding:0; list-style:none;}
+ul:after{content:""; display:block; clear:both;}
+li{float:left; position:relative;}
+input{width:180px; height:40px;}
+div{width:180px; height:0px; background-color:red; color:#fff; overflow:hidden; transition:0.6s all linear;/*display:none;*/ position:absolute; left:0; top:40px;}
+</style>
+</head>
+<body>
+<ul>
+	<li>
+    	<input type="button" value="导航1"/>
+        <div>导航1的下拉框</div>
+    </li>
+    <li>
+    	<input type="button" value="导航2"/>
+        <div>导航2的下拉框</div>
+    </li>
+    <li>
+    	<input type="button" value="导航3"/>
+        <div>导航3的下拉框</div>
+    </li>
+</ul>
+<script>
+var aLi = document.getElementsByTagName("li");
+for(var i=0;i<aLi.length;i++){
+	aLi[i].onmouseover = function (){
+		this.getElementsByTagName("div")[0].style.height = "300px";
+	}
+	aLi[i].onmouseout = function (){
+		this.getElementsByTagName("div")[0].style.height = "0";
+	}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>javascript</dt>
+    <dd>
+    	<p>JavaScript自定义属性：</p>
+        <ol>
+        	<li>自定义属性：给是给元素上定义本来不存在的属性;</li>
+            <li>语法：元素.自定义属性 = 123，可以如原本属性一样进行操作</li>
+            <li>js可以为任何HTML元素上添加任意数量的自定义属性</li>
+            <li>自定义属性是js向html添加东西的方式之一</li>
+            <li>例如循环动态给一组按钮添加索引值：元素[i].index = i，索引值的应用--想建立"匹配"/"对应"关系，如数组里的数据和按钮利用索引值一一对应</li>
+            <li>重要：后面循环几乎都会用到索引值；因为for循环结束时i已经变成最后一个数字，再次使用i就会出现错误，因此必须用到自定义属性，否则i显示的永远是循环结束后的数字</li>
+        </ol>
+		<p>JavaScript函数的参数：</p>
+        <ol>
+        	<li><pre>
+    function(在此处传参){}  
+    fn1(100); function fn1(a){alert(a)};//可以相当于：
+    fn1(100); function fn1(var a = 100){alert(100)};//但不能这么写</pre>其中在函数内部的a叫做形参，而调用函数里的100叫做实参</li>
+    		<li>也可以传多个参数，如：<pre>
+    fn1(100,"px"); function fn1(a,b){alert(a+b);}</pre></li>
+    		<li>参数可以为js的以下数据类型：数字、字符串、布尔值、函数、对象、未定义，网上很多类似的效果就是用函数传参的方式做的</li>
+            <li>如下是个对象当参数的例子:<pre>
+    fn5(window,document); 
+    function fn5(w,d){
+    	w.onload = function(){
+        	d.body.innerHTML=123;
+        }
+    };</pre></li>
+    		<li>用参数封装一个方法：<pre>
+    function fn1(a){
+    	if(typeof(a) === 'number' && a===a){  数字类型不是NaN，因为NaN不等于本身
+        	alert(a+20);
+        }else if(typeof(a)==='string'){
+        	alert(a.charAt(2));
+        }else if(typeof(a)==='function'){
+        	a();
+        }
+      }
+      fn1("1000"); 弹出:0
+      fn1(function () {alert("我不是数字和字符串")});  弹出:我不是数字和字符串
+    </pre></li>
+    		<li>函数传参应用的注意事项：
+            	<ul>
+                	<li>尽量保证HTML代码结构一致（否则很难重用代码）</li>
+                    <li>需要把核心程序实现，再用函数包裹起来</li>
+                    <li>把每组中不同的值找出来，通过传参分别实现效果</li>
+                </ul>
+			</li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、做3个按钮，起始value为0，每次点击时对应按钮的value值+1<br/>做3个按钮，起始value为0，每次点击时对应的value值顺序输出数组["A","B","C","D"]的数据，并循环</p>
+        <p>2、在点击按钮（3个）时用索引值把arr（3个）里的数据输入到p（3个）标签里</p>
+        <p>3、写一个img标签并将其图片信息和图片数量等进行布局；按照图片数量动态生成按钮，并写个数组保存图片信息；设置active的样式为红色背景白色字体，第一个按钮的class="active"，并在点击其他按钮时切换active；尽量使用函数去把代码合并，并在点击按钮时用索引值的一一对应来做当图片切换时同步切换图片信息和图片的数量</p>
+		<p>4、做一个qq好友下拉收回的效果，要求：有三个下拉选项（好友，同学，黑名单），每个好友有个active的效果（比如改变背景颜色的效果）</p>
+        <p>5、做两个4个按钮切换图片效果，用传参的方式让两个切换都正常运行，但图片数量不同，且切换的方式不同（一个hover效果，一个click效果）</p>
+    </dd>
+</dl>
+</body>
+</html>

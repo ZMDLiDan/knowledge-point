@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+</head>
+<body>
+<dl>
+	<dt>Jquery</dt>
+    <dd>
+    	<p>$()下的常用方法：</p>
+        <ol>
+        	<li>JQ的遍历：<pre>
+    $('li').each(function(i,elem){   
+    //一参：下标 二参 : 每个元素
+        $(elem).html(i);
+    });
+    //可以简写成下面的写法：
+    $('li').each(function(){ 
+        $(this).html($(this).index());
+    });</pre></li>
+    		<li>页面加载事件：<pre>
+    $(); //是$(document).ready()的简写，页面元素准备就绪时</pre></li>
+    		<li>*元素的创建：<pre>
+    $('&lt;&gt;')  //创建标签，如：
+    $("&lt;div class='box'&gt;").appendTo($("#div1"));</pre></li>
+    		<li>判断真假方法：<pre>
+    JQ对象.is(); //方法，判断is里面是否为真，返回布尔值，如:
+    JQ对象.is(":checked"); //判断单选/多选框是否被选中
+    JQ对象.is(":animated"); //判断对象是否在执行动画</pre></li>
+        </ol>
+        <p>JQ的工具方法：</p>
+        <ol>
+        	<li>JQ的方法（如：$().css()、$().html()、$().val()等）:只能给JQ对象用</li>
+    		<li>而工具方法（如：$.xxx()、$.yyy()、$.zzz()等）不仅可以给JQ用，也可以给原生JS用</li>
+    		<li>完善原生js方法的工具方法：<pre>
+    alert( typeof a );  //判断类型
+    alert( $.type(a) ); //可以判断更多的类型<hr/>
+    $.trim(str);   //去掉字符串前后空格<hr/>
+    $.inArray('b',arr); //类似于 indexOf，如果第一个参数不存在返回-1<hr/>
+    $.proxy(); 改变this指向，例如：
+    function show(){alert(this);}
+    $.proxy(show , document)();<hr/>
+    $.noConflict(); //防止冲突的 （可以将$的操控权交给其他js库保证兼容性），例如：
+    var $z= $.noConflict();  
+    var $ = 10;
+    $z(function(){
+    $z('body').css('background','red');});<hr/>
+    *var str = '{"name":"hello"}';
+    alert($.parseJSON( str ).name); //把字符串解析成真正的json<hr/>
+    var elems = document.getElementsByTagName("div"); //类数组
+    var arr = jQuery.makeArray(elems);
+    arr.reverse();  //转化真正的数组调用数组方法
+    $(arr).appendTo(document.body);<hr/>
+    $.ajax() 需要在服务器环境下，需要有地址页面，后面详解</pre></li>
+        </ol>
+        <p>$()下的高级方法：</p>
+        <ol>
+        	<li>简便的节点筛选方法：<pre>
+    JQ对象.siblings(); //找所有的兄弟节点，参数是筛选功能
+    JQ对象.nextAll(); //下面(后面)所有兄弟节点，参数是筛选功能
+    JQ对象.prevAll(); //上面所有兄弟节点，参数是筛选功能
+    JQ对象.parentsUntil()/nextUntil()/prevUntil(); //截止第一次出现筛选条件之前，无参数时和上面一样
+    JQ对象.clone(); //复制元素，可以接收一个参数true ，作用可以复制之前的操作。
+    //注意：为了防止id重复，应该用class做clone，例如：
+    $('.box1').clone().appendTo('.box');</pre></li>
+			<li>元素的包装：<pre>
+    JQ对象.wrap();  //包装
+    JQ对象.wrapAll();  //整体包装
+    JQ对象.wrapInner();  //内部包装
+    JQ对象.unwrap();  //删除包装 ( 删除父级 : 不包括body)，例如：
+    $('span').wrap('&lt;div&gt;');  //每个
+    $('span').wrapAll('&lt;div&gt;');   //整体
+    $('span').wrapInner('&lt;div&gt;'); //div变成span的子元素</pre></li>
+			<li>向元素组中添加：<pre>
+    JQ对象.add()  //一个或多个元素添加到匹配的元素集合
+    var elem = $('div');
+    var elem2 = elem.add('span');   //所有的div和span
+    elem.css('color','red');
+    elem2.css('background','yellow');</pre></li>
+    		<li>集合的截取：<pre>
+    JQ对象.slice(a,b)  //选中a到b（前）的元素
+    $('li').slice(1,4).css('background','red'); //第1位到第3位</pre></li>
+    		<li>(重点)动画：<pre>
+    JQ对象.animate();  
+    //第一个参数 : {} 运动的值和属性
+    //第二个参数 : 时间(运动快慢的)  默认 : 400
+    //第三个参数 : 运动形式 只有两种运动形式 ( 默认 : swing(慢快慢) linear(匀速) )
+    //第四个参数 :  回调函数，如：
+    $(function(){
+        $('#div1').click(function(){
+            $(this).animate({width : 300 , height : 300} , 4000 , 'linear',function(){alert(123);});
+            $('#div2').animate({width : 300 , height : 300} , 4000 , 'swing');
+        });
+    });<hr/>
+    $('#div1').stop();   //默认 : 只会阻止当前运动
+    $('#div1').stop(true); //阻止后续的运动
+    $('#div1').stop(true,true); //可以立即停止到指定的目标点
+    $('#div1').finish();  //立即停止到所有指定的目标点
+    $('#div1').delay();  //延时
+    if(!$(element).is(":animated")){} else{} //判断当前元素是否在执行jq动画animate</pre></li>
+        </ol>
+    </dd>
+    <dt>练习：</dt>
+    <dd>
+    	<p>1、四个多选框，做一个点击多选框判断数量的效果，如果超过两个多选框被选中会提示最多选中两个多选框并取消选中</p>
+    	<p>2、做一个多个图片输入移入凸显效果</p>
+        <p>3、做一个左侧导航折叠效果</p>
+        <p>4、无缝滚动和3个一组的轮播图</p>
+    </dd>
+</dl>
+</body>
+</html>

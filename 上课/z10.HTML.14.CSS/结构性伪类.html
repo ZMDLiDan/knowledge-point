@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+div *{height:50px; background-color:green;}
+p:nth-child(2){background-color:red;}
+/*li:nth-child(1){height:20px; background-color:red;}
+li:nth-child(2){height:20px; background-color:blue;}
+li:nth-child(3){height:20px; background-color:green;}
+li:nth-child(4){height:20px; background-color:black;}*/
+li{height:20px;}
+li:nth-child(2n){background-color:red;}
+li:nth-child(2n+1){background-color:blue;}
+</style>
+</head>
+<body>
+<ul>
+	<li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+<div id="div1">
+	<p></p>
+    <div></div>
+    <p></p>
+    <div></div>
+</div>
+<div id="div2">
+	<div></div>
+	<p></p>
+    <div></div>
+    <p></p>
+</div>
+</body>
+</html>

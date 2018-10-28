@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+body{margin:0;}
+ul{ margin:0; padding:0;}
+li{width:122px; height:172px; float:left; list-style:none; overflow:hidden;}
+div{position:relative; top:0; left:0;}
+</style>
+</head>
+<body>
+<ul>
+    <li>
+        <div>
+            <img src="img/0.JPG"/>
+            <img src="img/0.JPG"/>
+        </div>
+    </li>
+    <li>
+        <div>
+            <img src="img/0.JPG"/>
+            <img src="img/0.JPG"/>
+        </div>
+    </li>
+    <li>
+        <img src="img/colon.JPG" id="img1"/>
+    </li>
+    <li>
+        <div>
+            <img src="img/0.JPG"/>
+            <img src="img/0.JPG"/>
+        </div>
+    </li>
+    <li>
+		<div>
+            <img src="img/0.JPG"/>
+            <img src="img/0.JPG"/>
+        </div>
+    </li>
+    <li>
+        <img src="img/colon.JPG" id="img2"/>
+    </li>
+    <li>
+        <div>
+            <img src="img/0.JPG"/>
+            <img src="img/0.JPG"/>
+        </div>
+    </li>
+    <li>
+        <div>
+            <img src="img/0.JPG"/>
+            <img src="img/0.JPG"/>
+        </div>
+    </li>
+</ul>
+<script src="myJS.js"></script>
+<script>
+/*获取所有div元素和页面刷新时的时间*/
+var aDiv = document.getElementsByTagName('div');
+var oDate = new Date;
+/*将获取的时间转换成字符串并放入str1中记录初始时间*/
+var str1 = addZ(oDate.getHours())+addZ(oDate.getMinutes())+addZ(oDate.getSeconds()); 
+/*将上面每个字符对应的图片添加图片*/
+for(var i=0;i<6;i++){
+	i%2 == 0 ? twoPic(aDiv[i],str1.charAt(i),nextNumS) : twoPic(aDiv[i],str1.charAt(i),nextNumG);
+}
+/*每一秒钟调用一次shouTime*/
+setInterval(showTime,1000);
+/*每个图片实际由上下两张图片组成，下面的图片为下一秒时它的数字的图片*/
+function twoPic(nDiv,fNum,nFn){
+	var aImg = nDiv.getElementsByTagName('img');
+	aImg[0].src = 'img/'+fNum+'.JPG';
+	aImg[1].src = 'img/'+nFn(Number(fNum))+'.JPG';
+}
+/*每次调用此函数时重新获取当前时间，并调用changePic让所有下一秒改变的时间数图片执行切换动画*/
+function showTime(){
+	$("img1").src = $("img2").src = 'img/colon0.JPG';
+	var oDate = new Date;
+	var str2 = addZ(oDate.getHours())+addZ(oDate.getMinutes())+addZ(oDate.getSeconds());
+	for(var i=0;i<6;i++){//如果是个位调用nextNumG，如果是十位调用nextNumS
+		i%2 == 0 ? changePic(str1.charAt(i),str2.charAt(i),aDiv[i],nextNumS,str2) :changePic(str1.charAt(i),str2.charAt(i),aDiv[i],nextNumG,str2);
+	}
+	str1 = str2; //每次动画结束后将当前时间给到记录的初始时间str1
+	setTimeout(function(){  //每隔0.5秒切换一下':'图片，出现一闪一闪的效果
+		$("img1").src = $("img2").src = 'img/colon.JPG';
+	},500)
+}
+function nextNumG(a){return a+1>9 ? 0 : a+1;}	  //时分秒的个位数的下一位数
+function nextNumS(a){return a+1>5 ? 0 : a+1;}	  //时分秒的十位数的下一位数
+/*利用当前时间数和下一秒是否相等来判断是否需要切换图片，如果需要切换图片调用doMove函数执行动画*/
+function changePic(fNum,nNum,nDiv,nFn,endTime){
+	if(fNum != nNum){
+		var aImg = nDiv.getElementsByTagName('img');
+		doMove ( nDiv, 'top', 10, -172); 
+		//172px每30毫秒移动10px，移动大概需要用500多毫秒，因此下面延时计时器时间应该在600-900毫秒之间
+		setTimeout(function(){
+			aImg[0].src = 'img/'+nNum+'.JPG';//23:59:59时下一秒的图片皆为0
+			aImg[1].src =  endTime==="235959" ? 'img/'+0+'.JPG' :'img/'+nFn(Number(nNum))+'.JPG' 
+			nDiv.style.top = 0+'px';
+		},900)
+	}
+}
+</script>
+</body>
+</html>

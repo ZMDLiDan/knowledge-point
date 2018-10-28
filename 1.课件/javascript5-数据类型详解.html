@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+<body>
+<dl>
+	<dt>javascript</dt>
+    <dd>
+    	<p>JavaScript的ECMAScript标准：</p>
+        <ol>
+        	<li>js里的所有语言规范就是ECMAScript标准</li>
+            <li>例如function[]{}不能这么写，这是已经定义好的，必须遵守的</li>
+        </ol>
+        <p>JavaScript数据类型详解：<br/>数据类型：像HTML的标签就有各种类型：block、inline、inline-block，数据类型的目的是对他们能够做更准确的操作</p>
+        <ol>
+        	<li>用typeof可以判断数据类型，如：
+    <pre>
+    var i = 100;
+    alert(typeof (i));  //number</pre>对变量调用typeof将返回下列值之一：string,number,Boolean,object,function,undefined<br/>注意：对null(空对象，但还是对象)调用typeof会返回object,null被认为是对象的占位符</li>
+            <li>未定义：undefined，如
+            <pre>
+    var n ;  //就是一种状态</pre>
+            	<ul>
+                	<li>表示出乎意料的空，一般表示你写的程序有错误</li>
+                    <li>当变量定义后未初始化时，该变量的值为undefined；</li>
+                    <li>对一个没有声明的变量调用typeof时，返回值也是undefined；</li>
+                    <li>当函数无明确返回值时，返回值也是undefiend</li>
+                </ul>
+            </li>
+            <li>空对象：null，如
+            <pre>
+    var n = null;   //不存在的object</pre>
+            	<ul>
+                	<li>往往用来表示意料之中的空</li>
+                    <li>空对象不能添加自定义属性等</li>
+                    <li>表示尚未存在的对象，如果函数要返回对象，那么找不到该对象时，返回的值通常是null</li>
+                </ul>
+            </li>
+            <li>注意：undefined实际上的从null派生来的，它们在定义上是相等的
+            <pre>
+    alert(null==undefined)  //true</pre>
+==在判断大小时会发生数据类型转换，但是undefined和null不会发生转换</li>
+			<li>字符串类型：string，如：
+            <pre>
+    var s ="nihao"; //由零或多个 16位 Unicode 字符组成的字符序列，即字符串</pre>
+    			<ul>
+                	<li>String是唯一没有固定大小的原始类型，字符串的声明可以由双引号("")或单引号('')组成</li>
+                    <li>length属性：输出字符串的长度，空格也算长度</li>
+                    <li>charAt()方法：输出()里下标处的字符</li>
+                </ul>
+            </li>
+            <li>布尔值：boolean  只有ture/false两个值
+            	<ul>
+                	<li>if(12&gt;90){}  ()的部分会变成布尔类型，如：12>90就是false</li>
+                    <li>for(;i&lt;3;) 中间的部分也会转换成布尔类型为真时才会继续走循环</li>
+                </ul>
+            </li>
+            <li>数字类型：number   
+			<pre>
+    var i = 100；//不区分整数和浮点</pre>Number可以表示32位的整数，也可以表示64位的浮点数.</li>
+    		<li>对象类型（指向性数据类型）：object（包括Array、Function、Date、Json等）
+            <ul>
+            	<li>用new运算符加上要实例化的类的名字创建的对象，如：
+	<pre>
+    var obj=new Object(); //构造函数创建对象</pre>
+</li>
+				<li>用空的{}（json）声明一个对象，如：
+    <pre>
+    var obj={}; //字面量创建对象</pre></li>
+            </ul>对象（object）是JavaScript的基本数据类型之一。对象是一种复合值：它把多个值（原始值或者其他对象）聚合在一起，可以通过名字访问这些值。对象也可看做是属性的无序集合，每个属性都是一个名/值对。属性名是字符串，因此我们可以把对象看成是从字符串到值的映射<br/>object可以像我们页面元素一样添加自定义属性，如：
+	<pre>
+    obj.abc = 123；//也可以写成
+    obj={"abc":123} //属性名：值</pre>之前学习页面上获取元素通过点操作（obj .name ）和通过中括号操作（obj["name"]）同样适用于所有对象</li>
+            <li>用一个对象制作名字空间（命名空间），全局变量会绑定到window上，不同的JavaScript文件如果使用了相同的全局变量，或定义了相同名字的顶层函数，会造成命名冲突，很难发现。减少冲突的一个方法是把所有变量和函数绑定到一个全局变量中。例如：
+            <pre>
+    var MYAPP = {};// 唯一的全局变量MYAPP
+    MYAPP.name = 'myapp';// 其他变量
+    MYAPP.version = 1.0;// 其他变量
+    MYAPP.foo=function () { return 'foo';};//其他函数</pre>把自己的代码全部放入唯一的名字空间MYAPP中，会大大减少全局变量冲突的可能。许多著名的JavaScript库都是这么干的，如：jQuery，YUI等等。</li>
+        </ol>
+    </dd>
+</dl>
+</body>
+</html>

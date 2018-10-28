@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+div{width:150px; height:150px; background-color:red;}
+</style>
+</head>
+<body>
+<div id="div1"></div>
+<script>
+var oDiv = document.getElementById("div1");
+var bOn = true;
+oDiv.onclick = function (){
+	if(bOn){
+		oDiv.style.backgroundColor = "blue";
+	}else{
+		oDiv.style.backgroundColor = "red";
+	}
+	bOn = !bOn;
+}
+</script>
+</body>
+</html>

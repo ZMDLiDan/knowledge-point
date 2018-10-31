@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var count = 0 ;
+		function sum(n){
+			if(n==0) return;
+			else {
+				if(n%2){
+					count++;
+				}
+				sum(parseInt(n/2));
+			}
+		}
+		sum(15);
+		console.log(count);
+	</script>
+</body>
+</html>

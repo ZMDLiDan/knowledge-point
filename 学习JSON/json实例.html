@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<p id="p1"></p>
+	<p id="p2"></p>
+	<p id="p3"></p>
+	<script type="text/javascript">
+		var json = {
+			"p1":"我是p1",
+			"p2":"我是p2",
+			"p3":"我是p3"
+		}
+		document.getElementById('p1').innerHTML = json.p1;
+		document.getElementById('p2').innerHTML = json.p2;
+		document.getElementById('p3').innerHTML = json.p3;
+	</script>
+</body>
+</html>

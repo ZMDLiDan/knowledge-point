@@ -33,12 +33,18 @@
 		// var obj = fun.call(obj,5,6);
 		// console.log(obj);				//11
 
+		// function fun(a,b){
+		// 	return a+b;
+		// }
+		// var arr = [5,6]
+		// var obj = fun.apply(obj,arr);
+		// console.log(obj);				//11
+
 		function fun(a,b){
 			return a+b;
 		}
-		var arr = [5,6]
-		var obj = fun.apply(obj,arr);
-		console.log(obj);				//11
+		var obj = fun.bind(obj,3);
+		console.log(obj(3));				//7
 	</script>
 </body>
 </html>

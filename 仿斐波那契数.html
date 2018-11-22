@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var n=6;
+		function recursion(n,x,y){
+			if(n){
+				recursion(n-1,y,x+y);
+			}else{
+				console.log(y);
+			}
+		}
+		recursion(n-2,3,3);
+	</script>
+</body>
+</html>

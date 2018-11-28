@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		"use strict"
+		{
+			//声明一个Promise对象 方法一
+			let promise = new Promise ( (resolve, reject) => {
+				if ( success ) { 
+					resolve(a) 		// pending ——> resolved 参数将传递给对应的回调方法 
+				} else { 
+					reject(err) 	// pending ——> rejectd 
+				} 
+			} )
+		}
+		{
+			//声明一个Promise对象 方法二
+			function promise () {
+    			return new Promise ( function (resolve, reject) {
+        			if ( success ) {
+            			resolve(a)
+        			} else {
+            			reject(err)
+        			}
+    			} )
+			}
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var singleModle = function(){
+			privateNum = 122;
+			privateFunc = function(){
+				console.log('我是私有方法')
+			}
+
+			return {
+				publicMethod1 : publicMethod1,
+				publicMethod2 : publicMethod2
+			}
+		};
+		publicMethod1 = function(){
+			console.log('我是公有方法1')
+		}
+		publicMethod2 = function(){
+			console.log('我是公有方法2')
+		}
+		console.log(singleModle());
+	</script>
+</body>
+</html>
